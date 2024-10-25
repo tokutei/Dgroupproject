@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}削除内容{% endblock %}
+{% block contents %}
+        <form method="POST">
+            <br>
+            <div class="text-center">
+                <img src="{{ object.aitemimage.url }}" />
+                <p>商品名:{{ object.aitemname }}</p>
+                <p>カテゴリー:{{ object.category }}</p>
+                <p>賞味期限:{{ object.shelf }}</p>
+                <p>価格:{{ object.price }}</p>
+                {% csrf_token %}
+                <a href="{% url 'purchaseapp:purchase' user.id %}"class="btn btn-secondary my-2">戻る</a>
+            </div>
+        </form>
+
+{% endblock %}

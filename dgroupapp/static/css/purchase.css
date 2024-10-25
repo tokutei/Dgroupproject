@@ -1,0 +1,26 @@
+.delete-img {
+    width: 40%;  
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-top-right-radius: var(--bs-card-inner-border-radius);
+}
+
+.delete-text{
+    max-width: 4em;
+    text-align: center
+}
+
+.purchasetable{
+    border-spacing: 0;
+}
+
+.purchasetable th,.purchasetable td{
+    border-bottom: 2px solid #EEEEEE;
+    padding: 10px;
+}
+
+.image{
+    position: absolute;
+    width: 300px;
+    height: 450px;
+    background-size: contain;
+}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}削除内容{% endblock %}
+{% block contents %}
+        <form method="POST">
+            <br>
+            <div class="text-center">
+                <img src="{{ object.aitemimage.url }}" />
+                <p>商品名:{{ object.aitemname }}</p>
+                <p>カテゴリー:{{ object.category }}</p>
+                <p>賞味期限:{{ object.shelf }}</p>
+                <p>価格:{{ object.price }}</p>
+                <p>削除してもいいですか?</p>
+                {% csrf_token %}
+                <button class="btn btn-primary my-2"type="submit">削除</button>
+                <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-secondary my-2">キャンセル</a>
+            </div>
+        </form>
+
+{% endblock %}
