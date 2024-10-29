@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}商品情報入力{% endblock %}
+
+{% block contents %}
+<div class="d-flex my-4 justify-content-center">
+    <div class="input_form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>カテゴリ</th>
+                    <td>{{ form.category }}</td>
+                </tr>
+                <tr>
+                    <th>商品名</th>
+                    <td>{{ form.name }}</td>
+                </tr>
+                <tr>
+                    <th>価格</th>
+                    <td>{{ form.price }}</td>
+                </tr>
+                <tr>
+                    <th>数量</th>
+                    <td>{{ form.stock }}</td>
+                </tr>
+                <tr>
+                    <th>賞味期限</th>
+                    <td>{{ form.shelf_life }}</td>
+                </tr>
+                <tr>
+                    <th>アレルギー</th>
+                    <td>{{ form.allergy }}</td>
+                </tr>
+                <tr>
+                    <th>写真</th>
+                    <td>{{ form.image }}</td>
+                </tr>
+            </table>
+            <button type="submit" class="btn btn-primary">追加する</button>        
+        </form>
+    </div>
+    <br>
+</div>
+{% endblock %}
