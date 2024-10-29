@@ -1,12 +1,42 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView, DeleteView
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, ListView, DeleteView, CreateView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
 from .forms import FoodInputForm
 
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+
+
+class LoginView(TemplateView):
+    template_name = 'login.html'
+
+    def get(self, request):
+        form = AuthenticationForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password'])
+            if user is not None:
+                login(request, user)
+                return redirect('dgroupapp:index')  # アプリ名を含める
+        return render(request, self.template_name, {'form': form})
+
+
+class LogoutView(TemplateView):
+    template_name = 'logout.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        logout(request)
+        return redirect('dgroupapp:index')  # ログアウト後にリダイレクトするURL
 
 
 # 商品情報入力ページのビュー
