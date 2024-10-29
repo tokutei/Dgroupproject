@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'dgroupapp.apps.DgroupappConfig',
     'purchaseapp.apps.PurchaseappConfig',
     'accounts.apps.AccountsConfig',
+    'delivery.apps.DeliveryConfig',
+    'adminmenu.apps.AdminmenuConfig',
 ]
 
 MIDDLEWARE = [

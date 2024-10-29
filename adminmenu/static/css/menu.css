@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around; /* 均等に配置 */
+    background-color: #f8f9fa; /* 背景色 */
+    padding: 20px 0; 
+    margin-top: 65px; /* 上に余白を追加 */
+}
+
+
+.nav-button {
+    display: flex; 
+    flex-direction: column; /* 縦に並べる */
+    align-items: center; /* 中央揃え */
+    padding: 10px;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.4s;
+}
+
+
+/* 配送選択ボタン*/
+.btn-order {
+    background-color: #007bff;
+    padding: 45px 75px;
+}
+
+.btn-order:hover {
+    background-color: #0056b3;
+}
+
+/* 食品情報の入力ボタン */
+.btn-food-input {
+    background-color: #28a745;
+    padding: 45px 75px;
+}
+
+.btn-food-input:hover {
+    background-color: #218838;
+}
+
+/* 食品情報の削除ボタン */
+.btn-food-delete {
+    background-color: #dc3545;
+    padding: 45px 75px;
+}
+
+.btn-food-delete:hover {
+    background-color: #c82333;
+}
+
+
+/* サイトを表示ボタン */
+.btn-site {
+    position: absolute;
+    top: 65px;
+    right: 25px;
+}
+
+
+.btn-site:hover {
+    color: #138496; /* ホバー時の青緑色 */
+}
+
+
+.menutitle {
+    font-size: 25px;
+    position: absolute;
+    top: 50px;
+    left: 32px;
+}
+
+.button-icon {
+    width: 65px; /* アイコンの幅 */
+    height: 60px; /* アイコンの高さ */
+    margin-top: 10px; /* 文字との間に余白を追加 */
+    display: block; /* ブロック要素にして文字の下に表示 */
+    margin-left: auto; /* 中央揃え */
+    margin-right: auto; /* 中央揃え */
+}
+
+
+

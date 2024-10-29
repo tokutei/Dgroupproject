@@ -1,0 +1,32 @@
+{% extends 'system_base.html' %}
+{% load static %}
+{% block title %}WasteNot/管理システム{% endblock %}
+
+{% block content %}
+<a href="{% url 'index' %}" class="btn-site">サイトを表示</a>
+    <h2 class="menutitle">管理システムメニュー</h2>
+    <!-- ナビゲーションバー -->
+    <div class="navbar">
+        <a href="{% url 'order_list' %}" class="nav-button btn-order">
+            
+            <img src="{% static 'assets/img/delivery-icon.png' %}" alt="配送選択" class="button-icon">
+            <br>
+             配 送 選 択 
+        </a>
+        <a href="#" class="nav-button btn-food-input">
+            
+            <img src="{% static 'assets/img/food-input-icon.png' %}" alt="食品情報の入力" class="button-icon">
+            <br>
+            食品情報の入力
+        </a>
+        <a href="#" class="nav-button btn-food-delete">
+            
+            <img src="{% static 'assets/img/food-delete-icon.png' %}" alt="食品情報の削除" class="button-icon">
+            <br>
+            食品情報の削除
+        </a>
+        
+    </div>
+    
+     
+{% endblock %}

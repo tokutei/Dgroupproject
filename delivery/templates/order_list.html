@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteNot/配送選択</title>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <style>
+
+        header {
+            background-color: #a5c4e5; /* ヘッダーの背景色 */
+            font-size: 10px;
+            width: 100%; 
+            color: white; /* ヘッダーの文字色 */
+            padding: 0; 
+            padding-left: 12px; 
+            text-align: left; 
+            margin: 0; 
+            height: auto; 
+            line-height: 2; 
+        }
+
+        header a {
+            color: inherit; 
+            text-decoration: none; /* 下線を消す */
+        }
+
+    </style>
+    <script>
+        function confirmShipping(event, orderNumber) {
+            const confirmation = confirm("本当に配送しますか？");
+            if (!confirmation) {
+                event.preventDefault(); // 送信をキャンセル
+            } else {
+                alert("配送が完了しました (注文番号: " + orderNumber + ")");
+            }
+        }
+
+        function confirmCancellation(event) {
+            const confirmation = confirm("本当に配送を取り消しますか？");
+            if (!confirmation) {
+                event.preventDefault(); // 送信をキャンセル
+            } else {
+                alert("配送が取り消されました (注文番号: " + orderNumber +")");
+            }
+
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1><a href ="{% url 'system_menu' %}">●WasteNot管理</a></h1>
+    </header>
+
+    <h2 class="menutitle">配送選択</h2>
+    <div class="searchnum">
+        <form method="GET" action="{% url 'delivery:order_list' %}">
+            <label for="sort_by" class="search-label"></label>
+            <select name="sort_by" id="sort_by" class="search-select" onchange="this.form.submit()">
+                <option value="" {% if sort_by == '' %}selected{% endif %}>並び替え</option>
+                <option value="order_number" {% if sort_by == 'order_number' %}selected{% endif %}>注文番号</option>
+                <option value="product_name" {% if sort_by == 'product_name' %}selected{% endif %}>商品名</option>
+                <option value="delivery_method" {% if sort_by == 'delivery_method' %}selected{% endif %}>配送方法</option>
+                <option value="shipped_date" {% if sort_by == 'shipped_date' %}selected{% endif %}>配送日</option>
+            </select>
+            <input type="text" name="order_id" id="order_id" placeholder="注文番号を入力" class="search-input">
+            <button type="submit" class="search-button">検索</button>
+        </form>
+    </div>
+    
+    
+    <table>
+        <thead>
+            <tr>
+                <th>注文番号</th>
+                <th>商品名</th>
+                <th>数量</th>
+                <th>配送方法</th>
+                <th>配送ステータス</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr class="{% if order.shipped %}shipped{% endif %}">
+                <td>{{ order.order_number }}</td>
+                <td>{{ order.get_product_name_display }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>{{ order.get_delivery_method_display }}</td>
+                <td>
+                    <span>{{ order.shipped|yesno:"配送済み,未配送" }}</span>
+                    {% if order.shipped %}
+                        <span class="delivery-date">({{ order.shipped_date|date:"Y-m-d H:i" }})</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="button-group">
+                        {% if not order.shipped %}
+                        <form method="POST" action="{% url 'delivery:ship_order' order.id %}" onsubmit="confirmShipping(event, '{{ order.order_number }}')">
+                            {% csrf_token %}
+                            <button type="submit">配送</button>
+                        </form>
+                        {% else %}
+                        <form method="POST" action="{% url 'delivery:cancel_order' order.id %}" onsubmit="confirmCancellation(event)">
+                            {% csrf_token %}
+                            <button type="submit">取消</button>
+                        </form>
+                        <button disabled>配送済み</button>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>        
+    </table>
+    
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Waste Not 2024</p></div>
+    </footer>
+     
+</body>
+</html>
