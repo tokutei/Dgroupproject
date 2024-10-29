@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import CustomUser
+from dgroupLogin.models import CustomUser
 
 
 class CartPost(models.Model):
