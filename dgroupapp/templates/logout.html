@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Logout Confirmation</title>
+</head>
+<body>
+    <h1>ログアウト確認</h1>
+    <p>本当にログアウトしますか？</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">はい</button>
+        <a href="{% url 'dgroupapp:index' %}">いいえ</a>
+    </form>
+</body>
+</html>

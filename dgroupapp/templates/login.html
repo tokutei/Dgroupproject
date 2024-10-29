@@ -1,0 +1,25 @@
+<!-- login.html -->
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>ログイン</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username.label }}<br>
+            {{ form.username }}<br>
+        </div>
+        <div class="form-group">
+            {{ form.password.label }}<br>
+            {{ form.password }}<br>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    {% if form.non_field_errors %}
+        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
+</div>
+{% endblock %}
