@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dgroupapp.apps.DgroupappConfig',
     'purchaseapp.apps.PurchaseappConfig',
-    'accounts.apps.AccountsConfig',
     'delivery.apps.DeliveryConfig',
 
     'adminmenu.apps.AdminmenuConfig',

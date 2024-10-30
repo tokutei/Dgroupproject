@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('purchaseapp.urls')),
     path('', include('delivery.urls')),
     path('', include('adminmenu.urls')),
+    path('dgroupLogin/', include('dgroupLogin.urls', namespace='dgroupLogin')), 
 ]
