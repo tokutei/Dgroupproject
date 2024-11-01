@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, ListView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import UserPassesTestMixin
 # from .forms import FoodInputForm
 
 
@@ -38,6 +39,12 @@ class LogoutView(TemplateView):
         logout(request)
         return redirect('dgroupapp:index')  # ログアウト後にリダイレクトするURL
 
+
+class SuperuserOnlyView(UserPassesTestMixin, TemplateView):
+    template_name = 'system_menu.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 # 商品情報入力ページのビュー
 # class CreateFoodView(CreateView):

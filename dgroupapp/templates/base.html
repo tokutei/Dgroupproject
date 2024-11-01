@@ -35,21 +35,31 @@
                             <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
                         </ul>
                     </li>
-                    {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <span class="nav-link">ログイン中: {{ user.username }}</span>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'dgroupapp:logout' %}" class="nav-link">ログアウト</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a href="{% url 'dgroupLogin:signup' %}" class="nav-link">会員登録</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'dgroupapp:login' %}" class="nav-link">ログイン</a>
-                        </li>
-                    {% endif %}
+                    <ul class="nav">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <span class="nav-link">ログイン中: {{ user.username }}</span>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'dgroupapp:logout' %}" class="nav-link">ログアウト</a>
+                            </li>
+                    
+                            {% if user.is_superuser %}
+                                <li class="nav-item">
+                                    <a href="{% url 'dgroupapp:superuser_only' %}" class="nav-link">スーパーユーザー専用ページ</a>
+                                </li>
+                            {% endif %}
+                            
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'dgroupLogin:signup' %}" class="nav-link">会員登録</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'dgroupapp:login' %}" class="nav-link">ログイン</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    
                 </ul>                
                 <form class="d-flex">
                     <button class="btn btn-outline-dark" type="submit">
