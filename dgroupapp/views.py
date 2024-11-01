@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import UserPassesTestMixin
-# from .forms import FoodInputForm
+from .forms import FoodInputForm
 
 
 class IndexView(TemplateView):
@@ -46,16 +46,17 @@ class SuperuserOnlyView(UserPassesTestMixin, TemplateView):
     def test_func(self):
         return self.request.user.is_superuser
 
-# 商品情報入力ページのビュー
-# class CreateFoodView(CreateView):
-#     form_class = FoodInputForm
-#     template_name = "input_food.html"
-#     success_url = reverse_lazy('dgroupapp:input_done')
 
-#     def form_valid(self, form):
-#         inputdata = form.save(commit=False)
-#         inputdata.save()
-#         return super().form_valid(form)
+# 商品情報入力ページのビュー
+class CreateFoodView(CreateView):
+    form_class = FoodInputForm
+    template_name = "input_food.html"
+    success_url = reverse_lazy('dgroupapp:input_done')
+
+    def form_valid(self, form):
+        inputdata = form.save(commit=False)
+        inputdata.save()
+        return super().form_valid(form)
 
 
 # 入力完了ページのビュー
