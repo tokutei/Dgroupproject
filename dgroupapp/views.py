@@ -5,10 +5,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import UserPassesTestMixin
 from .forms import FoodInputForm
+from .models import FoodInput
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'index.html'
+    queryset = FoodInput.objects.order_by('-inputed_at')
 
 
 class LoginView(TemplateView):
