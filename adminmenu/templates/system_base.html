@@ -29,13 +29,17 @@
         }
 
         footer {
-            position: fixed; /* フッターを固定 */
-            bottom: 0; /* 画面の下端に配置 */
-            width: 100%; /* フッターを画面幅いっぱいに */
-            padding: 0px 0; /* フッターの上下の余白を調整 */
             background-color: #343a40; /* フッターの背景色 */
+            font-size: 8px;
+            width: 100%; /* フッターを画面幅いっぱいに */
+            position: fixed; /* フッターを固定 */
             color: white; /* フッターの文字色 */
+            bottom: 0; /* 画面の下端に配置 */
+            padding: 0;
+            margin: 0; 
             text-align: center; /* 文字を中央揃え */
+            height: auto; 
+            line-height: 0; 
             
         }
 
@@ -54,7 +58,7 @@
 
     <footer>
         <div class="container">
-            <p class="m-0">Copyright &copy; Waste Not 2024</p>
+            <h2 class="m-0">Copyright &copy; Waste Not 2024</h2>
         </div>
     </footer>
 </body>

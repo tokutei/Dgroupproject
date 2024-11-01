@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Order
+from django.core.paginator import Paginator  # Paginatorをインポート
 
 def order_list(request):
     order_id = request.GET.get('order_id')
@@ -13,8 +14,13 @@ def order_list(request):
         orders = Order.objects.filter(order_number=order_id).order_by(sort_by)
     else:
         orders = Order.objects.all().order_by(sort_by)
+        
+    # ページネーションの設定
+    paginator = Paginator(orders, 5)  # 1ページに5件表示
+    page_number = request.GET.get('page')  # 現在のページ番号を取得
+    page_obj = paginator.get_page(page_number)  # ページオブジェクトを取得
 
-    return render(request, 'order_list.html', {'orders': orders, 'sort_by': sort_by})
+    return render(request, 'order_list.html', {'orders': page_obj, 'sort_by': sort_by})
 
 def ship_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)

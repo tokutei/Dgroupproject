@@ -88,5 +88,136 @@ body {
     margin-right: auto; /* 中央揃え */
 }
 
+table {
+    width: 65%;
+    border-collapse: collapse;
+    margin: 20px auto; /* 中央配置 */
+    
+}
+
+th, td {
+    padding: 3px;
+    font-size: 14px; /* フォントサイズを小さく */
+    text-align: left;
+    border: 2px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 130px; /* 配送ステータスの幅を150pxに設定 */
+}
+th:nth-child(2), td:nth-child(2) {
+    width: 180px; /* 配送ステータスの幅を150pxに設定 */
+}
+th:nth-child(3), td:nth-child(3) {
+    width: 60px; /* 配送ステータスの幅を150pxに設定 */
+}
+th:nth-child(4), td:nth-child(4) {
+    width: 100px; /* 配送ステータスの幅を150pxに設定 */
+}
+th:nth-child(5), td:nth-child(5) {
+    width: 230px; /* 配送ステータスの幅を150pxに設定 */
+}
+th:nth-child(6), td:nth-child(6) {
+    width: 145px; /* 配送ステータスの幅を150pxに設定 */
+}
+
+.shipped {
+    background-color: #d4edda; /* 配送済みの行の色 */
+}
+
+/* 検索フォーム全体のスタイル */
+.searchnum {
+    display: flex;
+    justify-content: center; /* フォームを中央揃え */
+    margin-top: 55px; /* 上部にスペースを追加 */
+}
+
+/* 入力フィールドのスタイル */
+.search-input {
+    background-color: #fbfefb;
+    color: grey;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px; /* ボタンとの間にスペースを追加 */
+    
+}
+
+/* 検索ボタンのスタイル */
+.search-button {
+    background-color: #4CAF50; /* 緑色の背景 */
+    color: white; /* 文字色を白に */
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 0px; /* ラベルとの間にスペースを追加 */
+}
+
+.search-button:hover {
+    background-color: #45a049; /* ホバー時に少し色を変更 */
+}
+
+/* ラベルのスタイル */
+.search-label {
+    
+    font-size: 14px;
+    margin-right: 0px; /* セレクトボックスとの間にスペースを追加 */
+}
+
+/* セレクトボックスのスタイル */
+.search-select {
+    background-color: #f3f3f3;
+    color: grey;
+    padding: 7px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
 
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.button-group {
+    display: inline-flex; /* ボタンを横に並べる */
+    gap: 10px; /* ボタンの間にスペースを追加 */
+}
+
+form {
+    margin: 0; /* フォーム間の余白をなくす */
+}
+
+
+
+button[disabled] {
+    background-color: #ccc; /* 配送済みボタンは灰色に */
+    cursor: not-allowed;
+}
+
+.delivery-date {
+    margin-left: 10px; /* 配送ステータスとのスペースを調整 */
+    color: gray; /* 配送日をグレーに */
+}
+
+.pagination {
+    text-align: center; /* 中央揃え */
+    margin: 20px 0; /* 上下の余白を調整 */
+}
+
+.step-links a {
+    margin: 0 5px; /* リンク間の余白を調整 */
+    text-decoration: none; /* 下線を消す */
+}
+
+.step-links .current {
+    font-weight: bold; /* 現在のページを太字に */
+}

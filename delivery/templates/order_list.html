@@ -1,32 +1,8 @@
+{% extends 'system_base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WasteNot/配送選択</title>
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    <style>
+{% block title %}WasteNot/管理システム{% endblock %}
 
-        header {
-            background-color: #a5c4e5; /* ヘッダーの背景色 */
-            font-size: 10px;
-            width: 100%; 
-            color: white; /* ヘッダーの文字色 */
-            padding: 0; 
-            padding-left: 12px; 
-            text-align: left; 
-            margin: 0; 
-            height: auto; 
-            line-height: 2; 
-        }
-
-        header a {
-            color: inherit; 
-            text-decoration: none; /* 下線を消す */
-        }
-
-    </style>
+{% block content %}
     <script>
         function confirmShipping(event, orderNumber) {
             const confirmation = confirm("本当に配送しますか？");
@@ -44,15 +20,8 @@
             } else {
                 alert("配送が取り消されました (注文番号: " + orderNumber +")");
             }
-
         }
     </script>
-</head>
-<body>
-
-    <header>
-        <h1><a href ="{% url 'system_menu' %}">●WasteNot管理</a></h1>
-    </header>
 
     <h2 class="menutitle">配送選択</h2>
     <div class="searchnum">
@@ -69,7 +38,6 @@
             <button type="submit" class="search-button">検索</button>
         </form>
     </div>
-    
     
     <table>
         <thead>
@@ -115,10 +83,23 @@
             {% endfor %}
         </tbody>        
     </table>
-    
-    <footer class="py-5 bg-dark">
-        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Waste Not 2024</p></div>
-    </footer>
-     
-</body>
-</html>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if orders.has_previous %}
+                <a href="?page=1&sort_by={{ sort_by }}">最初へ</a>
+                <a href="?page={{ orders.previous_page_number }}&sort_by={{ sort_by }}">前へ</a>
+            {% endif %}
+
+            <span class="current">
+                {{ orders.number }} / {{ orders.paginator.num_pages }}
+            </span>
+
+            {% if orders.has_next %}
+                <a href="?page={{ orders.next_page_number }}&sort_by={{ sort_by }}">次へ</a>
+                <a href="?page={{ orders.paginator.num_pages }}&sort_by={{ sort_by }}">最後へ</a>
+            {% endif %}
+        </span>
+    </div>
+
+{% endblock %}
