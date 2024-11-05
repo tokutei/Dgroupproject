@@ -6,6 +6,7 @@ body {
     padding: 20px;
 }
 
+
 .navbar {
     display: flex;
     justify-content: space-around; /* 均等に配置 */

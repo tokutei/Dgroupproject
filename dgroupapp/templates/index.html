@@ -1,16 +1,19 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Shop Homepage - Start Bootstrap Template{% endblock %}
+{% block title %}Waste Not{% endblock %}
 
 {% block content %}
-<header class="bg-dark py-5">
+<header class="bg-dark custom-header"> <!-- カスタムクラスを追加 -->
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Shop in style</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop homepage template</p>
+            <img src="{% static 'assets/img/title.png' %}" alt="Shop Image" class="custom-header-img my-4">
         </div>
     </div>
 </header>
+
+
+
 
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -26,7 +29,7 @@
                             <!-- Product name-->
                             <h5 class="fw-bolder">{{record.name}}</h5>
                             <!-- Product price-->
-                            ￥{{record.price}}
+                            <span class="price">￥{{record.price}}</span> <!-- ここにクラスを追加 -->
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -42,5 +45,6 @@
         </div>
     </div>
 </section>
+
 
 {% endblock %}
