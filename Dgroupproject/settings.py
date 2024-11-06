@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'dgrouinquiry',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,10 +42,10 @@ INSTALLED_APPS = [
     'dgroupapp.apps.DgroupappConfig',
     'purchaseapp.apps.PurchaseappConfig',
     'delivery.apps.DeliveryConfig',
-
     'adminmenu.apps.AdminmenuConfig',
-    #　ログイン
+    # ログイン
     'dgroupLogin.apps.DgrouploginConfig',
+
 ]
 
 MIDDLEWARE = [

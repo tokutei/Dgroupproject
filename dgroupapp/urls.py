@@ -1,6 +1,7 @@
-from django.urls import path
+from django.urls import path,include
 from .views import IndexView, LoginView, LogoutView, InputDoneView,SuperuserOnlyView
 from .views import CreateFoodView
+
 app_name = 'dgroupapp'
 
 urlpatterns = [
@@ -10,4 +11,5 @@ urlpatterns = [
     path('superuser-only/', SuperuserOnlyView.as_view(), name='superuser_only'),
     path('input_food/', CreateFoodView.as_view(), name='input_food'),
     path('input_done/', InputDoneView.as_view(), name='input_done'),
+    path('contact/', include('dgrouinquiry.urls')),
 ]

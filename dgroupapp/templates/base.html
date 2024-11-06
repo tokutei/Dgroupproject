@@ -103,6 +103,16 @@
             <p class="m-0 text-center text-white">Copyright &copy; Waste Not 2024</p>
         </div>
     </footer>
+   
+    <!-- base.html -->
+{% if messages %}
+<div class="alert alert-success">
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
