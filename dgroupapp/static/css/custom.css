@@ -1,143 +1,143 @@
 .navbar-img {
-    width: 185px;
+    width: 150px; /* 画像サイズを調整 */
     height: auto;
-    margin-left: -65px; /* 必要に応じて値を調整 */
+    margin-left: -50px; /* 必要に応じて調整 */
 }
 
-
 .custom-navbar {
-    background-color: #fe85b7; /* お好みの色に変更 */
-    font-size: 18px; /* フォントサイズを少し小さく */
-    padding: 0; /* 上下のパディングを狭める */
+    background-color: #fe85b7;
+    font-size: 14px; /* 少し小さく調整 */
+    padding: 0;
 }
 
 .custom-navbar .nav-item {
     color: #ffffff;
-    margin-top: 5px; /* 上部の余白を追加してテキストを下にずらす */
+    margin-top: 5px; /* 余白を小さめに調整 */
 }
-
 
 .custom-navbar .nav-link {
-    color: #ffffff; /* 通常時の色 */
-    padding: 10px 15px; /* リンクの上下パディングを調整してスペースを増やす */
-    display: block; /* 要素をブロック表示にする */
-    text-align: left; /* テキストを左揃えにする */
+    color: #ffffff;
+    padding: 8px 12px; /* パディングを減らして調整 */
+    display: block;
+    text-align: left;
+    margin-top: 5px;
 }
 
-
-
 .custom-navbar .nav-link:hover {
-    color: #eeeeee; /* ホバー時の色 */
+    color: #eeeeee;
 }
 
 .custom-btn {
-    background-color: #ecebeb; /* 背景色を白に設定 */
-    color: #000000; /* 文字色を黒に設定（白の背景に映えるように） */
-    border: 2px solid #000000; /* 黒い枠線を追加（必要に応じて） */
+    background-color: #ecebeb;
+    color: #000000;
+    border: 2px solid #000000;
 }
 
 .custom-btn:hover {
-    background-color: #f0f0f0; /* ホバー時の色（薄いグレーなど） */
-    color: #000000; /* ホバー時の文字色 */
+    background-color: #f0f0f0;
+    color: #000000;
 }
 
 .search-form {
-    display: flex; /* フレックスボックスを使用 */
-    align-items: center; /* 垂直方向に中央揃え */
-    margin-left: 10px; /* ナビゲーションアイテムとの間隔を設定 */
-    margin-right: 10px;
-    
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .search-input {
-    height: 35px; /* 高さを調整して他のナビゲーションアイテムと揃える */
-    font-size: 14px; /* フォントサイズを設定 */
-    margin-right: 5px; /* 他のナビゲーションアイテムとの間隔を設定 */
-    padding: 5px; /* 内側の余白を設定 */
-    margin-top: 7px; /* 下に余白を追加 */
-    width: 280px; /* 幅を広げる（お好みで調整） */
-    max-width: 300px; /* 最大幅を設定（お好みで調整） */
+    height: 30px;
+    font-size: 13px;
+    margin-right: 3px;
+    padding: 5px;
+    width: 240px; /* 幅を縮小 */
+    max-width: 260px; /* 最大幅を設定 */
+    margin-top: 9px;
 }
 
 .search-button {
-    height: 35px; /* ボタンの高さを調整 */
-    font-size: 14px; /* ボタンのフォントサイズを設定 */
-    padding: 5px 10px; /* ボタンの内側の余白を設定 */
-    margin-top: 7px; /* 下に余白を追加 */
-    
-    
+    height: 30px;
+    font-size: 13px;
+    padding: 5px 8px;
+    margin-top: 9px;
 }
 
-
 .dropdown-toggle {
-    font-size: 17px; /* フォントサイズを小さくする */
-    line-height: 0.9; /* 行の高さを調整してスペースを減らす */
-    margin-left: 15px;
+    font-size: 16px;
+    line-height: 0.9;
+    margin-left: 10px;
     margin-bottom: 2px;
 }
 
-
 .small-text {
-    font-size: 15px; /* フォントサイズを小さく設定（お好みで調整） */
+    font-size: 14px;
     color: #ffffff;
 }
 
 .custom-header-img {
-    width: 300px; /* お好みの幅に設定 */
-    height: auto; /* 高さを自動調整 */
-    margin: 0 auto; /* 中央揃え（必要に応じて） */
+    width: 260px; /* 画像幅を縮小 */
+    height: auto;
+    margin: 0 auto;
 }
 
 .custom-header {
-    padding-top: 3px; /* 上のパディング */
-    padding-bottom: 3px; /* 下のパディング */
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
-
 .card-img-top {
-    width: auto; /* 画像の幅を親要素に合わせる */
-    height: 250px; /*2 高さは自動調整 */
-    object-fit: cover; /* 画像を親要素に収めるためにアスペクト比を保持 */
+    width: auto;
+    height: 200px; /* 高さを調整 */
+    object-fit: cover;
 }
 
 .footer-link {
-    text-decoration: none; /* 下線を消す */
-    color: #ffffff; /* リンクの文字色を白に設定 */
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .footer-link:hover {
-    text-decoration: underline; /* ホバー時に下線を表示する場合 */
+    text-decoration: underline;
 }
 
-
-/* カードの背景色を変更 */
-
-
 .card {
-    background-color: #fcfeff; /* カードの背景色を変更（例：薄いグレー） */
-    width: 100%; /* 幅を100%にして、親要素に合わせる */
+    background-color: #fcfeff;
+    width: 100%; /* カードの幅を少し狭める */
+    max-width: 350px; /* 必要に応じて最大幅を設定 */
     margin: auto; /* カードを中央に配置 */
 }
 
-/* ボタンの色を変更 */
 .btn-outline-dark {
-    color: #343a40; /* ボタンのテキスト色 */
-    border-color: #343a40; /* ボタンの枠の色 */
+    color: #343a40;
+    border-color: #343a40;
+    font-size: 13px; /* ボタンのフォントサイズを小さく */
+    padding: 4px 6px; /* パディングを調整して小さく */
 }
+
 
 .btn-outline-dark:hover {
-    background-color: #343a40; /* ホバー時の背景色 */
-    color: #ffffff; /* ホバー時のテキスト色 */
+    background-color: #343a40;
+    color: #ffffff;
 }
 
-/* テキストの色を変更 */
 .card-body .fw-bolder {
-    color: #212529; /* 商品名の色 */
-    font-size: 20px;
+    color: #212529;
+    font-size: 18px; /* フォントサイズを微調整 */
 }
 
-/* 商品価格の色を変更 */
 .card-body .price {
-    color: #ff0707; /* 価格の色を変更（例：緑色） */
-    font-size: 19px;
+    color: #ff0707;
+    font-size: 18px;
+}
+
+.card-body {
+    padding: 2px 3px; /* パディングを小さく調整 */
+}
+
+.card-footer {
+    padding: 2px 3px; /* パディングを小さく調整 */
+}
+
+.btn-outline-dark.mt-auto {
+    margin-top: 5px; /* ボタン間の間隔を縮める */
 }
