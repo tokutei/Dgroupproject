@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 # カテゴリモデル
@@ -11,6 +12,18 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# アレルギー食材モデル
+class Allergy(models.Model):
+
+    name = models.CharField(
+        verbose_name='アレルギー食材名',
+        max_length=20,
+    )
+
+    def __str__(self):
+        return self.name
 
 
 # 食品入力モデル
@@ -37,6 +50,7 @@ class FoodInput(models.Model):
 
     shelf_life = models.DateField(
         verbose_name='賞味期限',
+        default=timezone.now()
     )
 
     allergy = models.CharField(
@@ -56,15 +70,3 @@ class FoodInput(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# アレルギー食材モデル
-# class Allergy(models.Model):
-
-#     name = models.CharField(
-#         verbose_name='アレルギー食材名',
-#         max_length=20,
-#     )
-
-#     def __str__(self):
-#         return self.name
