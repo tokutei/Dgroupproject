@@ -1,0 +1,15 @@
+<h2>入力内容の確認</h2>
+<p>以下の内容で送信します。よろしいですか？</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <ul>
+        <li><strong>お名前:</strong> {{ form_data.name }}</li>
+        <li><strong>メールアドレス:</strong> {{ form_data.email }}</li>
+        <li><strong>住所:</strong> {{ form_data.address }}</li>
+        <li><strong>お問い合わせ内容:</strong> {{ form_data.message }}</li>
+    </ul>
+    <button type="submit">送信</button>
+</form>
+
+<a href="{% url 'dgrouinquiry:contact' %}">戻る</a>

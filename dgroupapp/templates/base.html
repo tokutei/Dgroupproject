@@ -25,7 +25,10 @@
             <div class="collapse navbar-collapse custom-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item">
-                        <a class="nav-link" href="#!">お届け先</a>
+                        <a class="nav-link" id="navbarDropdown" href="#">
+                            <span class="small-text">こんにちは {{ user.username }}さん</span><br>
+                            住所: {{ user.address }}<br>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <form class="search-form"> <!-- search-formクラスを使用 -->
@@ -96,7 +99,7 @@
                 <a href="{% url 'dgroupapp:teams' %}" class="footer-link">利用規約</a>
                 <a href="#!" class="footer-link">| プライバシー規約</a>
                 <a href="#!" class="footer-link">| 概要</a>
-                <a href="#!" class="footer-link">| お問い合わせ</a>
+                <a href="/contact/" class="footer-link">| お問い合わせ</a>
                 <a href="#!" class="footer-link">| その他</a>
             </div>
             

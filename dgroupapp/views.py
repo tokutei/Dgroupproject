@@ -65,6 +65,7 @@ class CreateFoodView(CreateView):
 class InputDoneView(TemplateView):
     template_name = 'input_done.html'
 
+
 # 利用規約
 class TeamsView(TemplateView):
     template_name = 'teams.html'

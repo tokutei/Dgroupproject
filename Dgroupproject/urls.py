@@ -27,6 +27,7 @@ urlpatterns = [
     path('', include('delivery.urls')),
     path('', include('adminmenu.urls')),
     path('dgroupLogin/', include('dgroupLogin.urls', namespace='dgroupLogin')), 
+    path('', include('dgrouinquiry.urls')),
 ]
 
 

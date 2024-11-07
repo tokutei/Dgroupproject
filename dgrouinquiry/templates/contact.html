@@ -1,4 +1,3 @@
-<!-- dgroupinquiry/templates/dgroupinquiry/contact.html -->
 {% load static %}
 <!DOCTYPE html>
 <html lang="ja">
@@ -15,37 +14,29 @@
 <body>
     <h1>お問い合わせ</h1>
 
-    {% if messages %}
-        <div class="alert alert-success">
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
-
     <form method="post">
         {% csrf_token %}
         <div class="form-group">
             <label for="id_name">お名前</label>
-            {{ form.name }}  <!-- フォームフィールド -->
+            {{ form.name }}
         </div>
 
         <div class="form-group">
             <label for="id_email">メールアドレス</label>
-            {{ form.email }}  <!-- フォームフィールド -->
+            {{ form.email }}
         </div>
 
         <div class="form-group">
             <label for="id_message">お問い合わせ内容</label>
-            {{ form.message }}  <!-- フォームフィールド -->
+            {{ form.message }}
         </div>
 
         <div class="form-group">
             <label for="id_address">住所</label>
-            {{ form.address }}  <!-- フォームフィールド -->
+            {{ form.address }}
         </div>
 
-        <button type="submit" class="btn btn-primary">送信</button>
+        <button type="submit" class="btn btn-primary">確認</button>
     </form>
 
 </body>
