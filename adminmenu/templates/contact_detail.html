@@ -1,0 +1,18 @@
+<!-- adminmenu/templates/contact_detail.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ contact.name }} さんのお問い合わせ詳細</title>
+</head>
+<body>
+    <h1>{{ contact.name }} さんのお問い合わせ詳細</h1>
+    <p><strong>メールアドレス:</strong> {{ contact.email }}</p>
+    <p><strong>住所:</strong> {{ contact.address }}</p>
+    <p><strong>メッセージ:</strong> {{ contact.message }}</p>
+    <p><strong>送信日時:</strong> {{ contact.created_at }}</p>
+    <br>
+    <a href="{% url 'contact_list' %}">戻る</a>
+</body>
+</html>

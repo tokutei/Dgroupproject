@@ -1,0 +1,30 @@
+<!-- adminmenu/templates/contact_list.html -->
+{% extends 'system_base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>お問い合わせリスト</title>
+</head>
+<body>
+    <h1>お問い合わせリスト</h1>
+    <ul>
+        {% for contact in contacts %}
+            <li>
+                <a href="{% url 'contact_detail' contact.id %}">
+                    {{ contact.name }} ({{ contact.email }})
+                </a>
+                - {{ contact.created_at }}
+            </li>
+        {% empty %}
+            <li>現在、お問い合わせはありません。</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'contact_list' %}">戻る</a>
+</body>
+</html>
+     
+{% endblock %}
