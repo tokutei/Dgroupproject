@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}アカウント切り替え{% endblock %}
+
+{% block content %}
+<h1>アカウントの切り替え</h1>
+
+<form method="POST" class="account-switch-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="user_id">切り替えたいアカウントを選択してください</label>
+        <select name="user_id" id="user_id" class="form-control">
+            {% for user in users %}
+                {% if user.is_superuser %}
+                    <option value="{{ user.id }}" class="superuser-option">{{ user.username }} (運営アカウント)</option>
+                {% else %}
+                    <option value="{{ user.id }}">{{ user.username }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">アカウントを切り替える</button>
+</form>
+{% endblock %}

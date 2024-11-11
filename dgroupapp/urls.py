@@ -13,5 +13,9 @@ urlpatterns = [
     path('input_food/', CreateFoodView.as_view(), name='input_food'),
     path('input_done/', InputDoneView.as_view(), name='input_done'),
     path('contact/', include('dgrouinquiry.urls')),
+    path('switch_account/', views.switch_account, name='switch_account'),
     path('teams/', views.TeamsView.as_view(), name='teams'),  
+    path('privacy/', views.PrivacyView.as_view(), name='privacy'),
+    
+    
 ]
