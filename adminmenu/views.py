@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Contact
+from dgrouinquiry.models import Contact
 
 
 def system_menu(request):
