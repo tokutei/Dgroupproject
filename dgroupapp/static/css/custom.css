@@ -141,3 +141,88 @@
 .btn-outline-dark.mt-auto {
     margin-top: 5px; /* ボタン間の間隔を縮める */
 }
+
+/* アカウント切り替えページのスタイル */
+.account-switch-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+}
+
+.custom-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.custom-select:focus {
+    border-color: #f57c00;
+    outline: none;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary {
+    background-color: #f57c00;
+    border: none;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #e65100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .account-switch-form {
+        padding: 15px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+
+    .custom-select {
+        font-size: 14px;
+    }
+}
+
+
+
+.superuser-option {
+    background-color: #f8d7da; /* 明るい赤色 */
+    color: #721c24; /* 赤い文字 */
+    font-weight: bold;
+}
+
+.superuser-option:hover {
+    background-color: #f5c6cb; /* ホバー時の色 */
+}
