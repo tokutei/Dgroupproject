@@ -1,15 +1,26 @@
-<h2>入力内容の確認</h2>
-<p>以下の内容で送信します。よろしいですか？</p>
+{% extends 'base.html' %}
+{% load static %}
 
-<form method="POST">
-    {% csrf_token %}
-    <ul>
-        <li><strong>お名前:</strong> {{ form_data.name }}</li>
-        <li><strong>メールアドレス:</strong> {{ form_data.email }}</li>
-        <li><strong>住所:</strong> {{ form_data.address }}</li>
-        <li><strong>お問い合わせ内容:</strong> {{ form_data.message }}</li>
-    </ul>
-    <button type="submit">送信</button>
-</form>
+{% block content %}
+    <link href="{% static 'css/confirmation_styles.css' %}" rel="stylesheet" />
 
-<a href="{% url 'dgrouinquiry:contact' %}">戻る</a>
+    <div class="confirmation-container">
+        <h2 class="confirmation-title">入力内容の確認</h2>
+        <p class="confirmation-subtitle">以下の内容で送信します。よろしいですか？</p>
+
+        <form method="POST" class="confirmation-form">
+            {% csrf_token %}
+            <ul class="confirmation-list">
+                <li><strong>お名前:</strong> {{ form_data.name }}</li>
+                <li><strong>メールアドレス:</strong> {{ form_data.email }}</li>
+                <li><strong>住所:</strong> {{ form_data.address }}</li>
+                <li><strong>お問い合わせ内容:</strong> {{ form_data.message }}</li>
+            </ul>
+
+            <div class="confirmation-buttons">
+                <button type="submit" class="confirm-btn">送信</button>
+                <a href="{% url 'dgrouinquiry:contact' %}" class="back-link">戻る</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

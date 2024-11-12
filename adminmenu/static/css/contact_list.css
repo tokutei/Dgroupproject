@@ -81,3 +81,8 @@ body {
     padding: 20px;
     font-style: italic;
 }
+.contact-message {
+    word-wrap: break-word;  /* 単語が長くても折り返し */
+    white-space: pre-wrap;  /* 改行コード(\n)を維持しつつ折り返し */
+    word-break: break-word;  /* 長い単語の途中で折り返し */
+}
