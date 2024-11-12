@@ -20,5 +20,5 @@ class FoodInputForm(ModelForm):
         model = FoodInput
         fields = ['category', 'name', 'price', 'stock', 'shelf_life', 'allergy', 'image']
         widgets = {
-            'shelf_life': forms.SelectDateWidget()
+            'shelf_life': forms.NumberInput(attrs={"type": "date"})
         }
