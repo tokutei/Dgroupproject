@@ -4,27 +4,26 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import UserPassesTestMixin
-# from .models import Food
+from foods.models import Food
 from dgroupLogin.models import CustomUser  # CustomUserをインポート
 from django.contrib.auth.decorators import login_required
 
 
-
 class IndexView(ListView):
-    # model = Food
+    model = Food
     template_name = 'index.html'
     context_object_name = 'object_list'  # コンテキストの名前を指定
 
-    # def get_queryset(self):
-    #     # デフォルトで全商品を表示
-    #     queryset = Food.objects.order_by('-inputed_at')
+    def get_queryset(self):
+        # デフォルトで全商品を表示
+        queryset = Food.objects.order_by('-inputed_at')
 
-    #     # 検索フォームから商品名を受け取ってフィルタリング
-    #     name = self.request.GET.get('name', None)
-    #     if name:
-    #         queryset = queryset.filter(name__icontains=name)  # 商品名に部分一致するものを検索
+        # 検索フォームから商品名を受け取ってフィルタリング
+        name = self.request.GET.get('name', None)
+        if name:
+            queryset = queryset.filter(name__icontains=name)  # 商品名に部分一致するものを検索
 
-    #     return queryset
+        return queryset
 
 
 class LoginView(TemplateView):

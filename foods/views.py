@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, DeleteView, CreateView
 from django.urls import reverse_lazy
 from .forms import FoodInputForm
-# from .models import Food
 
 
 # 商品情報入力ページのビュー
@@ -13,9 +12,9 @@ class CreateFoodView(CreateView):
 
     def form_valid(self, form):
         inputdata = form.save(commit=False)
-    #     allergy = form.cleaned_data.get("allergy")
-    #     if allergy:
-    #         inputdata.allergy = '、'.join(allergy)
+        allergy = form.cleaned_data.get("allergy")
+        if allergy:
+            inputdata.allergy = '、'.join(allergy)
         inputdata.save()
         return super().form_valid(form)
 
