@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品登録</title>
+</head>
+<body>
+    <h1>商品登録</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.name.id_for_label }}">商品名:</label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label for="{{ form.quantity.id_for_label }}">個数:</label>
+            {{ form.quantity }}
+        </div>
+        <div>
+            <label for="{{ form.expiration_date.id_for_label }}">消費期限:</label>
+            {{ form.expiration_date }}
+        </div>
+        <div>
+            <label for="{{ form.allergies.id_for_label }}">アレルギー:</label>
+            {{ form.allergies }}  <!-- チェックボックスが表示されます -->
+        </div>
+        <button type="submit">登録</button>
+    </form>
+</body>
+</html>

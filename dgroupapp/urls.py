@@ -16,6 +16,7 @@ urlpatterns = [
     path('switch_account/', views.switch_account, name='switch_account'),
     path('teams/', views.TeamsView.as_view(), name='teams'),  
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
+    path('convenience/', include('Convenience.urls')),
     
     
 ]
