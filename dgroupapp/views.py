@@ -4,28 +4,27 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import UserPassesTestMixin
-from .forms import FoodInputForm
-from .models import FoodInput
+# from .models import Food
 from dgroupLogin.models import CustomUser  # CustomUserをインポート
 from django.contrib.auth.decorators import login_required
 
 
 
 class IndexView(ListView):
-    model = FoodInput
+    # model = Food
     template_name = 'index.html'
     context_object_name = 'object_list'  # コンテキストの名前を指定
 
-    def get_queryset(self):
-        # デフォルトで全商品を表示
-        queryset = FoodInput.objects.order_by('-inputed_at')
+    # def get_queryset(self):
+    #     # デフォルトで全商品を表示
+    #     queryset = Food.objects.order_by('-inputed_at')
 
-        # 検索フォームから商品名を受け取ってフィルタリング
-        name = self.request.GET.get('name', None)
-        if name:
-            queryset = queryset.filter(name__icontains=name)  # 商品名に部分一致するものを検索
+    #     # 検索フォームから商品名を受け取ってフィルタリング
+    #     name = self.request.GET.get('name', None)
+    #     if name:
+    #         queryset = queryset.filter(name__icontains=name)  # 商品名に部分一致するものを検索
 
-        return queryset
+    #     return queryset
 
 
 class LoginView(TemplateView):
@@ -64,26 +63,10 @@ class SuperuserOnlyView(UserPassesTestMixin, TemplateView):
         return self.request.user.is_superuser
 
 
-# 商品情報入力ページのビュー
-class CreateFoodView(CreateView):
-    form_class = FoodInputForm
-    template_name = "input_food.html"
-    success_url = reverse_lazy('dgroupapp:input_done')
-
-    def form_valid(self, form):
-        inputdata = form.save(commit=False)
-        inputdata.save()
-        return super().form_valid(form)
-
-
-# 入力完了ページのビュー
-class InputDoneView(TemplateView):
-    template_name = 'input_done.html'
-
-
 # 利用規約
 class TeamsView(TemplateView):
     template_name = 'teams.html'
+
 
 class PrivacyView(TemplateView):
     template_name = 'privacy.html'

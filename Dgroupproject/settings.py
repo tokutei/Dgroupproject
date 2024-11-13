@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'dgroupapp.apps.DgroupappConfig',
     'purchaseapp.apps.PurchaseappConfig',
     'delivery.apps.DeliveryConfig',
+    'foods.apps.FoodsConfig',
     'adminmenu.apps.AdminmenuConfig',
     # ログイン
     'dgroupLogin.apps.DgrouploginConfig',
