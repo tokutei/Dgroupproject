@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('dgroupapp.urls')),
     path('', include('purchaseapp.urls')),
     path('', include('delivery.urls')),
+    path('', include('foods.urls')),
     path('', include('adminmenu.urls')),
     path('dgroupLogin/', include('dgroupLogin.urls', namespace='dgroupLogin')), 
     path('', include('dgrouinquiry.urls')),
