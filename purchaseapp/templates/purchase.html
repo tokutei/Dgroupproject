@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}買い物かご内容{% endblock %}
 
-{% block contents %}
+{% block content %}
 <!-- Header-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -10,12 +10,14 @@
                 <tr>
                     <th>商品名</th>
                     <th>価格</th>
+                    <th>個数</th>
                     <th></th>
                 </tr>
                 {% for record in object_list %}
                 <tr>
                     <td>{{ record.aitemname }}</td>
                     <td>￥{{ record.price }}</td>
+                    <td>{{ record.stock }}</td>
                     <td><a href="{% url 'purchaseapp:detail' record.pk %}">詳細</a>
                     </td>
                 </tr>
@@ -23,6 +25,7 @@
                 <tr>
                     <td>支払額</td>
                     <td>￥{{ totalprice }}</td>
+                    <td>{{ totalstock }}</td>
                     <td></td>
                 </tr>
             </table>
@@ -30,24 +33,51 @@
     </div>
     <div class="text-center">
         <br>
-        <form method="GET">
+        <form action="{% url 'create-checkout-session' %}" method="POST">
+            {% csrf_token %}
             <p>
-                住所:<input type="text" name="address">
+                住所:　　 <input type="text" name="address" value="{{ user.address }}" style="width: 200px" required>
+            </p>
+            <p>
+                発送方法:
+                <select name="delivery" style="width: 200px">
+                    <option value="standard">通常配送</option>
+                    <option value="express">速達配送</option>
+                </select>
             </p>
             <p>
                 支払方法:
-                <select name="payment">
+                <select name="payment" id="select" style="width: 200px">
                     <option value="0">--------</option>
                     <option value="1">クレジットカード決済</option>
-                    <option value="2">クレジットカード決済</option>
-                    <option value="3">クレジットカード決済</option>
-                    <option value="4">代金引換</option>
+                    <option value="2">代金引換</option>
                 </select>
             </p>
             <br>
-            <a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:purchase' user.id %}'">購入</a>
+            <div id="message1" class="hidden">
+                <button class="btn btn-primary my-2" type="submit" name="credit">購入画面に進む</button>
+            </div>
+
+            <div id="message2" class="hidden">
+                <button class="btn btn-primary my-2" type="submit" name="cash">購入画面に進む</button>
+            </div>
+
+            <script>
+                const select = document.getElementById("select");
+                const message1 = document.getElementById("message1");
+                const message2 = document.getElementById("message2");
+                
+                select.addEventListener("change", (event) => {
+                    const value = event.target.value;
+                    message1.classList.toggle("hidden", value !== "1");
+                    message2.classList.toggle("hidden", value !== "2");
+                    
+                });
+            </script>
+
         </form>
     </div>
 </section>
+
 
 {% endblock %}

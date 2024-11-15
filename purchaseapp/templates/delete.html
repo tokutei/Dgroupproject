@@ -1,19 +1,47 @@
 {% extends 'base.html' %}
 {% block title %}削除内容{% endblock %}
-{% block contents %}
-        <form method="POST">
-            <br>
-            <div class="text-center">
-                <img src="{{ object.aitemimage.url }}" />
-                <p>商品名:{{ object.aitemname }}</p>
-                <p>カテゴリー:{{ object.category }}</p>
-                <p>賞味期限:{{ object.shelf }}</p>
-                <p>価格:{{ object.price }}</p>
-                <p>削除してもいいですか?</p>
-                {% csrf_token %}
-                <button class="btn btn-primary my-2"type="submit">削除</button>
-                <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-secondary my-2">キャンセル</a>
-            </div>
-        </form>
+{% block content %}
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.aitemimage.url }}" alt="..." style="width: 470px; height: 300px;" /></div>
+                    <div class="col-md-6">
+                        <div style="word-break: break-word; overflow-wrap: break-word;">
+                        <h1 class="display-5 fw-bolder">{{ object.aitemname }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span>￥{{ object.price }}</span>
+                        </div>
+                        <p class="lead">
+                            カテゴリー:{{ object.category }}<br>
+                            賞味期限:{{ object.shelf }}<br>
+                            アレルギー:<br>{{ object.allergy }}<br><br>
+                            削除してもいいですか?<br>            
+                        </p>
+                        <style>
+                            form input[type="number"]::-webkit-outer-spin-button,
+                            form input[type="number"]::-webkit-inner-spin-button {
+                                -webkit-appearance: none !important;
+                                margin: 0 !important;
+                                appearance: none !important;
+                            }
 
+                            form input[type="number"] {
+                                -moz-appearance: textfield !important;
+                                appearance: none !important;
+                            }
+                        </style>
+                        <form method="POST">
+                            <div class="d-flex">
+                                {{ form.stockminus }}
+                                {% csrf_token %}
+                                <button class="btn btn-primary my-2"type="submit">削除</button>
+                                　
+                                <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-secondary my-2">キャンセル</a>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 {% endblock %}

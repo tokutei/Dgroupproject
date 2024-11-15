@@ -141,3 +141,7 @@ AUTH_USER_MODEL = 'dgroupLogin.CustomUser'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+STRIPE_PUBLIC_KEY = 'pk_test_51QHz1VL8vAMNBiqUw57QudwIiSaN9UjFPbXsfrckeMTEaR9GIBNbyOo0p7lfSHzw4tetDosiK7j09OgavYSykVkk00sebm3Lyu'
+
+STRIPE_SECRET_KEY = 'sk_test_51QHz1VL8vAMNBiqUVPvvdB1yOgrjCQI8g1D3aIKWNMZOEiQVGx7SMbfBonNbDbfNPcyG6GHNDW6ipKM3TWOtNuBf00ch2qhGfU'

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}買い物かご内容{% endblock %}
+
+{% block content %}
+<!-- Header-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <table class="purchasetable">
+                <tr>
+                    <th>商品名</th>
+                    <th>価格</th>
+                    <th>個数</th>
+                    <th></th>
+                </tr>
+                {% for record in object_list %}
+                <tr>
+                    <td>{{ record.aitemname }}</td>
+                    <td>￥{{ record.price }}</td>
+                    <td>{{ record.stock }}</td>
+                    <td><a href="{% url 'purchaseapp:detail' record.pk %}">詳細</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td>支払額</td>
+                    <td>￥{{ totalprice }}</td>
+                    <td>{{ totalstock }}</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="text-center">
+        <br>
+        <form action="{% url 'success' %}" method="POST">
+            {% csrf_token %}
+            <p>
+                住所:　　{{ address }}
+            </p>
+            <p>
+                発送方法:{{ delivery }}
+            </p>
+            <p>
+                支払方法:代金引換
+            </p>
+            <br>
+                <button class="btn btn-primary my-2" type="submit" name="credit">購入確定</button>
+
+        </form>
+    </div>
+</section>
+
+
+{% endblock %}
