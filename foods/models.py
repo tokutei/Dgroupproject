@@ -29,6 +29,15 @@ class Allergy(models.Model):
 # 食品モデル
 class Food(models.Model):
 
+    stripe_product_id = models.CharField(
+        verbose_name="商品ID",
+        max_length=100
+    )
+
+    stripe_price_id = models.CharField(
+        max_length=100
+    )
+
     category = models.ForeignKey(
         Category,
         verbose_name='カテゴリ',
