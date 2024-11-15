@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}住所の編集{% endblock %}
+
+{% block content %}
+<div class="container">
+    <hr>
+
+    <form method="POST" class="custom-address-edit-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="address" class="custom-label"><h3>お届け先住所の編集</h3></label>
+            <textarea id="address" name="address" class="custom-form-control" rows="4">{{ user.address }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary custom-submit-btn">住所を更新する</button>
+    </form>
+
+    <br>
+</div>
+{% endblock %}

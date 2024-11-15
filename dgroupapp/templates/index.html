@@ -1,19 +1,114 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Waste Not{% endblock %}
+{% block title %}WasteNot{% endblock %}
 
 {% block content %}
-<header class="bg-dark custom-header"> <!-- カスタムクラスを追加 -->
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <img src="{% static 'assets/img/title.png' %}" alt="Shop Image" class="custom-header-img my-4">
-        </div>
-    </div>
-</header>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
+<script>
+    const container = document.querySelector('.category-container');
+
+    function scrollLeft() {
+        container.scrollBy({ left: -150, behavior: 'smooth' });
+    }
+
+    function scrollRight() {
+        container.scrollBy({ left: 150, behavior: 'smooth' });
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.slide-slick1-parts').slick({
+            autoplay: true,        // 自動再生
+            autoplaySpeed: 2800,   // スライドが切り替わるまでの時間（ミリ秒）
+            dots: true,            // ナビゲーションのドットを表示
+            arrows: false         // 矢印を非表示
+        });
+    });
+</script>
+
+
+
+<aside class="slide-slick1-parts">
+    <div><img src="{% static 'assets/img/ad.png' %}" alt=""></div>
+    <div><img src="{% static 'assets/img/ad2.jpg' %}" alt=""></div>
+    <div><img src="{% static 'assets/img/ad3.jpg' %}" alt=""></div>
+</aside>
+
+
+<div class="pickup">
+<h2 style="text-align: center;">おすすめ商品</h2>
+    <div class="list-square-parts">
+    <div class="list-parts">
+    <a href="images/1.jpg" data-lightbox="group1" data-title="タイトルを">
+    <img src="{% static 'assets/img/koppepan.png' %}" alt="">
+    </a>
+    </div>
+    
+    <div class="list-parts">
+    <a href="images/2.jpg" data-lightbox="group1" data-title="タイトルを">
+    <img src="{% static 'assets/img/ocha.jpg' %}" alt="">
+    </a>
+    </div>
+    
+    <div class="list-parts">
+    <a href="images/3.jpg" data-lightbox="group1" data-title="タイトルを">
+    <img src="{% static 'assets/img/onigiri.jpg' %}" alt="">
+    </a>
+    </div>
+    
+    <div class="list-parts">
+    <a href="images/1.jpg" data-lightbox="group1" data-title="タイトルを">
+    <img src="{% static 'assets/img/lawson.png' %}" alt="">
+    </a>
+    </div>
+    
+</div>
+</div>
+
+<!-- 流れるアニメーション付き横スライド -->
+<div class="scroll-infinity py-3">
+    <div class="scroll-infinity__wrap">
+      <ul class="scroll-infinity__list scroll-infinity__list--left">
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/familymart.png' %}"  /></li>                        
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/lawson.png' %}"  /></li>      
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/seven_eleven.png' %}"  /></li>      
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/familymart.png' %}"  /></li>                        
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/lawson.png' %}"  /></li>      
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/seven_eleven.png' %}"  /></li>          
+      </ul>
+      <ul class="scroll-infinity__list scroll-infinity__list--left">
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/familymart.png' %}"  /></li>                        
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/lawson.png' %}"  /></li>      
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/seven_eleven.png' %}"  /></li>      
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/familymart.png' %}"  /></li>                        
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/lawson.png' %}"  /></li>      
+        <li class="scroll-infinity__item"><img src="{% static 'assets/img/seven_eleven.png' %}"  /></li>          
+      </ul>
+    </div>
+</div>
+
+
+<div class="category-header">
+    <div class="category-container">
+        {% for record in object_list %}
+        <div class="category-card">
+            <img src="{{ record.image.url }}" alt="カテゴリ画像1">
+            <p>{{ record.name }}</p>
+        </div>
+        {% endfor %}
+        <!-- 他のカテゴリカードを追加 -->
+    </div>
+</div>
+
+<section>
+    <div class="container px-4 px-lg-5 mt-1">
+        <h2 style="text-align: center;">商品一覧</h2>
+        
+
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for record in object_list %}
             <div class="col mb-5">
@@ -42,3 +137,44 @@
 </section>
 
 {% endblock %}
+
+
+
+
+
+
+<h2>スライドショー</h2>
+<ul>
+<li>スライド速度はjsの最後にある「}, 4000); // 4秒ごとにスライドを切り替える」の「4000」の数字で調整できます。</li>
+<li>フェード（切り替わる際）のスピードはcssで調整できます。cssのコメントを読んで下さい。</li>
+<li>スライドショー下のボタン色や大きさはcssで調整できます。</li>
+<li>デモは３枚スライドですが、４枚目の画像を追加したい場合は３枚目のブロック(３行)をコピペし、「img3-parts」を「img4-parts」に書き換えて任意の画像に入れ替えればOKです。</li>
+<li>リンクが不要ならa要素を入れなければOK。</li>
+</ul>
+
+<div class="slide3-parts">
+
+<div class="slide-parts img1-parts">
+<a href="#"><img src="images/1.jpg" alt=""></a>
+</div>
+
+<div class="slide-parts img2-parts">
+<a href="#"><img src="images/2.jpg" alt=""></a>
+</div>
+
+<div class="slide-parts img3-parts">
+<a href="#"><img src="images/3.jpg" alt=""></a>
+</div>
+
+<div class="slide-indicators"></div><!--現在表示中ボタン-->
+
+</div>
+<!--/.slide3-parts-->
+
+
+
+
+
+
+
+

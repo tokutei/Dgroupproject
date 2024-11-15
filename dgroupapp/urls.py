@@ -14,5 +14,8 @@ urlpatterns = [
     path('teams/', views.TeamsView.as_view(), name='teams'),  
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
     path('convenience/', include('Convenience.urls')),
+    path('profile/', views.profile, name='profile'),
+    path('edit_address/', views.edit_address, name='edit_address'),
+    path('address_update_complete/', views.address_update_complete, name='address_update_complete'),
 ]
 #http://127.0.0.1:8000/convenience/register/

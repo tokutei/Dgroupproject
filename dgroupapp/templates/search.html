@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Waste Not{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container px-4 px-lg-5 mt-1 py-2">
+        <div class="search-result">
+        <h3 style="text-align: center;">
+            {% if search_query %}”{{ search_query }}”の検索結果 {{ result_count }}件{% endif %}
+        </h3>
+        </div>
+
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 py-3 justify-content-center">
+            {% for record in object_list %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- 商品画像 -->
+                    <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="..." />
+                    <!-- 商品詳細 -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">{{ record.name }}</h5>
+                            <span class="price">￥{{ record.price }}</span>
+                        </div>
+                    </div>
+                    <!-- 商品アクション -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="#">商品詳細</a>
+                            <a class="btn btn-outline-dark mt-auto" href="#"><i class="bi-cart-fill me-1"></i>カートに追加</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

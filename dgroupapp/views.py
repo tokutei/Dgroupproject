@@ -7,23 +7,36 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from foods.models import Food
 from dgroupLogin.models import CustomUser  # CustomUserをインポート
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 class IndexView(ListView):
     model = Food
     template_name = 'index.html'
-    context_object_name = 'object_list'  # コンテキストの名前を指定
+    context_object_name = 'object_list'
 
     def get_queryset(self):
         # デフォルトで全商品を表示
         queryset = Food.objects.order_by('-inputed_at')
 
         # 検索フォームから商品名を受け取ってフィルタリング
-        name = self.request.GET.get('name', None)
-        if name:
-            queryset = queryset.filter(name__icontains=name)  # 商品名に部分一致するものを検索
+        self.search_query = self.request.GET.get('name', None)
+        if self.search_query:
+            queryset = queryset.filter(name__icontains=self.search_query)
 
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # 検索ワードと検索結果数を追加
+        context['search_query'] = self.search_query
+        context['result_count'] = context['object_list'].count()
+        return context
+
+    def get_template_names(self):
+        if self.request.GET.get('name'):
+            return ['search.html']
+        return ['index.html']
 
 
 class LoginView(TemplateView):
@@ -91,3 +104,26 @@ def switch_account(request):
             users = CustomUser.objects.filter(is_superuser=False)  # 普通のユーザーのみ表示
 
         return render(request, 'switch_account.html', {'users': users})
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html', {'user': request.user})
+
+@login_required
+def edit_address(request):
+    if request.method == 'POST':
+        # フォームから新しい住所を取得
+        new_address = request.POST.get('address')
+
+        # ユーザーの住所を更新
+        request.user.address = new_address
+        request.user.save()
+
+        return redirect('dgroupapp:address_update_complete')
+    
+    # GETリクエストの場合は、現在の住所を表示
+    return render(request, 'edit_address.html')
+
+@login_required
+def address_update_complete(request):
+    return render(request, 'address_update_complete.html')
