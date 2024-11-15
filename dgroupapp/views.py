@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import UserPassesTestMixin
-from foods.models import Food
+from foods.models import Food, Category
 from dgroupLogin.models import CustomUser  # CustomUserをインポート
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -16,22 +16,19 @@ class IndexView(ListView):
     context_object_name = 'object_list'
 
     def get_queryset(self):
-        # デフォルトで全商品を表示
         queryset = Food.objects.order_by('-inputed_at')
-
-        # 検索フォームから商品名を受け取ってフィルタリング
         self.search_query = self.request.GET.get('name', None)
         if self.search_query:
             queryset = queryset.filter(name__icontains=self.search_query)
-
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # 検索ワードと検索結果数を追加
         context['search_query'] = self.search_query
         context['result_count'] = context['object_list'].count()
+        context['categorys'] = Category.objects.all()  # カテゴリ情報を追加
         return context
+
 
     def get_template_names(self):
         if self.request.GET.get('name'):
@@ -127,3 +124,16 @@ def edit_address(request):
 @login_required
 def address_update_complete(request):
     return render(request, 'address_update_complete.html')
+
+
+
+
+def category_view(request, category_id):
+    # 指定したカテゴリに関連する商品を取得
+    category = Category.objects.get(id=category_id)
+    products = Food.objects.filter(category=category)  # カテゴリに関連する商品を取得
+
+    return render(request, 'category_view.html', {
+        'category': category,
+        'products': products,
+    })

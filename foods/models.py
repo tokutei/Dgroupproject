@@ -10,6 +10,12 @@ class Category(models.Model):
         max_length=20
     )
 
+    image = models.ImageField(
+        verbose_name='写真',
+        upload_to='images',
+        default='images/default.jpg',  
+    )
+
     def __str__(self):
         return self.title
 

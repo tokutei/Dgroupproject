@@ -94,15 +94,21 @@
 
 <div class="category-header">
     <div class="category-container">
-        {% for record in object_list %}
+        {% for category in categorys %}
         <div class="category-card">
-            <img src="{{ record.image.url }}" alt="カテゴリ画像1">
-            <p>{{ record.name }}</p>
+            <!-- カテゴリ画像をクリックするとカテゴリページに遷移 -->
+            <a href="{% url 'dgroupapp:category_view' category.id %}">
+                <img src="{{ category.image.url }}" alt="カテゴリ画像">
+                <p>{{ category.title }}</p>
+            </a>
         </div>
+        {% empty %}
+        <p>カテゴリがありません。</p>
         {% endfor %}
-        <!-- 他のカテゴリカードを追加 -->
     </div>
+    
 </div>
+
 
 <section>
     <div class="container px-4 px-lg-5 mt-1">
@@ -141,35 +147,6 @@
 
 
 
-
-
-<h2>スライドショー</h2>
-<ul>
-<li>スライド速度はjsの最後にある「}, 4000); // 4秒ごとにスライドを切り替える」の「4000」の数字で調整できます。</li>
-<li>フェード（切り替わる際）のスピードはcssで調整できます。cssのコメントを読んで下さい。</li>
-<li>スライドショー下のボタン色や大きさはcssで調整できます。</li>
-<li>デモは３枚スライドですが、４枚目の画像を追加したい場合は３枚目のブロック(３行)をコピペし、「img3-parts」を「img4-parts」に書き換えて任意の画像に入れ替えればOKです。</li>
-<li>リンクが不要ならa要素を入れなければOK。</li>
-</ul>
-
-<div class="slide3-parts">
-
-<div class="slide-parts img1-parts">
-<a href="#"><img src="images/1.jpg" alt=""></a>
-</div>
-
-<div class="slide-parts img2-parts">
-<a href="#"><img src="images/2.jpg" alt=""></a>
-</div>
-
-<div class="slide-parts img3-parts">
-<a href="#"><img src="images/3.jpg" alt=""></a>
-</div>
-
-<div class="slide-indicators"></div><!--現在表示中ボタン-->
-
-</div>
-<!--/.slide3-parts-->
 
 
 
