@@ -5,5 +5,5 @@ app_name = 'foods'
 
 urlpatterns = [
     path('food_input/', views.CreateFoodView.as_view(), name='food_input'),
-    path('input_done/', views.InputDoneView.as_view(), name='input_done'),
+    path('input_done/', views.InputSuccessView.as_view(), name='input_done'),
 ]

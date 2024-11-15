@@ -21,6 +21,8 @@ class CreateFoodView(CreateView):
         allergy = form.cleaned_data.get("allergy")
         if allergy:
             inputdata.allergy = '、'.join(allergy)
+        else:
+            inputdata.allergy = 'なし'
         productname = inputdata.name
         price = int(inputdata.price)
         product = stripe.Product.create(
@@ -49,5 +51,5 @@ class CreateFoodView(CreateView):
 
 
 # 入力完了ページのビュー
-class InputDoneView(TemplateView):
-    template_name = 'input_done.html'
+class InputSuccessView(TemplateView):
+    template_name = 'input_success.html'

@@ -1,46 +1,48 @@
 {% extends 'system_base.html' %}
 {% load static %}
 
-{% block title %}商品情報入力{% endblock %}
+{% block title %}食品入力 WasteNot/管理システム{% endblock %}
 
 {% block content %}
-<div class="d-flex my-4 justify-content-center">
-    <div class="input_form">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <table>
-                <tr>
-                    <th>カテゴリ</th>
-                    <td>{{ form.category }}</td>
-                </tr>
-                <tr>
-                    <th>商品名</th>
-                    <td>{{ form.name }}</td>
-                </tr>
-                <tr>
-                    <th>価格</th>
-                    <td>{{ form.price }}</td>
-                </tr>
-                <tr>
-                    <th>数量</th>
-                    <td>{{ form.stock }}</td>
-                </tr>
-                <tr>
-                    <th>賞味期限</th>
-                    <td>{{ form.shelf_life }}</td>
-                </tr>
-                <tr>
-                    <th>アレルギー</th>
-                    <td>{{ form.allergy }}</td>
-                </tr>
-                <tr>
-                    <th>写真</th>
-                    <td>{{ form.image }}</td>
-                </tr>
-            </table>
-            <button type="submit" class="btn btn-primary">追加する</button>        
-        </form>
-    </div>
+<div class="input_page">
+    <h2 class="menutitle">食品入力</h2>
+    <form method="POST" enctype="multipart/form-data" class="input_form">
+        {% csrf_token %}
+        <table class="food_input">
+            <tr>
+                <th>カテゴリ</th>
+                <td>{{ form.category }}</td>
+            </tr>
+            <tr>
+                <th>商品名</th>
+                <td>{{ form.name }}</td>
+            </tr>
+            <tr>
+                <th>価格</th>
+                <td>{{ form.price }}</td>
+            </tr>
+            <tr>
+                <th>在庫数</th>
+                <td>{{ form.stock }}</td>
+            </tr>
+            <tr>
+                <th>賞味期限</th>
+                <td>{{ form.shelf_life }}</td>
+            </tr>
+            <tr>
+                <th>アレルギー</th>
+                <td>{{ form.allergy }}</td>
+            </tr>
+            <tr>
+                <th>写真</th>
+                <td>{{ form.image }}</td>
+            </tr>
+        </table>
+        <div align = "right">
+            <button type="submit" class="input_btn">追加する</button> 
+        </div>
+    </form>
+    <a href="{% url 'system_menu' %}">戻る</a>
     <br>
 </div>
 {% endblock %}
