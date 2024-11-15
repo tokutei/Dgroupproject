@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'dgrouinquiry',
+    'dgrouinquiry.apps.DgrouinquiryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     'foods.apps.FoodsConfig',
     'adminmenu.apps.AdminmenuConfig',
     # ログイン
-    'dgroupLogin.apps.DgrouploginConfig',
-
-    'Convenience',
+    'dgroupLogin.apps.DgrouploginConfig',   
+    #問い合わせ
+    'dgrouinquiry.apps.DgrouinquiryConfig',
+    #コンビニ
+    'Convenience.apps.ConvenienceConfig',
 
 
 
