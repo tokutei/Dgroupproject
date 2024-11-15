@@ -1,6 +1,6 @@
 """
 URL configuration for Dgroupproject project.
-
+ 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
 Examples:
@@ -25,8 +25,8 @@ from purchaseapp.views import (
     SuccessPage,
     CancelPageView,
 )
-
-
+ 
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('dgroupapp.urls')),
@@ -34,20 +34,16 @@ urlpatterns = [
     path('', include('delivery.urls')),
     path('', include('foods.urls')),
     path('', include('adminmenu.urls')),
-    path('dgroupLogin/', include('dgroupLogin.urls', namespace='dgroupLogin')), 
+    path('dgroupLogin/', include('dgroupLogin.urls', namespace='dgroupLogin')),
     path('', include('dgrouinquiry.urls')),
-<<<<<<< HEAD
-    path('', include('Convenience.urls')),
-=======
     path('stripe/', ProductTopPageView.as_view(), name="product-top-page"),
     path('stripe/create-checkout-session/', CreateCheckoutSessionView.as_view(), name="create-checkout-session"),
     path('stripe/purchasecheck', PurchaseCheck, name='purchasecheck'),
     path('stripe/success/', SuccessPage, name='success'),
     path('stripe/cancel/', CancelPageView.as_view(), name="cancel"),
->>>>>>> 99a4ad0b89348f8c9b726e74c1c24313d728478a
 ]
-
-
+ 
+ 
 # urlpatternsにmediaフォルダのURLパターンを追加
 urlpatterns += static(
     # MEDIA_URL = 'media/'
