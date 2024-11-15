@@ -15,3 +15,4 @@ urlpatterns = [
     path('privacy/', views.PrivacyView.as_view(), name='privacy'),
     path('convenience/', include('Convenience.urls')),
 ]
+#http://127.0.0.1:8000/convenience/register/

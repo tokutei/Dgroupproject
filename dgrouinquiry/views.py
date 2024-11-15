@@ -21,7 +21,7 @@ def contact_confirm_view(request):
     form_data = request.session.get('contact_form_data', None)
     
     if not form_data:
-        return redirect('contact')  # データが無ければフォーム画面にリダイレクト
+        return redirect('dgrouinquiry:contact')  # データが無ければフォーム画面にリダイレクト
 
     if request.method == 'POST':
         # 確認後、データをデータベースに保存

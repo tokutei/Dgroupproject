@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     # ログイン
     'dgroupLogin.apps.DgrouploginConfig',
 
-    'Convenience'
+    'Convenience',
 
 
 

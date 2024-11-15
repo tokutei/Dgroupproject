@@ -4,28 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品登録</title>
+
+    <!-- staticタグを読み込む -->
+    {% load static %}
+    
+    <!-- CSSファイルの読み込み -->
+    <link rel="stylesheet" href="{% static 'CSS/Convenience1.css' %}">
 </head>
 <body>
     <h1>商品登録</h1>
 
-    <form method="post">
+    <!-- フォームの開始: enctypeを設定 -->
+    <form method="post" action="{% url 'Convenience:product_confirm' %}" enctype="multipart/form-data">
         {% csrf_token %}
+        
         <div>
             <label for="{{ form.name.id_for_label }}">商品名:</label>
             {{ form.name }}
+            {% if form.name.errors %}
+                <ul class="errors">
+                    {% for error in form.name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
+
         <div>
             <label for="{{ form.quantity.id_for_label }}">個数:</label>
             {{ form.quantity }}
+            {% if form.quantity.errors %}
+                <ul class="errors">
+                    {% for error in form.quantity.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
+
         <div>
             <label for="{{ form.expiration_date.id_for_label }}">消費期限:</label>
             {{ form.expiration_date }}
+            {% if form.expiration_date.errors %}
+                <ul class="errors">
+                    {% for error in form.expiration_date.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
+
         <div>
             <label for="{{ form.allergies.id_for_label }}">アレルギー:</label>
-            {{ form.allergies }}  <!-- チェックボックスが表示されます -->
+            {{ form.allergies }}
+            {% if form.allergies.errors %}
+                <ul class="errors">
+                    {% for error in form.allergies.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
+
+        <div>
+            <label for="{{ form.image.id_for_label }}">商品画像:</label>
+            {{ form.image }}
+            {% if form.image.errors %}
+                <ul class="errors">
+                    {% for error in form.image.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <!-- エラーメッセージ全体 -->
+        {% if form.non_field_errors %}
+            <ul class="errors">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- フォーム送信ボタン -->
         <button type="submit">登録</button>
     </form>
 </body>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品登録確認</title>
+</head>
+<body>
+    <h1>商品登録確認</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <p><strong>商品名:</strong> {{ form_data.name }}</p>
+        <p><strong>個数:</strong> {{ form_data.quantity }}</p>
+        <p><strong>消費期限:</strong> {{ form_data.expiration_date }}</p>
+        <p><strong>アレルギー:</strong> {{ form_data.allergies }}</p>
+        <p><strong>商品画像:</strong><br><img src="{{ form_data.image.url }}" alt="商品画像" width="150"></p>
+
+        <button type="submit">この内容で登録</button>
+    </form>
+
+    <br>
+    <a href="{% url 'product_register' %}">修正する</a>
+</body>
+</html>
