@@ -18,6 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from purchaseapp.views import (
+    CreateCheckoutSessionView,
+    ProductTopPageView,
+    PurchaseCheck,
+    SuccessPage,
+    CancelPageView,
+)
 
 
 urlpatterns = [
@@ -29,6 +36,11 @@ urlpatterns = [
     path('', include('adminmenu.urls')),
     path('dgroupLogin/', include('dgroupLogin.urls', namespace='dgroupLogin')), 
     path('', include('dgrouinquiry.urls')),
+    path('stripe/', ProductTopPageView.as_view(), name="product-top-page"),
+    path('stripe/create-checkout-session/', CreateCheckoutSessionView.as_view(), name="create-checkout-session"),
+    path('stripe/purchasecheck', PurchaseCheck, name='purchasecheck'),
+    path('stripe/success/', SuccessPage, name='success'),
+    path('stripe/cancel/', CancelPageView.as_view(), name="cancel"),
 ]
 
 

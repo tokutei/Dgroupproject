@@ -8,6 +8,7 @@
     <meta name="author" content="" />
     <title>{% block title %}Waste Not{% endblock %}</title>
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <link href="{% static 'css/purchase.css' %}" rel="stylesheet" />
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
 
@@ -84,13 +85,15 @@
                         {% endif %}
                     </ul>
                 </ul>
-                <form class="d-flex">
+                {% if user.is_authenticated %}
+                <form action="{% url 'purchaseapp:cart' user.id %}" class="d-flex">
                     <button class="btn custom-btn" type="submit"> <!-- btn-outline-dark を custom-btn に変更 -->
                         <i class="bi-cart-fill me-1"></i>
                         カート
                         <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                     </button>
-                </form>       
+                </form> 
+                {% endif %}      
                 
             </div>
         </div>

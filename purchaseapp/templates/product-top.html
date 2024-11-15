@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}商品トップ{% endblock %}
+{% block content %}
+<session>
+    <h1>商品一覧</h1>
+    <hr />
+        <div clss="product">
+            <div class="description">
+                {% for product in product_list %}
+                    <h2>{{ product.nae }}</h2>
+                    <picture>
+                        <img src="{{ product.file.url }}" alt="image" style="width:auth;">
+                    </picture>
+                    <div>{{ product.description }}</div>
+                    {% for price_data in product.Prices.all %}
+                    <h4>価格:￥{{ price_data.get_display_price }}</h4>
+                    <form action="{% url 'create-checkout-session' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">購入画面に進む</button>
+                    </form>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+</session>
+{% endblock %}
