@@ -44,14 +44,7 @@
                             <button type="submit" class="search-button">検索</button>
                         </form>
                     </li>
-                    
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#!">SHOP</a>
-                    </li>
+                
                     <ul class="nav">
                         {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
@@ -102,6 +95,8 @@
 
     {% block content %}{% endblock %}
 
+
+    <a href="#" id="page-top"><i class="blogicon-chevron-up"></i>トップへ戻る</a>
     <div id="footermenu2-parts">
         <ul>
         <li class="title">規約</li>
@@ -109,7 +104,7 @@
         </ul>
         <ul>
         <li class="title">プライバシー</li>
-        <a href="#!" class="footer-link">| プライバシー規約</a>
+        <a href="{% url 'dgroupapp:privacy' %}" class="footer-link">| プライバシー規約</a>
         </ul>
         <ul>
         <li class="title">ヘルプ</li>
@@ -121,11 +116,11 @@
         </ul>
         
     </div>
+
 <footer>
     <small>Copyright&copy; <a href="">Waste Not</a> All Rights Reserved.</small>
     <span class="pr"><a href="https://www.o-hara.ac.jp/" target="_blank">2024 TeamD</a></span>
 </footer>
-   
     <!-- base.html -->
 {% if messages %}
 <div class="alert alert-success">

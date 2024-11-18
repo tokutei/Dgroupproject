@@ -48,10 +48,11 @@
 .search-input {
     height: 30px;
     font-size: 13px;
-    margin-right: 3px;
+    margin-right: 2px;
+    margin-left: 2px;
     padding: 5px;
-    width: 240px; /* 幅を縮小 */
-    max-width: 260px; /* 最大幅を設定 */
+    width: 380px; /* 幅を縮小 */
+    max-width: 490px; /* 最大幅を設定 */
     margin-top: 9px;
 }
 
@@ -60,6 +61,7 @@
     font-size: 13px;
     padding: 5px 8px;
     margin-top: 9px;
+    margin-right: 3px;
 }
 
 .dropdown-toggle {
@@ -687,4 +689,22 @@ h3 {
     .custom-back-btn {
         font-size: 14px;
     }
+}
+
+/***トップへ戻るボタン***/
+#page-top {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: .7em;
+    text-align: center;
+    background: #565656; /*背景色*/
+    color: #ffffff; /*文字色*/
+    transition: .3s;
+    text-decoration: none;
+}
+/***マウスオーバー時***/
+#page-top:hover {
+    background: #666; /*背景色*/
+    color: #fff; /*文字色*/
 }
