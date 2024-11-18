@@ -20,5 +20,6 @@ class FoodInputForm(ModelForm):
         model = Food
         fields = ['category', 'name', 'price', 'stock', 'shelf_life', 'allergy', 'image']
         widgets = {
+            'name': forms.TextInput(attrs={"placeholder": "商品名を入力"}),
             'shelf_life': forms.NumberInput(attrs={"type": "date"})
         }

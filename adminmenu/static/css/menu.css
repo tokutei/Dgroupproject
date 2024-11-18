@@ -89,21 +89,21 @@ body {
     margin-right: auto; /* 中央揃え */
 }
 
-table {
+.order_list {
     width: 65%;
     border-collapse: collapse;
     margin: 20px auto; /* 中央配置 */
     
 }
 
-th, td {
+.order_list th, .order_list td {
     padding: 3px;
     font-size: 14px; /* フォントサイズを小さく */
     text-align: left;
     border: 2px solid #ddd;
 }
 
-th {
+.order_list th {
     background-color: #f2f2f2;
 }
 
@@ -221,4 +221,110 @@ button[disabled] {
 
 .step-links .current {
     font-weight: bold; /* 現在のページを太字に */
+}
+
+/* 食品追加画面 */
+.input_page {
+    padding-bottom: 5%;
+}
+
+.input_form {
+    border-radius: 10px;
+    box-shadow: 0 4px 4px #c1d6de; /* ボックスのドロップシャドウを設定 */
+    padding: 10px;
+    max-width: 700px; /* フォームの横幅を設定 */
+    margin: 30px auto; /* 中央配置*/
+}
+
+.food_input {
+    margin: 20px auto; /* ボックス内の中央に配置 */
+}
+
+.food_input th {
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.food_input td {
+    padding-right: 30px;
+    padding-bottom: 18px; /* 入力ボックス間の余白を設定*/
+}
+
+#id_allergy label, .food_input input[type="checkbox"] {
+    cursor: pointer; /* カーソルを設定 */
+}
+
+.food_input select,
+.food_input input[type="text"],
+.food_input input[type="number"],
+.food_input input[type="date"] {
+    border: 1.5px solid #a2afca; /* 入力ボックスの枠線 */
+    border-radius: 4px;
+}
+
+select[name="category"] {
+    width: 406.67px;
+    height: 44.67px;
+}
+
+.food_input input[type="text"],
+.food_input input[type="number"] {
+    width: 400px;
+    height: 40px;
+}
+
+input[name="shelf_life"] {
+    width: 200px;
+    height: 42px;
+}
+
+/* チェックボックスのデザイン */
+.food_input input[type="checkbox"] {
+    appearance: none;
+    margin: 0;
+    margin-right: 3px;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    border-radius: 3px;
+    border-width: 1px;
+    border: 1.5px solid;
+    border-color: #a2afca;
+    background-color: #fff;
+    position: relative;
+    top: -2px;
+}
+
+/* チェック後のデザイン */
+.food_input input[type="checkbox"]:checked {
+border-color: #5b95ad;
+background-color: #5b95ad;
+background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>');
+background-size: 100% auto;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+#id_allergy {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 1行に4つの列を作成 */
+    gap: 7px; /* チェックボックス間の余白を設定 */
+
+}
+
+/* 追加ボタンのデザイン */
+.input_btn {
+    background-color: #0d6efd; /* 青色の背景 */
+    color: white; /* 文字色を白に */
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.input_btn:hover {
+    background-color: #0b5ed7; /* ホバー時に少し色を変更 */
 }
