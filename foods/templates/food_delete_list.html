@@ -11,6 +11,7 @@
             <th>価格</th>
             <th>在庫</th>
             <th>操作</th>
+            <th>　　</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,9 @@
             <td>{{ food.stock }}</td>
             <td>
                 <a href="{% url 'foods:food_delete' food.id %}" class="delete-link">削除</a>
+            </td>
+            <td>
+                <a href="{% url 'foods:food_update' food.id %}" class="update-link">編集</a>
             </td>
         </tr>
         {% empty %}
