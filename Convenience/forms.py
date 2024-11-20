@@ -12,7 +12,7 @@ class ProductForm(forms.ModelForm):
         ('fish', '魚'),
         ('crustacean', '甲殻類'),
     ]
-    
+
     allergies = forms.MultipleChoiceField(
         choices=ALLERGY_CHOICES,
         widget=forms.CheckboxSelectMultiple,

@@ -10,4 +10,6 @@ urlpatterns = [
     path('cart/<int:pk>/delete', views.PurchaseDeleteView.as_view(), name='purchase_delete'),
     path('cart/purchase/<int:user>', views.PurchaseView.as_view(), name='purchase'),
     path('cart/<int:pk>/detail', views.DetailView.as_view(), name='detail'),
+    path('buy/<int:pk>', views.BuyView.as_view(), name='buy'),
+    path('buy/buysuccess/<str:stripe_product_id>', views.BuySuccess, name='buysuccess'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

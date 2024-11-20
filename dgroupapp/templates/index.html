@@ -131,8 +131,7 @@
                     <!-- 商品アクション -->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                         <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto" href="#">商品詳細</a>
-                            <a class="btn btn-outline-dark mt-auto" href="#"><i class="bi-cart-fill me-1"></i>カートに追加</a>
+                            <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
                         </div>
                     </div>
                 </div>

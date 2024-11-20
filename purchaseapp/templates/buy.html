@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}削除内容{% endblock %}
+{% block content %}
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.image.url }}" alt="..." style="width: 470px; height: 300px;" /></div>
+                    <div class="col-md-6">
+                        <h1 class="display-5 fw-bolder">{{ object.name }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span>￥{{ object.price }}</span>
+                        </div>
+                        <p class="lead">
+                            カテゴリー:{{ object.category }}<br>
+                            賞味期限:{{ object.shelf_life }}<br>
+                            アレルギー:{{ object.allergy }}<br><br>
+                        </p>
+                        <style>
+                            form input[type="number"]::-webkit-outer-spin-button,
+                            form input[type="number"]::-webkit-inner-spin-button {
+                                -webkit-appearance: none !important;
+                                margin: 0 !important;
+                                appearance: none !important;
+                            }
+
+                            form input[type="number"] {
+                                -moz-appearance: textfield !important;
+                                appearance: none !important;
+                            }
+                        </style>
+                        <form action="{% url 'purchaseapp:buysuccess' object.stripe_product_id %}" method="POST">
+                            {% csrf_token %}
+                            <div class="d-flex">
+                                <input name="addstock" class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 3rem" min="1" max="{{ maxvalue }}" />
+                                <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                    <i class="bi-cart-fill me-1"></i>
+                                    Add to cart
+                                </button>
+                                　
+                                <a href="{% url 'index' %}"class="btn btn-secondary my-2">キャンセル</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}

@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.conf import settings
 from django.core.mail import send_mail
 from .models import CartPost, OrderPost, OrderAitemPost, Product, Price
+from foods.models import Food
 from .forms import CartPostForm
 from urllib.parse import urlencode, urljoin
 
@@ -165,3 +166,41 @@ def SuccessPage(request):
     entries.save()
     CartPost.objects.filter(user=request.user.id).delete()
     return render(request, ('success.html'))
+
+
+class BuyView(DetailView):
+    template_name = 'buy.html'
+    model = Food
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        productid = self.object.stripe_product_id
+        mystock = CartPost.objects.filter(stripe_product_id=productid)
+        if len(mystock) == 0:
+            context['maxvalue'] = self.object.stock
+        else:
+            value = CartPost.objects.get(stripe_product_id=productid)
+            context['maxvalue'] = self.object.stock - value.stock
+        return context
+
+def BuySuccess(request, stripe_product_id):
+    select_list = CartPost.objects.filter(stripe_product_id=stripe_product_id)
+    addstock = request.POST.get('addstock')
+    if len(select_list) == 0:
+        print_list = Food.objects.get(stripe_product_id=stripe_product_id)
+        cartadd = CartPost(
+            user=request.user,
+            stripe_product_id=stripe_product_id,
+            aitemimage=print_list.image,
+            category=print_list.category,
+            aitemname=print_list.name,
+            price=print_list.price,
+            stock=addstock,
+            shelf=print_list.shelf_life,
+            allergy=print_list.allergy,
+        )
+        cartadd.save()
+    else:
+        update_object = CartPost.objects.get(stripe_product_id=stripe_product_id)
+        update_object.stock = update_object.stock + int(addstock)
+        update_object.save()
+    return redirect('index')
