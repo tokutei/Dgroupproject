@@ -178,6 +178,11 @@ footer .pr {display: block;}
     font-size: 18px;
 }
 
+.card-body .shelf {
+    color: gray;
+    font-size: 15px;
+}
+
 .card-body {
     padding: 2px 3px; /* パディングを小さく調整 */
 }

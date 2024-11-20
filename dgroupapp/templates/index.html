@@ -33,41 +33,49 @@
 
 
 <aside class="slide-slick1-parts">
+    <div><img src="{% static 'assets/img/famima.jpeg' %}" alt=""></div>
     <div><img src="{% static 'assets/img/ad.png' %}" alt=""></div>
-    <div><img src="{% static 'assets/img/ad2.jpg' %}" alt=""></div>
-    <div><img src="{% static 'assets/img/ad3.jpg' %}" alt=""></div>
+    <div><img src="{% static 'assets/img/famima.jpeg' %}" alt=""></div>
 </aside>
 
 
-<div class="pickup">
-<h2 style="text-align: center;">おすすめ商品</h2>
-    <div class="list-square-parts">
-    <div class="list-parts">
-    <a href="images/1.jpg" data-lightbox="group1" data-title="タイトルを">
-    <img src="{% static 'assets/img/koppepan.png' %}" alt="">
-    </a>
+<section>
+    <div class="pickup">
+        <h2 style="text-align: center;">賞味期限が遠い商品<br>-セール中-</h2>
+
+        <<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for record in recommended_items %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                <!-- 商品画像 -->
+                <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="{{ record.name }}">
+                <a href="{% url 'purchaseapp:buy' record.pk %}" data-lightbox="group1" data-title="{{ record.name }}">
+                
+                </a>
+                <!-- 商品詳細 -->
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <h5 class="fw-bolder">{{ record.name }}</h5>
+                        <span class="price">￥{{ record.price }}</span><br>
+                        <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
+                    </div>
+                </div>
+                <!-- 商品アクション -->
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+            {% empty %}
+            <p>おすすめ商品がありません。</p>
+            {% endfor %}
+        </div>
     </div>
-    
-    <div class="list-parts">
-    <a href="images/2.jpg" data-lightbox="group1" data-title="タイトルを">
-    <img src="{% static 'assets/img/ocha.jpg' %}" alt="">
-    </a>
-    </div>
-    
-    <div class="list-parts">
-    <a href="images/3.jpg" data-lightbox="group1" data-title="タイトルを">
-    <img src="{% static 'assets/img/onigiri.jpg' %}" alt="">
-    </a>
-    </div>
-    
-    <div class="list-parts">
-    <a href="images/1.jpg" data-lightbox="group1" data-title="タイトルを">
-    <img src="{% static 'assets/img/lawson.png' %}" alt="">
-    </a>
-    </div>
-    
-</div>
-</div>
+</section>
+
+
 
 <!-- 流れるアニメーション付き横スライド -->
 <div class="scroll-infinity py-3">
@@ -101,6 +109,7 @@
                 <img src="{{ category.image.url }}" alt="カテゴリ画像">
                 <p>{{ category.title }}</p>
             </a>
+            
         </div>
         {% empty %}
         <p>カテゴリがありません。</p>
@@ -125,7 +134,8 @@
                     <div class="card-body p-4">
                         <div class="text-center">
                             <h5 class="fw-bolder">{{ record.name }}</h5>
-                            <span class="price">￥{{ record.price }}</span>
+                            <span class="price">￥{{ record.price }}</span><br>
+                            <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
                         </div>
                     </div>
                     <!-- 商品アクション -->

@@ -16,7 +16,8 @@ class IndexView(ListView):
     context_object_name = 'object_list'
 
     def get_queryset(self):
-        queryset = Food.objects.order_by('-inputed_at')
+        # 通常の商品を新着順で取得
+        queryset = Food.objects.order_by('-inputed_at')  # 新着順に並べ替え
         self.search_query = self.request.GET.get('name', None)
         if self.search_query:
             queryset = queryset.filter(name__icontains=self.search_query)
@@ -27,8 +28,11 @@ class IndexView(ListView):
         context['search_query'] = self.search_query
         context['result_count'] = context['object_list'].count()
         context['categorys'] = Category.objects.all()  # カテゴリ情報を追加
-        return context
 
+        # 賞味期限が遠い順に商品4件を取得
+        context['recommended_items'] = Food.objects.order_by('shelf_life')[:4]  # 賞味期限が遠い順に4つ取
+
+        return context
 
     def get_template_names(self):
         if self.request.GET.get('name'):
@@ -137,3 +141,4 @@ def category_view(request, category_id):
         'category': category,
         'products': products,
     })
+
