@@ -1,10 +1,10 @@
 {% extends 'system_base.html' %}
 
-{% block title %}食品情報入力 WasteNot/管理システム{% endblock %}
+{% block title %}食品情報編集 WasteNot/管理システム{% endblock %}
 
 {% block content %}
 <div class="input_page">
-    <h2 class="menutitle">食品情報入力</h2>
+    <h2 class="menutitle">食品情報編集</h2>
     <form method="POST" enctype="multipart/form-data" class="input_form">
         {% csrf_token %}
         <table class="food_input">
@@ -38,10 +38,10 @@
             </tr>
         </table>
         <div align = "right">
-            <button type="submit" class="input_btn">追加する</button> 
+            <button type="submit" class="input_btn">編集を保存する</button> 
         </div>
     </form>
-    <a href="{% url 'system_menu' %}">戻る</a>
+    <a href="{% url 'foods:food_delete_list' %}">戻る</a>
     <br>
 </div>
 {% endblock %}

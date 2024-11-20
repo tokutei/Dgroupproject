@@ -67,4 +67,12 @@ class Price(models.Model):
     def get_display_price(self):
         return self.price
 
+
+class BuyJudge(models.Model):
+    stripe_product_id = models.CharField(verbose_name='商品ID', max_length=100)
+    stock = models.IntegerField(verbose_name='購入数')
+    def __str__(self):
+        return self.stripe_product_id
+
+
 # Create your models here.
