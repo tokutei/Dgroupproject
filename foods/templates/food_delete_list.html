@@ -1,0 +1,35 @@
+{% extends 'system_base.html' %}
+{% block title %}食品情報削除 WasteNot/管理システム{% endblock %}
+
+{% block content %}
+<h2>食品情報削除</h2>
+<table class="food_list">
+    <thead>
+        <tr>
+            <th>カテゴリ</th>
+            <th>商品名</th>
+            <th>価格</th>
+            <th>在庫</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for food in foods %}
+        <tr>
+            <td>{{ food.category }}</td>
+            <td>{{ food.name }}</td>
+            <td>{{ food.price }}</td>
+            <td>{{ food.stock }}</td>
+            <td>
+                <a href="{% url 'foods:food_delete' food.id %}" class="delete-link">削除</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">削除できる食品がありません。</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'system_menu' %}" class="btn-back">戻る</a>
+{% endblock %}
