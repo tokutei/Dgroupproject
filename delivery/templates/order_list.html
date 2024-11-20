@@ -3,103 +3,105 @@
 {% block title %}WasteNot/管理システム{% endblock %}
 
 {% block content %}
-    <script>
-        function confirmShipping(event, orderNumber) {
-            const confirmation = confirm("本当に配送しますか？");
-            if (!confirmation) {
-                event.preventDefault(); // 送信をキャンセル
-            } else {
-                alert("配送が完了しました (注文番号: " + orderNumber + ")");
-            }
+<script>
+    function confirmShipping(event, orderNumber) {
+        const confirmation = confirm("本当に配送しますか？");
+        if (!confirmation) {
+            event.preventDefault(); // 送信をキャンセル
+        } else {
+            alert("配送が完了しました (注文番号: " + orderNumber + ")");
         }
+    }
 
-        function confirmCancellation(event) {
-            const confirmation = confirm("本当に配送を取り消しますか？");
-            if (!confirmation) {
-                event.preventDefault(); // 送信をキャンセル
-            } else {
-                alert("配送が取り消されました (注文番号: " + orderNumber +")");
-            }
+    function confirmCancellation(event) {
+        const confirmation = confirm("本当に配送を取り消しますか？");
+        if (!confirmation) {
+            event.preventDefault(); // 送信をキャンセル
+        } else {
+            alert("配送が取り消されました");
         }
-    </script>
+    }
+</script>
 
-    <h2 class="menutitle">配送選択</h2>
-    <div class="searchnum">
-        <form method="GET" action="{% url 'delivery:order_list' %}">
-            <label for="sort_by" class="search-label"></label>
-            <select name="sort_by" id="sort_by" class="search-select" onchange="this.form.submit()">
-                <option value="" {% if sort_by == '' %}selected{% endif %}>並び替え</option>
-                <option value="order_number" {% if sort_by == 'order_number' %}selected{% endif %}>注文番号</option>
-                <option value="product_name" {% if sort_by == 'product_name' %}selected{% endif %}>商品名</option>
-                <option value="delivery_method" {% if sort_by == 'delivery_method' %}selected{% endif %}>配送方法</option>
-                <option value="shipped_date" {% if sort_by == 'shipped_date' %}selected{% endif %}>配送日</option>
-            </select>
-            <input type="text" name="order_id" id="order_id" placeholder="注文番号を入力" class="search-input">
-            <button type="submit" class="search-button">検索</button>
-        </form>
-    </div>
-    
-    <table class="order_list">
-        <thead>
-            <tr>
-                <th>注文番号</th>
-                <th>商品名</th>
-                <th>数量</th>
-                <th>配送方法</th>
-                <th>配送ステータス</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order in orders %}
-            <tr class="{% if order.shipped %}shipped{% endif %}">
-                <td>{{ order.order_number }}</td>
-                <td>{{ order.get_product_name_display }}</td>
-                <td>{{ order.quantity }}</td>
-                <td>{{ order.get_delivery_method_display }}</td>
-                <td>
-                    <span>{{ order.shipped|yesno:"配送済み,未配送" }}</span>
-                    {% if order.shipped %}
-                        <span class="delivery-date">({{ order.shipped_date|date:"Y-m-d H:i" }})</span>
+<h2 class="menutitle">配送選択</h2>
+<div class="searchnum">
+    <form method="GET" action="{% url 'delivery:order_list' %}">
+        <label for="sort_by" class="search-label"></label>
+        <select name="sort_by" id="sort_by" class="search-select" onchange="this.form.submit()">
+            <option value="ordernumber" {% if sort_by == 'ordernumber' %}selected{% endif %}>注文番号</option>
+            <option value="aitemname" {% if sort_by == 'aitemname' %}selected{% endif %}>商品名</option>
+            <option value="delivery_method" {% if sort_by == 'delivery_method' %}selected{% endif %}>配送方法</option>
+            <option value="shipped_date" {% if sort_by == 'shipped_date' %}selected{% endif %}>配送日</option>
+        </select>        
+        <input type="text" name="order_id" id="order_id" placeholder="注文番号を入力" class="search-input" value="{{ request.GET.order_id }}">
+        <button type="submit" class="search-button">検索</button>
+    </form>
+</div>
+
+<table class="order_list">
+    <thead>
+        <tr>
+            <th>注文番号</th>
+            <th>商品名</th>
+            <th>数量</th>
+            <th>配送方法</th>
+            <th>配送ステータス</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr class="{% if order.shipped %}shipped{% endif %}">
+            <td>{{ order.ordernumber }}</td>
+            <td>
+                {% for item in order_items %}
+                    {% if item.ordernumber == order.ordernumber %}
+                        {{ item.aitemname }}
                     {% endif %}
-                </td>
-                <td>
-                    <div class="button-group">
-                        {% if not order.shipped %}
-                        <form method="POST" action="{% url 'delivery:ship_order' order.id %}" onsubmit="confirmShipping(event, '{{ order.order_number }}')">
-                            {% csrf_token %}
-                            <button type="submit">配送</button>
-                        </form>
-                        {% else %}
+                {% endfor %}
+            </td>
+            <td>{{ order.aitem }}</td>
+            <td>{{ order.get_delivery_method_display }}</td>
+            <td>
+                <span>{{ order.shipped|yesno:"配送済み,未配送" }}</span>
+                {% if order.shipped %}
+                    <span class="delivery-date">({{ order.shipped_date|date:"Y-m-d H:i" }})</span>
+                {% endif %}
+            </td>
+            <td>
+                <div class="button-group">
+                    {% if not order.shipped %}
+                    <form method="POST" action="{% url 'delivery:ship_order' order.id %}" onsubmit="confirmShipping(event, '{{ order.ordernumber }}')">
+                        {% csrf_token %}
+                        <button type="submit">配送</button>
+                    </form>
+                    {% else %}
                         <form method="POST" action="{% url 'delivery:cancel_order' order.id %}" onsubmit="confirmCancellation(event)">
                             {% csrf_token %}
                             <button type="submit">取消</button>
                         </form>
-                        <button disabled>配送済み</button>
-                        {% endif %}
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>        
-    </table>
+                    <button disabled>配送済み</button>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if orders.has_previous %}
-                <a href="?page=1&sort_by={{ sort_by }}">最初へ</a>
-                <a href="?page={{ orders.previous_page_number }}&sort_by={{ sort_by }}">前へ</a>
-            {% endif %}
-
-            <span class="current">
-                {{ orders.number }} / {{ orders.paginator.num_pages }}
-            </span>
-
-            {% if orders.has_next %}
-                <a href="?page={{ orders.next_page_number }}&sort_by={{ sort_by }}">次へ</a>
-                <a href="?page={{ orders.paginator.num_pages }}&sort_by={{ sort_by }}">最後へ</a>
-            {% endif %}
+<div class="pagination">
+    <span class="step-links">
+        {% if orders.has_previous %}
+            <a href="?page=1&sort_by={{ sort_by }}">最初へ</a>
+            <a href="?page={{ orders.previous_page_number }}&sort_by={{ sort_by }}">前へ</a>
+        {% endif %}
+        <span class="current">
+            {{ orders.number }} / {{ orders.paginator.num_pages }}
         </span>
-    </div>
-
+        {% if orders.has_next %}
+            <a href="?page={{ orders.next_page_number }}&sort_by={{ sort_by }}">次へ</a>
+            <a href="?page={{ orders.paginator.num_pages }}&sort_by={{ sort_by }}">最後へ</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}
