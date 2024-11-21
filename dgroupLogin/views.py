@@ -54,7 +54,7 @@ def user_profile_view(request):
             # 電話番号をセッションから取得
             user_profile.phone_number = request.session.get('phone_number')
             user_profile.save()  # ユーザー情報をデータベースに保存
-            return redirect('confirmation')
+            return redirect('dgroupLogin:confirmation')
     else:
         form = CustomUserForm()
 

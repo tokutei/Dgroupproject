@@ -8,7 +8,7 @@ from foods.models import Food, Category
 from dgroupLogin.models import CustomUser  # CustomUserをインポート
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from foods.models import Allergy, Food 
+from foods.models import Food 
 from django.core.paginator import Paginator
 
 class IndexView(ListView):
@@ -138,24 +138,24 @@ def category_view(request, category_id):
     })
 
 
-def allergy_view(request):
-    # 全てのアレルギーを取得
-    allergies = Allergy.objects.all()
+# def allergy_view(request):
+#     # 全てのアレルギーを取得
+#     allergies = Allergy.objects.all()
 
-    # 初期表示として、全ての食品を取得
-    foods = Food.objects.all()
+#     # 初期表示として、全ての食品を取得
+#     foods = Food.objects.all()
 
-    # アレルギーが選択されている場合、選択されたアレルギーを含む食品をフィルタリング
-    selected_allergy = request.GET.get('allergy', None)
-    if selected_allergy:
-        # 'selected_allergy'に基づいてアレルギー項目が含まれていない食品をフィルタリング
-        foods = foods.exclude(allergy__icontains=selected_allergy)
+#     # アレルギーが選択されている場合、選択されたアレルギーを含む食品をフィルタリング
+#     selected_allergy = request.GET.get('allergy', None)
+#     if selected_allergy:
+#         # 'selected_allergy'に基づいてアレルギー項目が含まれていない食品をフィルタリング
+#         foods = foods.exclude(allergy__icontains=selected_allergy)
 
-    # フィルタリング後の食品とアレルギー一覧をテンプレートに渡す
-    return render(request, 'allergy_view.html', {
-        'allergies': allergies,  # アレルギーのリストを渡す
-        'foods': foods,          # フィルタリング後の食品リストを渡す
-    })
+#     # フィルタリング後の食品とアレルギー一覧をテンプレートに渡す
+#     return render(request, 'allergy_view.html', {
+#         'allergies': allergies,  # アレルギーのリストを渡す
+#         'foods': foods,          # フィルタリング後の食品リストを渡す
+#     })
 
 class NewArrivalsView(ListView):
     model = Food

@@ -20,16 +20,16 @@ class Category(models.Model):
         return self.title
 
 
-# アレルギー食材モデル
-class Allergy(models.Model):
+# # アレルギー食材モデル
+# class Allergy(models.Model):
 
-    name = models.CharField(
-        verbose_name='アレルギー食材名',
-        max_length=20,
-    )
+#     name = models.CharField(
+#         verbose_name='アレルギー食材名',
+#         max_length=20,
+#     )
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
 # 食品モデル
