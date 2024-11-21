@@ -3,6 +3,21 @@
 {% block title %}新着商品{% endblock %}
 
 {% block content %}
+
+<div class="category-header">
+    <div class="category-container">
+        {% for category in categorys %}
+            <div class="category-card">
+                <a href="{% url 'dgroupapp:category_view' category.id %}">
+                    <img src="{{ category.image.url }}" alt="カテゴリ画像">
+                    <p>{{ category.title }}</p>
+                </a>
+            </div>
+        {% empty %}
+            <p>カテゴリがありません。</p>
+        {% endfor %}
+    </div>
+</div>
 <!-- 新着商品の表示 -->
 <div class="container px-4 px-lg-5 mt-1">
     <h3>新着順</h3>
@@ -55,7 +70,5 @@
     </div>
     
 </div>
-
-
-
+    </div>
 {% endblock %}
