@@ -28,6 +28,8 @@ class IndexView(ListView):
         context['search_query'] = self.search_query
         context['result_count'] = context['object_list'].count()
         context['categorys'] = Category.objects.all()  # カテゴリ情報を追加
+         # 賞味期限が遠い順に商品4件を取得
+        context['recommended_items'] = Food.objects.order_by('shelf_life')[:4]  # 賞味期限が遠い順に4つ取
         return context
 
 
@@ -182,3 +184,4 @@ class NewArrivalsView(ListView):
         context['new_arrivals'] = page_obj  # ページネーションされた商品
         context['categorys'] = Category.objects.all()  # カテゴリ情報も追加
         return context
+    
