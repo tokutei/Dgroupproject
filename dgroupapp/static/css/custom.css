@@ -800,3 +800,288 @@ h3 {
     font-size: 1.5em;
     color: #007bff;
 }
+
+
+/*2カラムブロック（※900px未満では１カラム）
+---------------------------------------------------------------------------*/
+/*２カラムを囲むブロック*/
+.list-half-parts .list-parts {
+	display: flex;			/*flexボックスを使う指定*/
+	flex-direction: column;	/*子要素を縦並びにする*/
+	margin-bottom: 2rem;	/*ボックスの下に2文字分のスペースを空ける*/
+    margin-left: 20px;
+}
+
+/*ブロック内のh4見出し*/
+.list-half-parts .list-parts h4 {
+	font-size: 1.5rem;	/*文字サイズを1.4倍*/
+    
+}
+.list-half-parts .list-parts h2 {
+	font-size: 1.5rem;	/*文字サイズを1.4倍*/
+    margin-left: 30px;
+}
+.list-half-parts .list-parts p {
+	font-size: 1.1rem;	/*文字サイズを1.4倍*/
+    margin-left: 30px;
+    
+}
+
+/*画像ブロック共通*/
+.list-half-parts .image-l-parts img, .list-half-parts .image-r-parts img {
+    width: 100%; /* 親要素の幅に収まるようにする */
+    max-width: 550px; /* 最大幅を300pxに設定 */
+    height: auto; /* アスペクト比を保持 */
+    border-radius: 30px; /* 角を丸くする指定 */
+    box-shadow: 10px 10px rgba(0,0,0,0.1); /* ボックスの影 */
+}
+
+	/*画面幅900px以上の追加指定*/
+	@media screen and (min-width:900px) {
+
+		/*２カラムを囲むブロック*/
+		.list-half-parts .list-parts {
+			flex-direction: row;			/*子要素を横並びにする*/
+			justify-content: space-between;	/*並びかたの種類の指定*/
+			align-items: center;			/*垂直揃えの指定。天地中央に配置されるように。*/
+		}
+		
+		/*画像ブロック共通*/
+		.list-half-parts .image-l-parts, .list-half-parts .image-r-parts {
+			width: 50%;			/*画像の幅*/
+		}
+		
+		/*画像を右に配置する場合*/
+		.list-half-parts .image-r-parts {
+			margin-left: 2rem;	/*画像の左側に空けるスペース*/
+		}
+		
+		/*画像を左に配置する場合*/
+		.list-half-parts .image-l-parts {
+			order: -1;
+			margin-right: 2rem;	/*画像の右側に空けるスペース*/
+		}
+
+		/*テキストブロック*/
+		.list-half-parts .text-parts {
+			flex: 2;
+		}
+
+	}/*追加指定ここまで*/
+
+
+/*btnの設定（「btn1-parts」と「btn2-parts」）
+---------------------------------------------------------------------------*/
+/*ボタン共通*/
+a.btn1-parts, a.btn2-parts {
+	display: inline-block;text-decoration: none;
+	letter-spacing: 0.1em;	/*文字間隔を少しだけ広くとる*/
+	border-radius: 15px;		/*角を丸くする指定*/
+	padding: 0.5rem 3rem;	/*上下、左右へのボタン内の余白*/
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.2);	/*ボックスの影。右へ、下へ、ぼかし幅。0,0,0は黒の事で0.2は色が20%出た状態。*/
+	transition: 0.3s;	/*hoverまでにかける時間。0.3秒。*/
+}
+
+/*iタグ共通（アイコンの事）*/
+a.btn1-parts i, a.btn2-parts i {
+	padding-left: 1em;	/*アイコンとテキストの間の余白*/
+}
+
+/*btn1-partsの追加指定*/
+a.btn1-parts {
+	background: #fff;		/*背景色*/
+	border: 1px solid #ccc;	/*枠線の幅、線種、色*/
+   
+}
+
+/*btn1-parts内のiタグ（アイコンの事）*/
+a.btn1-parts i {
+	color: #999;	/*アイコンの色*/
+}
+
+
+/*マウスオン時*/
+a:hover.btn1-parts {
+	transform: scale(1.03);		/*103%に拡大する*/
+	filter: brightness(1.1);	/*少しだけ明るくする*/
+}
+
+.c {
+    text-align: center; /* 中央揃え */
+}
+
+
+/*枠線共通*/
+.animation-btn-parts::before,
+.animation-btn-parts::after,
+.animation-btn-inner-parts::before,
+.animation-btn-inner-parts::after {
+	content: "";
+	position: absolute;
+	background-color: #666;		/*background(背景)スタイルですが、hover時の枠線の色になります。*/
+	animation-duration: 0.2s;	/*アニメーションにかける時間。１辺あたり0.2秒。*/
+	animation-fill-mode: forwards;	/*アニメーション完了時に最後のフレームを維持。この１行を外してみると別の動作になって面白い動きになります。*/
+	animation-timing-function: linear;	/*アニメーションの速度のタイプ。同じ速度にする。*/
+}
+
+/* ページネーション全体 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* ページネーションリンクのスタイル */
+.step-links a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* ホバー時にリンクの色を変更 */
+.step-links a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* 現在のページ番号のスタイル */
+.current {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+/* 最初と最後のページリンク */
+.step-links a:first-child,
+.step-links a:last-child {
+    font-weight: bold;
+}
+
+/* ページネーションの矢印とリンクのデザイン */
+.step-links a.pagination-link {
+    padding: 8px 16px;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 前後の矢印にマウスを乗せたとき */
+.step-links a.pagination-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.step-links a.disabled {
+    pointer-events: none;
+    color: #ccc;
+    border-color: #ccc;
+}
+/* ページネーション全体 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    font-family: Arial, sans-serif; /* フォントを統一 */
+}
+
+/* ページネーションリンクのスタイル */
+.step-links a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 12px 24px;  /* ボタンを少し大きく */
+    margin: 0 8px;
+    border: 2px solid #007bff;
+    border-radius: 30px;  /* 丸みを持たせてボタン風に */
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    display: inline-block;  /* ボタンとして表示 */
+}
+
+/* ホバー時の効果 */
+.step-links a:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* 現在のページ番号のスタイル */
+.current {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 15px;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+/* 現在のページ番号のホバー時のスタイル */
+.current:hover {
+    background-color: #e1e1e1;
+    border-color: #ccc;
+}
+
+/* 最初と最後のページリンク */
+.step-links a:first-child,
+.step-links a:last-child {
+    font-weight: bold;
+}
+
+/* ページネーションの矢印（最初/最後） */
+.step-links a.pagination-link {
+    padding: 12px 24px;
+    margin: 0 8px;
+    background-color: #f8f9fa;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.step-links a.pagination-link:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* すべてのページネーションリンクを中央に配置 */
+.step-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 前後の矢印（1ページ戻る、1ページ進む） */
+.step-links a.disabled {
+    pointer-events: none;
+    color: #ccc;
+    border-color: #ccc;
+}
+
+/* モバイル向けのレスポンシブ対応 */
+@media (max-width: 768px) {
+    .pagination {
+        flex-direction: column;
+    }
+    
+    .step-links a {
+        font-size: 14px;
+        padding: 10px 20px;
+        margin: 5px 0;
+    }
+
+    .current {
+        font-size: 16px;
+        padding: 8px 16px;
+        margin: 5px 0;
+    }
+}

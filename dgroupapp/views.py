@@ -8,6 +8,7 @@ from foods.models import Food, Category
 from dgroupLogin.models import CustomUser  # CustomUserをインポート
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 class IndexView(ListView):
@@ -17,7 +18,7 @@ class IndexView(ListView):
 
     def get_queryset(self):
         # 通常の商品を新着順で取得
-        queryset = Food.objects.order_by('-inputed_at')  # 新着順に並べ替え
+        queryset = Food.objects.order_by('-inputed_at')[:8]   # 新着順に並べ替え
         self.search_query = self.request.GET.get('name', None)
         if self.search_query:
             queryset = queryset.filter(name__icontains=self.search_query)
@@ -142,3 +143,30 @@ def category_view(request, category_id):
         'products': products,
     })
 
+
+
+class NewArrivalsView(ListView):
+    model = Food
+    template_name = 'new_arrivals.html'
+    context_object_name = 'new_arrivals'
+
+    def get_queryset(self):
+        # 新着商品を新着順で取得
+        return Food.objects.order_by('-inputed_at')  # 新着順で並べ替え
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # 商品リストを取得
+        product_list = Food.objects.order_by('-inputed_at')  # 新着順で並べ替え
+        
+        # Paginatorを使ってページネーション
+        paginator = Paginator(product_list, 8)  # 1ページあたり12件を表示
+        
+        # 現在のページを取得
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        
+        context['new_arrivals'] = page_obj  # ページネーションされた商品
+        context['categorys'] = Category.objects.all()  # カテゴリ情報も追加
+        return context
