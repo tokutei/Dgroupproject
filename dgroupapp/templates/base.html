@@ -33,11 +33,13 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="small-text">お届け先</span>
                         </a>
+                        {% if user.is_authenticated %}
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="#!">{{ user.username }}さん</a></li>
                             <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">住所:{{ user.address }}</a></li>
                             
                         </ul>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
             

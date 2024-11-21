@@ -17,17 +17,22 @@ class IndexView(ListView):
     context_object_name = 'object_list'
 
     def get_queryset(self):
-        queryset = Food.objects.order_by('-inputed_at')[:8]
+        # 先に検索条件でフィルタリング
+        queryset = Food.objects.all()
+
         self.search_query = self.request.GET.get('name', None)
         if self.search_query:
             queryset = queryset.filter(name__icontains=self.search_query)
-        return queryset
+
+        # その後にスライス
+        return queryset.order_by('-inputed_at')[:8]  # フィルタリング後にスライスを適用
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.search_query
         context['result_count'] = context['object_list'].count()
-        context['categorys'] = Category.objects.all()  # カテゴリ情報を追加
+        context['categorys'] = Category.objects.all()
+        context['recommended_items'] = Food.objects.order_by('shelf_life')[:4]
         return context
 
 
@@ -182,3 +187,4 @@ class NewArrivalsView(ListView):
         context['new_arrivals'] = page_obj  # ページネーションされた商品
         context['categorys'] = Category.objects.all()  # カテゴリ情報も追加
         return context
+    
