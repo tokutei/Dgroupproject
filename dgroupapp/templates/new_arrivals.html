@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}新着商品{% endblock %}
+
+{% block content %}
+<!-- 新着商品の表示 -->
+<div class="container px-4 px-lg-5 mt-1">
+    <h3>新着順</h3>
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for product in new_arrivals %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- 商品画像 -->
+                    <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    
+                    <!-- 商品詳細 -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                            <span class="price">￥{{ product.price }}</span><br>
+                            <span class="shelf">賞味期限<br>{{ product.shelf_life }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 商品アクション -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' product.pk %}">商品詳細</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>新着商品がありません。</p>
+        {% endfor %}
+    </div>
+
+    <!-- ページネーション -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if new_arrivals.has_previous %}
+                <a class="pagination-link" href="?page=1">&laquo; 最初</a>
+                <a class="pagination-link" href="?page={{ new_arrivals.previous_page_number }}">前へ</a>
+            {% endif %}
+            
+            <span class="current">
+                ページ {{ new_arrivals.number }} / {{ new_arrivals.paginator.num_pages }} 
+            </span>
+    
+            {% if new_arrivals.has_next %}
+                <a class="pagination-link" href="?page={{ new_arrivals.next_page_number }}">次へ</a>
+                <a class="pagination-link" href="?page={{ new_arrivals.paginator.num_pages }}">最後 &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    
+</div>
+
+
+
+{% endblock %}

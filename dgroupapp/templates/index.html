@@ -23,25 +23,102 @@
     $(document).ready(function(){
         $('.slide-slick1-parts').slick({
             autoplay: true,        // 自動再生
-            autoplaySpeed: 2800,   // スライドが切り替わるまでの時間（ミリ秒）
+            autoplaySpeed: 3000,   // スライドが切り替わるまでの時間（ミリ秒）
             dots: true,            // ナビゲーションのドットを表示
             arrows: false         // 矢印を非表示
         });
     });
+
+    function toggleSteps() {
+        const stepsContainer = document.querySelector('.intro-steps-container');
+        const button = document.querySelector('.toggle-btn');
+        stepsContainer.classList.toggle('open');
+        if (stepsContainer.classList.contains('open')) {
+            button.innerHTML = 'お買い物の手順を隠す <i class="fas fa-chevron-up"></i>';
+        } else {
+            button.innerHTML = 'お買い物の手順を見る <i class="fas fa-chevron-down"></i>';
+        }
+    }
+
 </script>
 
 
 
 <aside class="slide-slick1-parts">
-    <div><img src="{% static 'assets/img/famima.jpeg' %}" alt=""></div>
-    <div><img src="{% static 'assets/img/ad.png' %}" alt=""></div>
-    <div><img src="{% static 'assets/img/famima.jpeg' %}" alt=""></div>
+    <div><img src="{% static 'assets/img/titleimg.png' %}" alt=""></div>
+    <div><img src="{% static 'assets/img/titleimg.png' %}" alt=""></div>
+    <div><img src="{% static 'assets/img/titleimg.png' %}" alt=""></div>
 </aside>
+<section class="intro-section">
+    <h2 class="intro-title">初めてのお客様へ</h2>
+    <p class="intro-text">
+        「WasteNot」へようこそ！<br>
+        私たちのサイトでは、食品ロス削減を目的に、賞味期限が近い商品をお得な価格でご提供しています。<br>
+    </p>
+    <button class="toggle-btn" onclick="toggleSteps()">お買い物の手順を見る <i class="fas fa-chevron-down"></i></button>
+    <div class="intro-steps-container">
+        <p class="intro-subtext">
+            こちらのサイトでは、以下の手順でお買い物をお楽しみいただけます：
+        </p>
+        <ol class="intro-steps">
+            <li><i class="fas fa-search"></i> トップページからカテゴリや商品を選択</li>
+            <li><i class="fas fa-info-circle"></i> 気になる商品の詳細を確認し、カートに追加</li>
+            <li><i class="fas fa-shopping-cart"></i> お客様情報を入力してご注文完了！</li>
+        </ol>
+        <p class="intro-subtext">
+            環境に優しい選択をしながら、お得な商品を手に入れてみませんか？<br>
+            ご利用を心よりお待ちしております！
+        </p>
+        <a href="{% url 'dgroupapp:teams' %}">利用規約</a>
+    </div>
+</section>
+
+
+<div class="list-half-parts">
+
+    <div class="list-parts">
+    
+    <div class="text-parts">
+    <h2>捨てない、つなげる未来。</h2>
+    <p>食品を無駄にしない選択が、環境や未来をより良くする一歩<br>
+        廃棄ではなく、価値ある選択へ。</p>
+ 
+    </div>
+    <!--/.text-parts-->
+    
+    <div class="image-r-parts">
+    <figure><img src="{% static 'assets/img/subimg.png' %}" alt=""></figure>
+    </div>
+    <!--/.image-r-parts-->
+    
+    </div>
+    <!--/.list-parts-->
+    
+    <div class="list-parts">
+    
+    <div class="text-parts">
+    <h4>食べ物を無駄にしない、新しいかたち。</h4>
+    <p2>従来のフードロス削減の枠を超えた新しい仕組みで、ユーザーと店舗をつなぐサービス<br>
+        効率的で持続可能な選択肢。</p2>
+    </div>
+    <!--/.text-parts-->
+    
+    <div class="image-l-parts">
+    <figure><img src="{% static 'assets/img/subimg2.png' %}" alt=""></figure>
+    </div>
+    <!--/.image-l-parts-->
+    
+    </div>
+    <!--/.list-parts-->
+    
+    </div>
+    <!--/.list-half-parts-->
+    
 
 
 <section>
-    <div class="pickup">
-        <h2 style="text-align: center;">賞味期限が遠い商品<br>-セール中-</h2>
+    <div class="container px-4 px-lg-5 mt-1">
+        <h2 style="text-align: center;">-セール中-</h2>
 
         <<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for record in recommended_items %}
@@ -150,6 +227,9 @@
         </div>
     </div>
 </section>
+
+        <p class="c"><a href="{% url 'dgroupapp:new_arrivals' %}" class="btn1-parts">もっと見る<i class="fas fa-arrow-circle-right"></i></a></p>
+        <a href="#" id="page-top"><i class="blogicon-chevron-up"></i>トップへ戻る</a>
 
 {% endblock %}
 
