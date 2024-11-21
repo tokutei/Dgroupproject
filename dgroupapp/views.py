@@ -8,6 +8,7 @@ from foods.models import Food, Category
 from dgroupLogin.models import CustomUser  # CustomUserをインポート
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from foods.models import Allergy, Food 
 
 
 class IndexView(ListView):
@@ -16,8 +17,7 @@ class IndexView(ListView):
     context_object_name = 'object_list'
 
     def get_queryset(self):
-        # 通常の商品を新着順で取得
-        queryset = Food.objects.order_by('-inputed_at')  # 新着順に並べ替え
+        queryset = Food.objects.order_by('-inputed_at')
         self.search_query = self.request.GET.get('name', None)
         if self.search_query:
             queryset = queryset.filter(name__icontains=self.search_query)
@@ -28,11 +28,8 @@ class IndexView(ListView):
         context['search_query'] = self.search_query
         context['result_count'] = context['object_list'].count()
         context['categorys'] = Category.objects.all()  # カテゴリ情報を追加
-
-        # 賞味期限が遠い順に商品4件を取得
-        context['recommended_items'] = Food.objects.order_by('shelf_life')[:4]  # 賞味期限が遠い順に4つ取
-
         return context
+
 
     def get_template_names(self):
         if self.request.GET.get('name'):
@@ -130,8 +127,6 @@ def address_update_complete(request):
     return render(request, 'address_update_complete.html')
 
 
-
-
 def category_view(request, category_id):
     # 指定したカテゴリに関連する商品を取得
     category = Category.objects.get(id=category_id)
@@ -142,3 +137,22 @@ def category_view(request, category_id):
         'products': products,
     })
 
+
+def allergy_view(request):
+    # 全てのアレルギーを取得
+    allergies = Allergy.objects.all()
+
+    # 初期表示として、全ての食品を取得
+    foods = Food.objects.all()
+
+    # アレルギーが選択されている場合、選択されたアレルギーを含む食品をフィルタリング
+    selected_allergy = request.GET.get('allergy', None)
+    if selected_allergy:
+        # 'selected_allergy'に基づいてアレルギー項目が含まれていない食品をフィルタリング
+        foods = foods.exclude(allergy__icontains=selected_allergy)
+
+    # フィルタリング後の食品とアレルギー一覧をテンプレートに渡す
+    return render(request, 'allergy_view.html', {
+        'allergies': allergies,  # アレルギーのリストを渡す
+        'foods': foods,          # フィルタリング後の食品リストを渡す
+    })

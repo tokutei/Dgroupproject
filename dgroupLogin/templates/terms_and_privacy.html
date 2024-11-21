@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>利用規約とプライバシーポリシー</h1>
+  
+  <form method="post">
+    {% csrf_token %}
+    
+    <p>利用規約に同意しますか？</p>
+    <input type="checkbox" name="agreed_to_terms" id="agreed_to_terms"> 同意する
+
+    <p>プライバシーポリシーに同意しますか？</p>
+    <input type="checkbox" name="agreed_to_privacy_policy" id="agreed_to_privacy_policy"> 同意する
+
+    <button type="submit">同意する</button>
+  </form>
+
+  <!-- エラーメッセージ表示 -->
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/terms_and_privacy.css' %}">
+{% endblock %}

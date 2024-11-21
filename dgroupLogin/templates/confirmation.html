@@ -1,0 +1,13 @@
+<h2>入力内容の確認</h2>
+<p><strong>ユーザー名:</strong> {{ user_profile.username }}</p>
+<p><strong>ニックネーム:</strong> {{ user_profile.nickname }}</p>
+<p><strong>メールアドレス:</strong> {{ user_profile.email }}</p>
+<p><strong>電話番号:</strong> {{ phone_number }}</p>
+<p><strong>住所:</strong> {{ user_profile.address }}</p>
+<p><strong>パスワード:</strong> {{ user_profile.password }}</p>
+<p><strong>パスワード確認:</strong> {{ user_profile.confirm_password }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">登録</button>
+</form>

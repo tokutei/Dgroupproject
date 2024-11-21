@@ -1,38 +1,74 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, TemplateView
-from .forms import CustomUserCreationForm
-from django.urls import reverse_lazy
+from .forms import PhoneNumberForm, CustomUserForm
+from .models import CustomUser
+from django.urls import path
+from django.views.generic import TemplateView
+from django.contrib import messages
+from django.shortcuts import redirect
 
 
-class SignUpView(CreateView):
-    form_class = CustomUserCreationForm
-    template_name = "member.html"  # アプリ名なし
-
-    def form_valid(self, form):
-        user_data = form.cleaned_data
-        self.request.session['user_data'] = user_data  # セッションにデータを保存
-        return redirect('dgroupLogin:signup_confirm')  # 確認画面にリダイレクト
-
-
-class SignUpConfirmView(TemplateView):
-    template_name = "signup_confirm.html"  
+class TermsAndPrivacyView(TemplateView):
+    template_name = 'terms_and_privacy.html'  # 使用するテンプレート
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_data'] = self.request.session.get('user_data')
+        # コンテキストにメッセージを追加することもできます（必要に応じて）
         return context
 
     def post(self, request, *args, **kwargs):
-        user_data = request.session.get('user_data')
-        if user_data:
-            # ユーザーを作成
-            form = CustomUserCreationForm(data=user_data)
-            if form.is_valid():
-                form.save()  # データベースに保存
-                del request.session['user_data']  # セッションからデータを削除
-                return redirect('dgroupLogin:signup_success')  # 成功画面にリダイレクト
-        return redirect('dgroupLogin:signup')  # データがない場合は登録画面に戻る
+        # チェックボックスの確認
+        agreed_to_terms = request.POST.get('agreed_to_terms', False)
+        agreed_to_privacy_policy = request.POST.get('agreed_to_privacy_policy', False)
+
+        # 両方に同意している場合、ユーザー情報入力ページにリダイレクト
+        if agreed_to_terms and agreed_to_privacy_policy:
+            return redirect('dgroupLogin:phone_number')  # 'user_profile'はユーザー情報入力ページのURL名
+        else:
+            # どちらかに同意していない場合、エラーメッセージを表示
+            messages.error(request, "利用規約とプライバシーポリシーに両方同意する必要があります。")
+
+        # POST後に再度同じテンプレートを表示
+        return self.render_to_response(self.get_context_data())
 
 
-class SignUpSuccessView(TemplateView):
-    template_name = "singnup_success.html"  # 登録完了画面のテンプレート名
+# 電話番号入力
+def phone_number_view(request):
+    if request.method == 'POST':
+        form = PhoneNumberForm(request.POST)
+        if form.is_valid():
+            phone_number = form.cleaned_data['phone_number']
+            request.session['phone_number'] = phone_number  # セッションに電話番号を保存
+            return redirect('dgroupLogin:user_profile')
+    else:
+        form = PhoneNumberForm()
+
+    return render(request, 'phone_number.html', {'form': form})
+
+
+# ユーザー情報入力
+def user_profile_view(request):
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            # 電話番号をセッションから取得
+            user_profile.phone_number = request.session.get('phone_number')
+            user_profile.save()  # ユーザー情報をデータベースに保存
+            return redirect('confirmation')
+    else:
+        form = CustomUserForm()
+
+    return render(request, 'user_profile.html', {'form': form})
+
+
+# 確認画面
+def confirmation_view(request):
+    # セッションから電話番号を取得
+    phone_number = request.session.get('phone_number')
+    # 最新のユーザー情報を取得
+    user_profile = CustomUser.objects.latest('id')
+
+    return render(request, 'confirmation.html', {
+        'user_profile': user_profile,
+        'phone_number': phone_number,
+    })
