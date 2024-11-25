@@ -8,9 +8,12 @@
     {% csrf_token %}
     
     <p>利用規約に同意しますか？</p>
+    <a href="{% url 'dgroupLogin:termsofservice' %}">利用規約を確認する</a>
     <input type="checkbox" name="agreed_to_terms" id="agreed_to_terms"> 同意する
 
     <p>プライバシーポリシーに同意しますか？</p>
+     <!-- プライバシーポリシー確認ページへのリンク -->
+    <a href="{% url 'dgroupLogin:privacy_confirmation' %}">プライバシーポリシーを確認する</a>
     <input type="checkbox" name="agreed_to_privacy_policy" id="agreed_to_privacy_policy"> 同意する
 
     <button type="submit">同意する</button>
@@ -29,3 +32,4 @@
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/terms_and_privacy.css' %}">
 {% endblock %}
+

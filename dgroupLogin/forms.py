@@ -2,18 +2,13 @@ from django import forms
 from .models import CustomUser
 
 
-# 電話番号フォーム
-class PhoneNumberForm(forms.Form):
-    phone_number = forms.CharField(max_length=15, label='電話番号')
-
-
 # ユーザー情報フォーム
 class CustomUserForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label='パスワード確認')
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'nickname', 'email', 'address', 'password']
+        fields = ['username', 'nickname', 'email', 'phone_number', 'address', 'password']
         widgets = {
             'password': forms.PasswordInput(),
         }
@@ -21,8 +16,10 @@ class CustomUserForm(forms.ModelForm):
             'username': 'ユーザー名',
             'nickname': 'ニックネーム',
             'email': 'メールアドレス',
+            'phone_number': '電話番号',
             'address': '住所',
             'password': 'パスワード',
+
         }
         help_texts = {
             'username': '半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。',
@@ -40,3 +37,12 @@ class CustomUserForm(forms.ModelForm):
         if password != confirm_password:
             raise forms.ValidationError('パスワードとパスワード確認が一致しません。')
         return cleaned_data
+    
+    def save(self, commit=True):
+        # パスワードをハッシュ化して保存
+        user = super().save(commit=False)
+        if user.password:
+            user.set_password(user.password)  # ここでパスワードをハッシュ化
+        if commit:
+            user.save()
+        return user
