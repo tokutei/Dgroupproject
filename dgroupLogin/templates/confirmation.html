@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <h2>入力内容の確認</h2>
 <p><strong>ユーザー名:</strong> {{ user_profile.username }}</p>
 <p><strong>ニックネーム:</strong> {{ user_profile.nickname }}</p>
@@ -10,3 +14,4 @@
     {% csrf_token %}
     <button type="submit">登録</button>
 </form>
+{% endblock %}

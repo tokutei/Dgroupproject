@@ -2,6 +2,7 @@ from django import forms
 from .models import CustomUser
 
 
+# 電話番号フォーム
 class PhoneNumberForm(forms.Form):
     phone_number = forms.CharField(max_length=15, label='電話番号')
 
@@ -15,6 +16,20 @@ class CustomUserForm(forms.ModelForm):
         fields = ['username', 'nickname', 'email', 'address', 'password']
         widgets = {
             'password': forms.PasswordInput(),
+        }
+        labels = {
+            'username': 'ユーザー名',
+            'nickname': 'ニックネーム',
+            'email': 'メールアドレス',
+            'address': '住所',
+            'password': 'パスワード',
+        }
+        help_texts = {
+            'username': '半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。',
+            'nickname': 'ニックネームを入力してください。',
+            'email': '有効なメールアドレスを入力してください。',
+            'address': '住所を入力してください。',
+            'password': 'パスワードを設定してください。',
         }
 
     def clean(self):
