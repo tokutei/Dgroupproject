@@ -68,6 +68,11 @@ def confirmation_view(request):
     # 最新のユーザー情報を取得
     user_profile = CustomUser.objects.latest('id')
 
+    if request.method == 'POST':
+        # 登録が完了した場合、登録完了画面にリダイレクト
+        messages.success(request, "登録が完了しました。")
+        return redirect('dgroupLogin:confirmation')  # 登録完了画面へのリダイレクト
+
     return render(request, 'confirmation.html', {
         'user_profile': user_profile,
         'phone_number': phone_number,
