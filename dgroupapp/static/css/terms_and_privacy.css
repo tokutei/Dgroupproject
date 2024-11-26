@@ -1,28 +1,13 @@
 /* 基本的なスタイルリセット */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
-  height: 100vh;  /* 画面の高さに合わせる */
-  display: flex;
-  justify-content: center; /* 水平方向に中央寄せ */
-  align-items: center;     /* 垂直方向に中央寄せ */
-}
-
 .terms-container {
   max-width: 600px;
-  width: 100%; /* 画面幅に応じた調整 */
+  width: 100%;              /* 画面幅に応じて調整 */
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  text-align: center;       /* すべてのフォーム要素を中央揃え */
+  margin: 70px auto;
 }
 
 h1 {
@@ -56,7 +41,7 @@ h1 {
 .checkbox-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;  /* チェックボックスとラベルを中央に配置 */
 }
 
 .checkbox-container input {

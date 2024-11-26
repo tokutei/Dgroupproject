@@ -2,36 +2,28 @@
 {% load static %}
 
 {% block content %}
-  <!-- ここにterms-containerクラスを追加 -->
   <div class="terms-container">
     <h1>利用規約とプライバシーポリシー</h1>
-
     <form method="post">
       {% csrf_token %}
       
       <div class="form-section">
         <p>利用規約に同意しますか？</p>
         <a href="{% url 'dgroupLogin:termsofservice' %}" class="link-button">利用規約を確認する</a>
-        <div class="checkbox-container">
-          <input type="checkbox" name="agreed_to_terms" id="agreed_to_terms">
-          <label for="agreed_to_terms">同意する</label>
-        </div>
+        <input type="checkbox" name="agreed_to_terms" id="agreed_to_terms"> 同意する
       </div>
 
       <div class="form-section">
         <p>プライバシーポリシーに同意しますか？</p>
         <a href="{% url 'dgroupLogin:privacy_confirmation' %}" class="link-button">プライバシーポリシーを確認する</a>
-        <div class="checkbox-container">
-          <input type="checkbox" name="agreed_to_privacy_policy" id="agreed_to_privacy_policy">
-          <label for="agreed_to_privacy_policy">同意する</label>
-        </div>
+        <input type="checkbox" name="agreed_to_privacy_policy" id="agreed_to_privacy_policy"> 同意する
       </div>
 
       <div class="form-actions">
         <button type="submit" class="submit-button">同意する</button>
       </div>
     </form>
-
+    
     <!-- エラーメッセージ表示 -->
     {% if messages %}
       <div class="messages">
@@ -43,8 +35,4 @@
       </div>
     {% endif %}
   </div>
-{% endblock %}
-
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'css/terms_and_privacy.css' %}">
 {% endblock %}
