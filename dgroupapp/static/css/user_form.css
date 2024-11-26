@@ -1,0 +1,77 @@
+    /* フォームコンテナ */
+  .user-form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+  }
+  
+  /* フォーム内の各セクション */
+  .user-form-container form > div {
+    margin-bottom: 20px;
+  }
+  
+  /* 各ラベル */
+  .user-form-container label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+  }
+  
+  /* 各入力フィールド */
+  .user-form-container input[type="text"],
+  .user-form-container input[type="email"],
+  .user-form-container input[type="tel"],
+  .user-form-container input[type="password"],
+  .user-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-form-container input[type="text"]:focus,
+  .user-form-container input[type="email"]:focus,
+  .user-form-container input[type="tel"]:focus,
+  .user-form-container input[type="password"]:focus,
+  .user-form-container textarea:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* エラーメッセージ */
+  .user-form-container ul {
+    padding-left: 20px;
+    color: red;
+    font-size: 12px;
+  }
+  
+  .user-form-container ul li {
+    margin-bottom: 5px;
+  }
+  
+  /* ボタン */
+  .user-form-container button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .user-form-container button:hover {
+    background-color: #218838;
+  }
+  

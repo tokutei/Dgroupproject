@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/user_form_unique.css' %}">
+{% endblock %}
+
 {% block content %}
-  <h1>ユーザー情報入力フォーム</h1>
-  
-  <div class="container">
+  <h2 class="user-form-title" style="text-align: center; margin-bottom: 30px;">ユーザー情報入力フォーム</h2>
+
+  <div class="user-form-container">
     <form method="POST">
       {% csrf_token %}
       
@@ -95,5 +99,4 @@
       <button type="submit">確定</button>
     </form>
   </div>
-
 {% endblock %}

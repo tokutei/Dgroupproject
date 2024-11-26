@@ -1,0 +1,1087 @@
+.navbar-img {
+    width: 150px; /* 画像サイズを調整 */
+    height: auto;
+    margin-left: -50px; /* 必要に応じて調整 */
+}
+
+.custom-navbar {
+    background-color: #7a7a7a;
+    font-size: 15px; /* 少し小さく調整 */
+    padding: 0;
+}
+
+.custom-navbar .nav-item {
+    color: #ffffff;
+    margin-top: 5px; /* 余白を小さめに調整 */
+}
+
+.custom-navbar .nav-link {
+    color: #ffffff;
+    padding: 8px 12px; /* パディングを減らして調整 */
+    display: block;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #eeeeee;
+}
+
+.custom-btn {
+    background-color: #ecebeb;
+    color: #000000;
+    border: 2px solid #000000;
+}
+
+.custom-btn:hover {
+    background-color: #f0f0f0;
+    color: #000000;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.search-input {
+    height: 30px;
+    font-size: 13px;
+    margin-right: 2px;
+    margin-left: 2px;
+    padding: 5px;
+    width: 380px; /* 幅を縮小 */
+    max-width: 490px; /* 最大幅を設定 */
+    margin-top: 9px;
+}
+
+.search-button {
+    height: 30px;
+    font-size: 13px;
+    padding: 5px 8px;
+    margin-top: 9px;
+    margin-right: 5px;
+}
+
+.dropdown-toggle {
+    font-size: 16px;
+    line-height: 0.9;
+    margin-left: 0px;
+    margin-bottom: 2px;
+}
+
+.small-text {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+
+
+.card-img-top {
+    width: auto;
+    height: 200px; /* 高さを調整 */
+    object-fit: cover;
+}
+
+
+
+
+
+/*フッターメニュー設定
+---------------------------------------------------------------------------*/
+/*ボックス全体の設定*/
+#footermenu2-parts {
+	background: #333;	/*背景色*/
+	color: #999;		/*文字色*/
+	font-size: 0.8rem;	/*文字サイズ。bodyのfont-sizeの80%です。*/
+	padding: 20px 50px;	/*上下、左右へのボックス内の余白*/
+	display: flex;		/*flexボックスを使う指定*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+	align-items: flex-start;		/*垂直揃えの指定。上に配置されるように。*/
+}
+
+/*ボックス内のリンクテキスト設定*/
+#footermenu2-parts a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/*ulタグ（メニューの１列あたり）*/
+#footermenu2-parts ul {
+	margin: 0;list-style: none;
+	padding: 0 2px;
+	flex: 1;
+}
+
+/*メニューの見出し(title)*/
+#footermenu2-parts .title {
+	font-weight: bold;		/*太字にする*/
+	color: #ccc;			/*文字色*/
+	padding-bottom: 5px;	/*下に空けるスペース*/
+}
+
+footer small {font-size: 100%;}
+footer {
+	font-size: 0.7rem;		/*文字サイズ。bodyのfont-sizeの70%です。*/
+	background: #e0e0e0;		/*背景色*/
+	text-align: center;		/*内容をセンタリング*/
+	padding: 20px;			/*ボックス内の余白*/
+}
+
+/*リンクテキスト*/
+footer a {color: inherit;text-decoration: none;}
+
+/*著作部分*/
+footer .pr {display: block;}
+
+
+
+
+
+.footer-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.card {
+    background-color: #fcfeff;
+    width: 100%; /* カードの幅を少し狭める */
+    max-width: 350px; /* 必要に応じて最大幅を設定 */
+    margin: auto; /* カードを中央に配置 */
+}
+
+.btn-outline-dark {
+    color: #343a40;
+    border-color: #343a40;
+    font-size: 13px; /* ボタンのフォントサイズを小さく */
+    padding: 4px 6px; /* パディングを調整して小さく */
+}
+
+
+.btn-outline-dark:hover {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.card-body .fw-bolder {
+    color: #212529;
+    font-size: 18px; /* フォントサイズを微調整 */
+}
+
+.card-body .price {
+    color: #ff0707;
+    font-size: 18px;
+}
+
+.card-body .shelf {
+    color: gray;
+    font-size: 15px;
+}
+
+.card-body {
+    padding: 2px 3px; /* パディングを小さく調整 */
+}
+
+.card-footer {
+    padding: 2px 3px; /* パディングを小さく調整 */
+}
+
+.btn-outline-dark.mt-auto {
+    margin-top: 5px; /* ボタン間の間隔を縮める */
+}
+
+/* アカウント切り替えページのスタイル */
+.account-switch-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1px;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: solid 1px #c3c3c3;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.custom-select,
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    transition: border-color 0.3s;
+}
+
+.custom-select:focus,
+.form-control:focus {
+    border-color: #f57c00;
+    outline: none;
+}
+
+.btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #f57c00;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #e65100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .account-switch-form {
+        padding: 15px;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+
+    .custom-select,
+    .form-control {
+        font-size: 14px;
+    }
+}
+
+.superuser-option {
+    background-color: #f8d7da; /* 明るい赤色 */
+    color: #721c24; /* 赤い文字 */
+    font-weight: bold;
+}
+
+.superuser-option:hover {
+    background-color: #f5c6cb; /* ホバー時の色 */
+}
+
+
+
+@keyframes infinity-scroll-left {
+    from {
+      transform: translateX(0);
+    }
+      to {
+      transform: translateX(-100%);
+    }
+    }
+    .scroll-infinity__wrap {
+      display: flex;
+      overflow: hidden;
+      margin-bottom: 0; /* 余白を削除 */
+
+    }
+    .scroll-infinity__list {
+      display: flex;
+      list-style: none;
+      padding: 0
+    }
+    .scroll-infinity__list--left {
+      animation: infinity-scroll-left 80s infinite linear 0.5s both;
+    }
+    .scroll-infinity__item {
+      width: calc(100vw / 6);
+    }
+    .scroll-infinity__item>img {
+      width: 75%;
+    }
+
+@keyframes infinity-scroll-right {
+    from {
+      transform: translateX(-100%);
+    }
+      to {
+      transform: translateX(0%);
+    }
+    }
+    .scroll-infinity__list--right{
+      animation :infinity-scroll-right 80s infinite linear 0.5s both;
+    }
+
+
+
+    .list-square-parts {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);	/* ここを変更して列数を調整 */
+        gap: 1rem;
+    }
+    
+    .list-square-parts .list-parts {
+        width: 90%; /* 横幅を調整 */
+        position: relative;
+        overflow: hidden;
+        height: 0;
+        padding-top: 75%;	/* ボックスの高さを調整 */
+        border-radius: 10px;
+        box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    }
+    
+    .list-square-parts .list-parts a {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .list-square-parts .list-parts img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: 0.5s;
+    }
+    
+    /* マウスオン時の画像 */
+    .list-square-parts .list-parts img:hover {
+        transform: scale(0.9);	/* 画像を少し縮小 */
+        filter: contrast(1.3);
+    }
+    
+
+
+    .category-header {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* 中央揃え */
+        padding: 10px;
+        background-color: #f8f6f6; /* 例: 淡い灰色 */
+        border-top: 1px solid #ddd;
+    }
+    
+    .category-container {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        gap: 20px;
+        padding: 10px;
+        scroll-behavior: smooth;
+        white-space: nowrap; /* カードが縦に並ばないようにする */
+        max-width: calc(125px * 8 + 20px * 8); /* 8個のカードが表示されるように最大幅を設定 */
+    }
+    
+    .category-container::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+    
+    .category-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 90px; /* 1カードの幅 */
+        text-align: center;
+        color: #333;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+    
+    .category-card img {
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        margin-bottom: 0;
+    }
+    
+
+    .category-card a {
+        font-size: 12px;
+        color: black;  /* 黒文字に変更 */
+        text-decoration: none;  /* 下線を削除 */
+    }
+    
+    .category-card a:hover {
+        color: black;  /* ホバー時も黒文字に変更 */
+        text-decoration: none;  /* ホバー時の下線を削除 */
+    }
+    
+    .category-card:hover {
+        transform: scale(1.1);
+    }
+    
+    .scroll-btn {
+        background-color: transparent;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #333;
+        transition: color 0.3s;
+    }
+    
+    .scroll-btn:hover {
+        color: #007bff;
+    }
+
+
+    .slide-slick1-parts img {
+        width: 100%;
+        height: auto;
+    }
+    
+
+
+
+
+/* プロフィール情報セクション */
+.profile-info {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* 上下に20pxの余白を設定し、左右は自動で調整 */
+    max-width: 600px; /* 最大幅を600pxに設定 */
+    width: 90%; /* 画面幅の90%で表示（最大幅600px） */
+
+}
+
+/* セクションタイトル */
+h3 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* 強調されたラベル (ユーザー名, メールアドレスなど) */
+.profile-info p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.profile-info strong {
+    color: #333;
+}
+
+/* プロフィール編集ボタン */
+.profile-btn, .profile2-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* プロフィール情報セクション */
+.profile-info {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    width: 90%;
+}
+
+/* セクションタイトル */
+h3 {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* 強調されたラベル (ユーザー名, メールアドレスなど) */
+.profile-info p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+}
+
+.profile-info strong {
+    color: #333;
+}
+
+/* ボタンのコンテナ */
+.button-container {
+    display: flex;
+    justify-content: center; /* ボタンを中央揃え */
+    gap: 10px; /* ボタン間のスペース */
+    margin-top: 20px; /* ボタンとプロフィール情報の間隔 */
+    margin-bottom: 28px;
+}
+
+/* プロフィール編集ボタン */
+.profile-btn, .profile2-btn {
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+/* プロフィール編集ボタン */
+.profile-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.profile-btn:hover {
+    background-color: #45a049;
+}
+
+/* トップページに戻るボタン */
+.profile2-btn {
+    background-color: #2196F3;
+    color: white;
+}
+
+.profile2-btn:hover {
+    background-color: #0b7dda;
+}
+
+
+/* 住所変更のフォームのデザイン */
+.custom-address-edit-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 28px;
+}
+
+/* フォーム内のラベル */
+.custom-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* テキストエリアのスタイル */
+.custom-form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+/* 更新ボタンのカスタムスタイル */
+.custom-submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.custom-submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* スマホやタブレットのレスポンシブデザイン */
+@media (max-width: 768px) {
+    .custom-address-edit-form {
+        padding: 15px;
+    }
+
+    .custom-submit-btn {
+        font-size: 14px;
+    }
+
+    .custom-back-btn {
+        font-size: 14px;
+    }
+}
+
+/* 完了ページのスタイル */
+.custom-completion-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 90px;
+}
+
+/* 見出しのデザイン */
+.custom-completion-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 完了メッセージのデザイン */
+.custom-completion-message {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* トップページに戻るボタンのカスタムスタイル */
+.custom-back-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.custom-back-btn:hover {
+    background-color: #45a049;
+}
+
+/* スマホやタブレットのレスポンシブデザイン */
+@media (max-width: 768px) {
+    .custom-completion-container {
+        padding: 15px;
+    }
+
+    .custom-completion-heading {
+        font-size: 20px;
+    }
+
+    .custom-completion-message {
+        font-size: 14px;
+    }
+
+    .custom-back-btn {
+        font-size: 14px;
+    }
+}
+
+/***トップへ戻るボタン***/
+#page-top {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    padding: .7em;
+    text-align: center;
+    background: #565656; /*背景色*/
+    color: #ffffff; /*文字色*/
+    transition: .3s;
+    text-decoration: none;
+}
+/***マウスオーバー時***/
+#page-top:hover {
+    background: #666; /*背景色*/
+    color: #fff; /*文字色*/
+}
+
+/* 全体のスタイリング */
+.intro-section {
+    text-align: center;
+    margin: 40px auto;
+    padding: 30px;
+    max-width: 830px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, #f9f9f9, #fff);
+}
+
+/* セクションタイトル */
+.intro-title {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* 説明テキスト */
+.intro-text,
+.intro-subtext {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* 折り畳みボタン */
+.toggle-btn {
+    margin: 15px auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #00e667;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggle-btn:hover {
+    background-color: #0056b3;
+}
+
+/* 手順リストのコンテナ */
+.intro-steps-container {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+    margin-top: 20px;
+}
+
+/* コンテンツ展開時 */
+.intro-steps-container.open {
+    max-height: 600px;
+}
+
+/* 手順リスト */
+.intro-steps {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.intro-steps li {
+    font-size: 1.2em;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.intro-steps i {
+    font-size: 1.5em;
+    color: #007bff;
+}
+
+
+/*2カラムブロック（※900px未満では１カラム）
+---------------------------------------------------------------------------*/
+/*２カラムを囲むブロック*/
+.list-half-parts .list-parts {
+	display: flex;			/*flexボックスを使う指定*/
+	flex-direction: column;	/*子要素を縦並びにする*/
+	margin-bottom: 2rem;	/*ボックスの下に2文字分のスペースを空ける*/
+    margin-left: 20px;
+}
+
+/*ブロック内のh4見出し*/
+.list-half-parts .list-parts h4 {
+	font-size: 1.5rem;	/*文字サイズを1.4倍*/
+    
+}
+.list-half-parts .list-parts h2 {
+	font-size: 1.5rem;	/*文字サイズを1.4倍*/
+    margin-left: 30px;
+}
+.list-half-parts .list-parts p {
+	font-size: 1.1rem;	/*文字サイズを1.4倍*/
+    margin-left: 30px;
+    
+}
+
+/*画像ブロック共通*/
+.list-half-parts .image-l-parts img, .list-half-parts .image-r-parts img {
+    width: 100%; /* 親要素の幅に収まるようにする */
+    max-width: 550px; /* 最大幅を300pxに設定 */
+    height: auto; /* アスペクト比を保持 */
+    border-radius: 30px; /* 角を丸くする指定 */
+    box-shadow: 10px 10px rgba(0,0,0,0.1); /* ボックスの影 */
+}
+
+	/*画面幅900px以上の追加指定*/
+	@media screen and (min-width:900px) {
+
+		/*２カラムを囲むブロック*/
+		.list-half-parts .list-parts {
+			flex-direction: row;			/*子要素を横並びにする*/
+			justify-content: space-between;	/*並びかたの種類の指定*/
+			align-items: center;			/*垂直揃えの指定。天地中央に配置されるように。*/
+		}
+		
+		/*画像ブロック共通*/
+		.list-half-parts .image-l-parts, .list-half-parts .image-r-parts {
+			width: 50%;			/*画像の幅*/
+		}
+		
+		/*画像を右に配置する場合*/
+		.list-half-parts .image-r-parts {
+			margin-left: 2rem;	/*画像の左側に空けるスペース*/
+		}
+		
+		/*画像を左に配置する場合*/
+		.list-half-parts .image-l-parts {
+			order: -1;
+			margin-right: 2rem;	/*画像の右側に空けるスペース*/
+		}
+
+		/*テキストブロック*/
+		.list-half-parts .text-parts {
+			flex: 2;
+		}
+
+	}/*追加指定ここまで*/
+
+
+/*btnの設定（「btn1-parts」と「btn2-parts」）
+---------------------------------------------------------------------------*/
+/*ボタン共通*/
+a.btn1-parts, a.btn2-parts {
+	display: inline-block;text-decoration: none;
+	letter-spacing: 0.1em;	/*文字間隔を少しだけ広くとる*/
+	border-radius: 15px;		/*角を丸くする指定*/
+	padding: 0.5rem 3rem;	/*上下、左右へのボタン内の余白*/
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.2);	/*ボックスの影。右へ、下へ、ぼかし幅。0,0,0は黒の事で0.2は色が20%出た状態。*/
+	transition: 0.3s;	/*hoverまでにかける時間。0.3秒。*/
+}
+
+/*iタグ共通（アイコンの事）*/
+a.btn1-parts i, a.btn2-parts i {
+	padding-left: 1em;	/*アイコンとテキストの間の余白*/
+}
+
+/*btn1-partsの追加指定*/
+a.btn1-parts {
+	background: #fff;		/*背景色*/
+	border: 1px solid #ccc;	/*枠線の幅、線種、色*/
+   
+}
+
+/*btn1-parts内のiタグ（アイコンの事）*/
+a.btn1-parts i {
+	color: #999;	/*アイコンの色*/
+}
+
+
+/*マウスオン時*/
+a:hover.btn1-parts {
+	transform: scale(1.03);		/*103%に拡大する*/
+	filter: brightness(1.1);	/*少しだけ明るくする*/
+}
+
+.c {
+    text-align: center; /* 中央揃え */
+}
+
+
+/*枠線共通*/
+.animation-btn-parts::before,
+.animation-btn-parts::after,
+.animation-btn-inner-parts::before,
+.animation-btn-inner-parts::after {
+	content: "";
+	position: absolute;
+	background-color: #666;		/*background(背景)スタイルですが、hover時の枠線の色になります。*/
+	animation-duration: 0.2s;	/*アニメーションにかける時間。１辺あたり0.2秒。*/
+	animation-fill-mode: forwards;	/*アニメーション完了時に最後のフレームを維持。この１行を外してみると別の動作になって面白い動きになります。*/
+	animation-timing-function: linear;	/*アニメーションの速度のタイプ。同じ速度にする。*/
+}
+
+/* ページネーション全体 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* ページネーションリンクのスタイル */
+.step-links a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* ホバー時にリンクの色を変更 */
+.step-links a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* 現在のページ番号のスタイル */
+.current {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+/* 最初と最後のページリンク */
+.step-links a:first-child,
+.step-links a:last-child {
+    font-weight: bold;
+}
+
+/* ページネーションの矢印とリンクのデザイン */
+.step-links a.pagination-link {
+    padding: 8px 16px;
+    margin: 0 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* 前後の矢印にマウスを乗せたとき */
+.step-links a.pagination-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.step-links a.disabled {
+    pointer-events: none;
+    color: #ccc;
+    border-color: #ccc;
+}
+/* ページネーション全体 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    font-family: Arial, sans-serif; /* フォントを統一 */
+}
+
+/* ページネーションリンクのスタイル */
+.step-links a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 12px 24px;  /* ボタンを少し大きく */
+    margin: 0 8px;
+    border: 2px solid #007bff;
+    border-radius: 30px;  /* 丸みを持たせてボタン風に */
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    display: inline-block;  /* ボタンとして表示 */
+}
+
+/* ホバー時の効果 */
+.step-links a:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* 現在のページ番号のスタイル */
+.current {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 0 15px;
+    border-radius: 30px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+/* 現在のページ番号のホバー時のスタイル */
+.current:hover {
+    background-color: #e1e1e1;
+    border-color: #ccc;
+}
+
+/* 最初と最後のページリンク */
+.step-links a:first-child,
+.step-links a:last-child {
+    font-weight: bold;
+}
+
+/* ページネーションの矢印（最初/最後） */
+.step-links a.pagination-link {
+    padding: 12px 24px;
+    margin: 0 8px;
+    background-color: #f8f9fa;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.step-links a.pagination-link:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+/* すべてのページネーションリンクを中央に配置 */
+.step-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 前後の矢印（1ページ戻る、1ページ進む） */
+.step-links a.disabled {
+    pointer-events: none;
+    color: #ccc;
+    border-color: #ccc;
+}
+
+/* モバイル向けのレスポンシブ対応 */
+@media (max-width: 768px) {
+    .pagination {
+        flex-direction: column;
+    }
+    
+    .step-links a {
+        font-size: 14px;
+        padding: 10px 20px;
+        margin: 5px 0;
+    }
+
+    .current {
+        font-size: 16px;
+        padding: 8px 16px;
+        margin: 5px 0;
+    }
+}

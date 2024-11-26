@@ -1,0 +1,50 @@
+/* メインコンテナ */
+.container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* シャドウを追加 */
+    padding: 30px;
+    width: 90%;
+    max-width: 600px; /* 最大幅を600pxに設定 */
+    text-align: left;
+    margin: 30px auto;
+
+}
+
+/* ヘッダー */
+h2 {
+    text-align: center;
+    color: #333; /* 見やすい色 */
+    margin-bottom: 20px;
+}
+
+/* 強調文字 */
+p strong {
+    color: #333;
+    font-weight: bold;
+}
+
+/* 各項目のスタイル */
+p {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* ボタン */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF; /* ボタンの色 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* ボタンのホバー効果 */
+button:hover {
+    background-color: #0056b3;
+}
