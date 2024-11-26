@@ -5,11 +5,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import UserPassesTestMixin
 from foods.models import Food, Category
-from dgroupLogin.models import CustomUser  # CustomUserをインポート
+from dgroupLogin.models import CustomUser 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from foods.models import Food 
 from django.core.paginator import Paginator
+
 
 class IndexView(ListView):
     model = Food
@@ -34,7 +35,6 @@ class IndexView(ListView):
         context['categorys'] = Category.objects.all()
         context['recommended_items'] = Food.objects.order_by('shelf_life')[:4]
         return context
-
 
     def get_template_names(self):
         if self.request.GET.get('name'):
@@ -108,9 +108,11 @@ def switch_account(request):
 
         return render(request, 'switch_account.html', {'users': users})
 
+
 @login_required
 def profile(request):
     return render(request, 'profile.html', {'user': request.user})
+
 
 @login_required
 def edit_address(request):
@@ -126,6 +128,7 @@ def edit_address(request):
     
     # GETリクエストの場合は、現在の住所を表示
     return render(request, 'edit_address.html')
+
 
 @login_required
 def address_update_complete(request):

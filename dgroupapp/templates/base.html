@@ -35,7 +35,7 @@
                         </a>
                         {% if user.is_authenticated %}
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">{{ user.username }}さん</a></li>
+                            <li><a class="dropdown-item" href="#!">{{ user.nickname }}さん</a></li>
                             <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">住所:{{ user.address }}</a></li>
                             
                         </ul>
@@ -53,7 +53,7 @@
                         {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="small-text">こんにちは {{ user.username }}さん</span><br>アカウント＆リスト
+                                <span class="small-text">こんにちは {{ user.nickname }}さん</span><br>アカウント＆リスト
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{% url 'dgroupapp:profile' %}">プロフィール</a></li>
@@ -125,13 +125,13 @@
     <span class="pr"><a href="https://www.o-hara.ac.jp/" target="_blank">2024 TeamD</a></span>
 </footer>
     <!-- base.html -->
-{% if messages %}
+<!-- {% if messages %}
 <div class="alert alert-success">
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
 </div>
-{% endif %}
+{% endif %} -->
 
     
 
