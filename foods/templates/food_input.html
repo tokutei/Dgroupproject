@@ -5,7 +5,7 @@
 {% block content %}
 <div class="input_page">
     <h2 class="menutitle">食品情報入力</h2>
-    <form method="POST" enctype="multipart/form-data" class="input_form">
+    <form method="POST" enctype="multipart/form-data" class="input_form" onsubmit="foodConfirm()">
         {% csrf_token %}
         <table class="food_input">
             <tr>
@@ -44,4 +44,14 @@
     <a href="{% url 'system_menu' %}">戻る</a>
     <br>
 </div>
+<script>
+    function foodConfirm() {
+        const conf = confirm('この内容で追加しますか？');
+        if (conf) {
+            alert('食品情報を追加しました。');
+        } else {
+            event.preventDefault();
+        }
+    }
+</script>
 {% endblock %}

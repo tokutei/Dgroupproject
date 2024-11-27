@@ -17,7 +17,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class CreateFoodView(CreateView):
     form_class = FoodInputForm
     template_name = "food_input.html"
-    success_url = reverse_lazy('foods:input_done')
+    success_url = reverse_lazy('foods:food_input')
 
     def form_valid(self, form):
         inputdata = form.save(commit=False)
@@ -51,11 +51,6 @@ class CreateFoodView(CreateView):
         price.save()
         inputdata.save()
         return super().form_valid(form)
-
-
-# 入力完了ページのビュー
-class InputSuccessView(TemplateView):
-    template_name = 'input_success.html'
 
 
 # 登録食品の一覧ページ
