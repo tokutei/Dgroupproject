@@ -1,11 +1,11 @@
 {% extends 'system_base.html' %}
 
-{% block title %}食品情報編集 WasteNot/管理システム{% endblock %}
+{% block title %}食品情報変更 WasteNot/管理システム{% endblock %}
 
 {% block content %}
 <div class="input_page">
-    <h2 class="menutitle">食品情報編集</h2>
-    <form method="POST" enctype="multipart/form-data" class="input_form">
+    <h2 class="menutitle">食品情報変更</h2>
+    <form method="POST" enctype="multipart/form-data" class="input_form" onsubmit="foodConfirm()">
         {% csrf_token %}
         <table class="food_input">
             <tr>
@@ -38,10 +38,20 @@
             </tr>
         </table>
         <div align = "right">
-            <button type="submit" class="input_btn">編集を保存する</button> 
+            <button type="submit" class="input_btn">変更する</button> 
         </div>
     </form>
     <a href="{% url 'foods:food_delete_list' %}">戻る</a>
     <br>
 </div>
+<script>
+    function foodConfirm() {
+        const conf = confirm('変更を保存しますか？');
+        if (conf) {
+            alert('食品情報を変更しました。');
+        } else {
+            event.preventDefault();
+        }
+    }
+</script>
 {% endblock %}

@@ -14,7 +14,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 # 商品情報入力ページのビュー
-class CreateFoodView(CreateView):
+class FoodCreateView(CreateView):
     form_class = FoodInputForm
     template_name = "food_input.html"
     success_url = reverse_lazy('foods:food_input')
@@ -67,12 +67,19 @@ class FoodDeleteView(DeleteView):
     success_url = reverse_lazy('foods:food_delete_list')
 
 
-# 編集ページのビュー
-class UpdateFoodView(UpdateView):
-    template_name = 'update_food.html'
+# 変更ページのビュー
+class FoodUpdateView(UpdateView):
+    template_name = 'food_update.html'
     form_class = FoodInputForm
     model = Food
     success_url = reverse_lazy('foods:food_delete_list')
+
+    # 既存のアレルギーデータを取得して変更画面の初期値に設定
+    def get_initial(self):
+        initial = super().get_initial()
+        food = self.get_object()
+        initial['allergy'] = food.allergy.split('、') if food.allergy else []
+        return initial
 
     def form_valid(self, form):
         adddata = form.save(commit=False)
