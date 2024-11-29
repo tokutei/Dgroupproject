@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import RegexValidator
 from .models import CustomUser
 
 
@@ -19,7 +20,6 @@ class CustomUserForm(forms.ModelForm):
             'phone_number': '電話番号',
             'address': '住所',
             'password': 'パスワード',
-
         }
         help_texts = {
             'username': '半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。',
@@ -28,6 +28,21 @@ class CustomUserForm(forms.ModelForm):
             'address': '住所を入力してください。',
             'password': 'パスワードを設定してください。',
         }
+
+    # `username`フィールドに半角英数字と特定記号のみを許可するバリデーション
+    username = forms.CharField(
+        max_length=150,
+        validators=[RegexValidator(r'^[a-zA-Z0-9@.+/-_]+$', '半角英数字と一部の記号のみを使用できます。')],
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+
+    # `phone_number`フィールドに10桁または11桁の半角数字のみを許可するバリデーション
+    phone_number = forms.CharField(
+        max_length=11,
+        min_length=10,
+        validators=[RegexValidator(r'^[0-9]{10,11}$', '10桁または11桁の半角数字を入力してください')],
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -46,6 +61,7 @@ class CustomUserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
