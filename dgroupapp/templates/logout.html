@@ -1,24 +1,36 @@
-<!-- login.html -->
+<!-- logout.html -->
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}ログアウト WasteNot{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Logout Confirmation</title>
-</head>
-<body>
-    <h1>ログアウト確認</h1>
-    <p>本当にログアウトしますか？</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">はい</button>
-        <a href="{% url 'dgroupapp:index' %}">いいえ</a>
-    </form>
-</body>
-</html>
+<style>
+    .logout-container {
+        margin: 50px auto 130px;
+        width: 500px;
+    }
+
+    .logout-form {
+        background-color: #fff;
+        border-radius: 7px;
+        box-shadow: 0 4px 10px #d1d1d1;
+        padding: 30px;
+    }
+
+    .btn-primary {
+        width: 80px;
+        margin-right: 10px;
+    }
+</style>
+<div class="logout-container">
+    <h2 class="text-center mb-3">ログアウト確認</h2>
+    <div class="logout-form">
+        <p>本当にログアウトしますか？</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">はい</button>
+            <a href="{% url 'dgroupapp:index' %}" class="btn btn-secondary">いいえ</a>
+        </form>
+    </div>
+</div>
 {% endblock %}

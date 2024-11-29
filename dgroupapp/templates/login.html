@@ -1,22 +1,51 @@
 <!-- login.html -->
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}ログイン WasteNot{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>ログイン</h2>
-    <form method="post">
+<style>
+    .login-container {
+        margin: 20px auto 30px;
+        width: 500px;
+    }
+
+    .login-form {
+        text-align: center;
+        background-color: #fff;
+        border-radius: 7px;
+        box-shadow: 0 4px 10px #d1d1d1;
+        padding: 25px;
+    }
+
+    .login-form input {
+        width: 370px;
+        height: 45px;
+        border: 1.5px solid #acacac;
+        border-radius: 5px;
+    }
+
+    .login-form label {
+        padding-right: 310px;
+    }
+
+    .btn-primary {
+        width: 270px;
+    }
+</style>
+<div class="login-container">
+    <h2 class="text-center mb-3">ログイン</h2>
+    <form method="post" class="login-form">
         {% csrf_token %}
-        <div class="form-group">
-            {{ form.username.label }}<br>
+        <div class="form-group pb-3">
+            <label>{{ form.username.label }}</label>
             {{ form.username }}<br>
         </div>
-        <div class="form-group">
-            {{ form.password.label }}<br>
+        <div class="form-group pb-3">
+            <label>{{ form.password.label }}</label>
             {{ form.password }}<br>
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">ログイン</button>
     </form>
     {% if form.non_field_errors %}
         <div class="alert alert-danger">{{ form.non_field_errors }}</div>
