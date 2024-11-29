@@ -1085,3 +1085,72 @@ a:hover.btn1-parts {
         margin: 5px 0;
     }
 }
+
+/* プロフィール編集全体のコンテナ */
+.custom-profile-edit-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* タイトルのデザイン */
+.custom-profile-edit-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* フォームのスタイル */
+.custom-profile-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 保存ボタン */
+.custom-save-btn {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* 保存ボタンと統一 */
+    width: 100%; /* 横幅を揃える場合は追加 */
+    text-align: center; /* テキストを中央揃え */
+}
+
+.custom-save-btn:hover {
+    background-color: #45a049;
+}
+
+/* キャンセルボタン */
+.custom-cancel-btn {
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    padding: 8px 15px;
+    background-color: #6c757d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* 保存ボタンと統一 */
+    width: 100%; /* 横幅を揃える場合は追加 */
+    text-align: center; /* テキストを中央揃え */
+}
+
+.custom-cancel-btn:hover {
+    background-color: #565e64;
+}
+
+
+

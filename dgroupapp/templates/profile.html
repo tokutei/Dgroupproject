@@ -8,15 +8,17 @@
 <hr>
 <div class="profile-info">
     <h3>プロフィール情報</h3>
-    <p><strong>ユーザー名:</strong> {{ user.nickname }}</p>
+    <p><strong>ユーザー名:</strong> {{ user.username }}</p>
+    <p><strong>ニックネーム:</strong> {{ user.nickname }}</p>
     <p><strong>メールアドレス:</strong> {{ user.email }}</p>
-    <p><strong>お届け先住所:</strong> {{ user.address }}</p>
-    <p><strong>登録日:</strong> {{ user.date_joined|date:"Y年m月d日" }}</p>
+    <p><strong>電話番号:</strong> {{ user.phone_number }}</p>
+    <p><strong>住所:</strong> {{ user.address }}</p>
 </div>
+
 
 <!-- ボタンを囲むコンテナ -->
 <div class="button-container">
-    <a href="#" class="profile-btn">プロフィール編集</a>
+    <a href="{% url 'dgroupapp:edit_profile' %}" class="profile-btn">プロフィール編集</a>
     <a href="{% url 'index' %}" class="profile2-btn">トップページに戻る</a>
 </div>
 

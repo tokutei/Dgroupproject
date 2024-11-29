@@ -46,3 +46,22 @@ class CustomUserForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'nickname', 'email', 'phone_number', 'address']  # 必要なフィールドを指定
+        labels = {
+            'username': 'ユーザー名',
+            'nickname': 'ニックネーム',
+            'email': 'メールアドレス',
+            'phone_number': '電話番号',
+            'address': '住所',
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'nickname': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }

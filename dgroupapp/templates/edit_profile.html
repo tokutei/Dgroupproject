@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}プロフィール編集{% endblock %}
+
+{% block content %}
+<div class="custom-profile-edit-container">
+    <h3 class="custom-profile-edit-title">プロフィール編集</h3>
+    <form method="post" class="custom-profile-edit-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn custom-save-btn">保存</button>
+    </form>
+    <a href="{% url 'dgroupapp:profile' %}" class="btn custom-cancel-btn">キャンセル</a>
+</div>
+{% endblock %}

@@ -9,6 +9,7 @@ from dgroupLogin.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from foods.models import Food 
+from dgroupLogin.forms import ProfileEditForm
 from django.core.paginator import Paginator
 
 
@@ -25,8 +26,8 @@ class IndexView(ListView):
         if self.search_query:
             queryset = queryset.filter(name__icontains=self.search_query)
 
-        # その後にスライス
-        return queryset.order_by('-inputed_at')[:8]  # フィルタリング後にスライスを適用
+        # 最新順（降順）で商品を取得
+        return Food.objects.order_by('-inputed_at')[:8]  # 'inputed_at' フィールドを使用
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -191,3 +192,15 @@ class NewArrivalsView(ListView):
         context['categorys'] = Category.objects.all()  # カテゴリ情報も追加
         return context
     
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = ProfileEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('dgroupapp:profile')  # プロフィールページにリダイレクト
+    else:
+        form = ProfileEditForm(instance=request.user)
+
+    return render(request, 'edit_profile.html', {'form': form})

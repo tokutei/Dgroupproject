@@ -19,5 +19,6 @@ urlpatterns = [
     path('address_update_complete/', views.address_update_complete, name='address_update_complete'),
     path('category/<int:category_id>/', views.category_view, name='category_view'),
     path('new-arrivals/', views.NewArrivalsView.as_view(), name='new_arrivals'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
 ]
 #http://127.0.0.1:8000/convenience/register/
