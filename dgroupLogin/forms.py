@@ -13,6 +13,14 @@ class CustomUserForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(),
         }
+        widgets = {
+            'username': forms.TextInput(attrs={'placeholder': 'ユーザー名（半角英数字、記号）'}),
+            'nickname': forms.TextInput(attrs={'placeholder': 'ニックネームを入力してください'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'example@domain.com'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': '電話番号（10～11桁）'}),
+            'address': forms.Textarea(attrs={'placeholder': '住所を入力してください', 'rows': 3}),
+            'password': forms.PasswordInput(attrs={'placeholder': 'パスワードを入力してください'}),
+        }
         labels = {
             'username': 'ユーザー名',
             'nickname': 'ニックネーム',
@@ -33,7 +41,7 @@ class CustomUserForm(forms.ModelForm):
     username = forms.CharField(
         max_length=150,
         validators=[RegexValidator(r'^[a-zA-Z0-9@.+/-_]+$', '半角英数字と一部の記号のみを使用できます。')],
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={'placeholder': 'ユーザー名（半角英数字、記号）'})
     )
 
     # `phone_number`フィールドに10桁または11桁の半角数字のみを許可するバリデーション
@@ -41,7 +49,7 @@ class CustomUserForm(forms.ModelForm):
         max_length=11,
         min_length=10,
         validators=[RegexValidator(r'^[0-9]{10,11}$', '10桁または11桁の半角数字を入力してください')],
-        widget=forms.TextInput(attrs={'class': 'form-control'})
+        widget=forms.TextInput(attrs={'placeholder': '電話番号（10～11桁）'})
     )
 
     def clean(self):
