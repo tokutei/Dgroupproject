@@ -204,3 +204,6 @@ def edit_profile(request):
         form = ProfileEditForm(instance=request.user)
 
     return render(request, 'edit_profile.html', {'form': form})
+
+class AboutView(TemplateView):
+    template_name = 'about.html'
