@@ -1,16 +1,5 @@
-/* form_styles.css */
-
-/* 全体的な背景とフォント設定 */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f7f7f7;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
-
-/* コンテナでフォームを中央に配置 */
-h1 {
+/* contact-page内のスタイルのみ適用 */
+.contact-page h1 {
     text-align: center;
     margin-top: 50px;
     font-size: 2.5rem;
@@ -18,7 +7,8 @@ h1 {
     font-weight: bold;
 }
 
-form {
+/* contact-page内のフォームスタイルのみ適用 */
+.contact-page > .container form {
     background: #fff;
     padding: 30px;
     max-width: 600px;
@@ -27,22 +17,9 @@ form {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 各フォームグループのスタイル */
-.form-group {
-    margin-bottom: 20px;
-}
-
-/* ラベルのスタイル */
-.form-group label {
-    font-size: 1.1rem;
-    color: #555;
-    font-weight: 500;
-    display: block;
-    margin-bottom: 10px;
-}
-
-/* 入力フィールドのスタイル */
-input, textarea {
+/* さらに、フォームの入力フィールドのスタイル */
+.contact-page > .container .form-group input, 
+.contact-page > .container .form-group textarea {
     width: 100%;
     padding: 12px 15px;
     font-size: 1rem;
@@ -51,18 +28,13 @@ input, textarea {
     transition: all 0.3s ease;
 }
 
-input:focus, textarea:focus {
+.contact-page > .container .form-group input:focus, 
+.contact-page > .container .form-group textarea:focus {
     border-color: #4A90E2;
     outline: none;
 }
 
-/* テキストエリアの高さ調整 */
-textarea {
-    min-height: 150px;
-}
-
-/* ボタンのスタイル */
-button {
+.contact-page > .container .form-group button {
     background-color: #4A90E2;
     color: #fff;
     border: none;
@@ -74,21 +46,21 @@ button {
     transition: background-color 0.3s ease;
 }
 
-button:hover {
+.contact-page > .container .form-group button:hover {
     background-color: #357ABD;
 }
 
-/* フォームのレスポンシブデザイン */
+/* レスポンシブデザイン */
 @media screen and (max-width: 768px) {
-    h1 {
+    .contact-page > .container h1 {
         font-size: 2rem;
     }
 
-    form {
+    .contact-page > .container form {
         padding: 20px;
     }
 
-    button {
+    .contact-page > .container .form-group button {
         padding: 10px;
         font-size: 1rem;
     }
