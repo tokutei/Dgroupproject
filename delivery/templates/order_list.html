@@ -29,7 +29,6 @@
         <label for="sort_by" class="search-label"></label>
         <select name="sort_by" id="sort_by" class="search-select" onchange="this.form.submit()">
             <option value="ordernumber" {% if sort_by == 'ordernumber' %}selected{% endif %}>注文番号</option>
-            <option value="aitemname" {% if sort_by == 'aitemname' %}selected{% endif %}>商品名</option>
             <option value="delivery_method" {% if sort_by == 'delivery_method' %}selected{% endif %}>配送方法</option>
             <option value="shipped_date" {% if sort_by == 'shipped_date' %}selected{% endif %}>配送日</option>
         </select>        
