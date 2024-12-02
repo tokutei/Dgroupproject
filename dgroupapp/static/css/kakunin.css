@@ -1,0 +1,100 @@
+/* 他のCSSに影響を与えないように、特定のクラス名を付けてスタイルを適用 */
+
+
+.container .content-box {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    margin: 30px auto;
+
+}
+
+.container h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.container p {
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    color: #555555;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.container strong {
+    font-weight: bold;
+    color: #333333;
+}
+
+/* 登録ボタン専用のスタイル */
+.register-button {
+    background-color: #4CAF50; /* 鮮やかな緑色 */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #45a049;
+}
+
+/* フォーム送信時のボタンのアニメーション */
+.register-button:active {
+    transform: scale(0.98);
+}
+/* 戻るボタン専用のスタイル */
+.back-button {
+    background-color: #f44336; /* 赤色 */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #e53935; /* ホバー時に少し暗くなる */
+}
+
+/* フォーム送信時のボタンのアニメーション */
+.back-button:active {
+    transform: scale(0.98);
+}
+
+
+/* スマートフォン向けのレスポンシブデザイン */
+@media (max-width: 600px) {
+    .container .content-box {
+        padding: 20px;
+    }
+
+    .container h2 {
+        font-size: 24px;
+    }
+
+    .container p {
+        font-size: 16px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+}
