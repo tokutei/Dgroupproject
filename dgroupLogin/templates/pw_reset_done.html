@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}パスワードリセット WasteNot{% endblock %}
+
+{% block content %}
+<style>
+    .pw-reset-container {
+        margin: 60px auto 180px;
+        width: 500px;
+    }
+</style>
+<div class="pw-reset-container">
+    <h5>パスワードがリセットされました。</h5>
+    <br>
+    <p>再設定したパスワードでログインしてください。</p>
+    <br>
+    <a href="{% url 'dgroupapp:login' %}">ログイン画面へ</a>
+</div>
+{% endblock %}

@@ -145,3 +145,12 @@ MEDIA_URL = '/media/'
 STRIPE_PUBLIC_KEY = 'pk_test_51QHz1VL8vAMNBiqUw57QudwIiSaN9UjFPbXsfrckeMTEaR9GIBNbyOo0p7lfSHzw4tetDosiK7j09OgavYSykVkk00sebm3Lyu'
 
 STRIPE_SECRET_KEY = 'sk_test_51QHz1VL8vAMNBiqUVPvvdB1yOgrjCQI8g1D3aIKWNMZOEiQVGx7SMbfBonNbDbfNPcyG6GHNDW6ipKM3TWOtNuBf00ch2qhGfU'
+
+# メール送信の設定
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = ''     # 自分のngnメールアドレス
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''        # 自分のngnメールアドレス
+EMAIL_HOST_PASSWORD = ''    # ngnのパスワード
+EMAIL_USE_TLS = True
