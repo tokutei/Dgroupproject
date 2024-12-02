@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}削除内容{% endblock %}
 {% block content %}
+    {% if object %}
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
@@ -15,7 +16,6 @@
                             カテゴリー:{{ object.category }}<br>
                             賞味期限:{{ object.shelf }}<br>
                             アレルギー:<br>{{ object.allergy }}<br><br>
-                            削除してもいいですか?<br>            
                         </p>
                         <style>
                             form input[type="number"]::-webkit-outer-spin-button,
@@ -29,14 +29,46 @@
                                 -moz-appearance: textfield !important;
                                 appearance: none !important;
                             }
+                            .select1 {
+                                display: block;
+                                width: 20%;
+                                padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+                                -moz-padding-start: calc(0.75rem - 3px);
+                                font-size: 1rem;
+                                font-weight: 400;
+                                line-height: 1.5;
+                                color: #212529;
+                                background-color: #fff;
+                                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+                                background-repeat: no-repeat;
+                                background-position: right 0.75rem center;
+                                background-size: 16px 12px;
+                                border: 1px solid #ced4da;
+                                border-radius: 0.375rem;
+                                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                                -webkit-appearance: none;
+                                -moz-appearance: none;
+                                appearance: none;
+                            }
+
+                            .select1:focus{
+                                border-color: #86b7fe;
+                                outline: 0;
+                                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                            }
                         </style>
-                        <form method="POST">
+                        <form action="{% url 'purchaseapp:deletesuccess' object.stripe_product_id %}" method="POST">
+                            削除数量:
+                            <select name="deletestock" class="select1">
+                                {% for i in deletenumber %}
+                                <option value="{{ i }}">{{ i }}
+                                {% endfor %}
+                            </select>
                             <div class="d-flex">
-                                {{ form.stockminus }}
                                 {% csrf_token %}
-                                <button class="btn btn-primary my-2"type="submit">削除</button>
+                                <button class="btn btn-outline-dark flex-shrink-0"type="submit">削除</button>
                                 　
-                                <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-secondary my-2">キャンセル</a>
+                                <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-outline-dark flex-shrink-0">キャンセル</a>
                             </div>
                         </form>
                         </div>
@@ -44,4 +76,7 @@
                 </div>
             </div>
         </section>
+    {% else %}
+    商品の有効期限が切れました
+    {% endif %}
 {% endblock %}

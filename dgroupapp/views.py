@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from foods.models import Food 
 from dgroupLogin.forms import ProfileEditForm
+from purchaseapp.models import CartPost, BuyJudge
 
 from django.core.paginator import Paginator
 
@@ -32,6 +33,25 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        food_list = []
+        foods = Food.objects.all()
+        for i in foods:
+            food_list.append(i.stripe_product_id)
+        minus = []
+        target = []
+        judge = BuyJudge.objects.all()
+        for i in judge:
+            if i.stripe_product_id in food_list:
+                foodsstock = Food.objects.get(stripe_product_id=i.stripe_product_id)
+                stock = foodsstock.stock - i.stock
+                if stock < 0:
+                    stock = 0
+                minus.append([i.stripe_product_id, stock])
+                target.append(i.stripe_product_id)
+        context['minus'] = minus
+        context['target'] = target
+
         context['search_query'] = self.search_query
         context['result_count'] = context['object_list'].count()
         context['categorys'] = Category.objects.all()
@@ -188,7 +208,25 @@ class NewArrivalsView(ListView):
         # 現在のページを取得
         page_number = self.request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        
+
+        food_list = []
+        foods = Food.objects.all()
+        for i in foods:
+            food_list.append(i.stripe_product_id)
+        minus = []
+        target = []
+        judge = BuyJudge.objects.all()
+        for i in judge:
+            if i.stripe_product_id in food_list:
+                foodsstock = Food.objects.get(stripe_product_id=i.stripe_product_id)
+                stock = foodsstock.stock - i.stock
+                if stock < 0:
+                    stock = 0
+                minus.append([i.stripe_product_id, stock])
+                target.append(i.stripe_product_id)
+        context['minus'] = minus
+        context['target'] = target
+
         context['new_arrivals'] = page_obj  # ページネーションされた商品
         context['categorys'] = Category.objects.all()  # カテゴリ情報も追加
         return context

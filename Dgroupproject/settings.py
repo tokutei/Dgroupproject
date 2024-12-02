@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "Dgroupproject.middleware.Middleware",
 ]
 
 ROOT_URLCONF = 'Dgroupproject.urls'
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Dgroupproject.context_processors.my_cart'
             ],
         },
     },
@@ -146,11 +148,14 @@ STRIPE_PUBLIC_KEY = 'pk_test_51QHz1VL8vAMNBiqUw57QudwIiSaN9UjFPbXsfrckeMTEaR9GIB
 
 STRIPE_SECRET_KEY = 'sk_test_51QHz1VL8vAMNBiqUVPvvdB1yOgrjCQI8g1D3aIKWNMZOEiQVGx7SMbfBonNbDbfNPcyG6GHNDW6ipKM3TWOtNuBf00ch2qhGfU'
 
+STRIPE_WEBHOOK_SECRET = 'whsec_a953156d9b33aab87d20ce94e8c60aa27b0fe56429cdc20059571cd9dad71c93'
+
 # メール送信の設定
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = ''     # 自分のngnメールアドレス
-EMAIL_HOST = 'smtp.office365.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = ''        # 自分のngnメールアドレス
-EMAIL_HOST_PASSWORD = ''    # ngnのパスワード
-EMAIL_USE_TLS = True
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = ''     # 自分のngnメールアドレス
+# EMAIL_HOST = 'smtp.office365.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = ''        # 自分のngnメールアドレス
+# EMAIL_HOST_PASSWORD = ''    # ngnのパスワード
+# EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

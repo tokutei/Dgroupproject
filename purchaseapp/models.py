@@ -1,5 +1,8 @@
 from django.db import models
 from dgroupLogin.models import CustomUser
+from django.utils import timezone
+from django.utils.timezone import now
+from datetime import timedelta
 
 
 class CartPost(models.Model):
@@ -13,8 +16,14 @@ class CartPost(models.Model):
     stockminus = models.IntegerField(verbose_name='削除数量', default=1)
     shelf = models.DateField(verbose_name='賞味期限')
     allergy = models.CharField(verbose_name='アレルギー', max_length=150)
+    added_at = models.DateTimeField(verbose_name='追加日時', auto_now_add=True)
+
     def __str__(self):
         return self.aitemname
+
+    def is_expired(self):
+        expiration_time = self.added_at + timedelta(minutes=30)
+        return timezone.now() > expiration_time
 
 
 class OrderPost(models.Model):
@@ -74,5 +83,11 @@ class BuyJudge(models.Model):
     def __str__(self):
         return self.stripe_product_id
 
+
+class Payment_intent(models.Model):
+    user = models.ForeignKey(CustomUser, verbose_name='ユーザー', on_delete=models.CASCADE)
+    payment_intent = models.CharField(max_length=9999)
+    def __str__(self):
+        return self.payment_intent
 
 # Create your models here.

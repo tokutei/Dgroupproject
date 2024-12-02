@@ -2,8 +2,9 @@
 {% block title %}買い物かご内容{% endblock %}
 
 {% block content %}
-<!-- Header-->
+{% if object_list %}
 <section class="py-5">
+    <a href="{% url 'purchaseapp:cart' user.id %}">戻る</a>
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <table class="purchasetable">
@@ -78,6 +79,8 @@
         </form>
     </div>
 </section>
-
+{% else %}
+カートに商品がありません
+{% endif %}
 
 {% endblock %}

@@ -6,7 +6,7 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder"><font color="white">Cart</font></h1>
+            <h1 class="display-4 fw-bolder">Cart</h1>
         </div>
     </div>
 </header>
@@ -16,31 +16,65 @@
         <h3>買い物かごに商品がありません</h3>
     </div>                
     {% else %}
+    {% if errorname_list %}
+    <div style="text-align: center">
+        <p><font color="red">在庫が不足しています</font></p>
+    </div>
+    {% endif %}       
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for record in object_list %}
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ record.stock }}</div>
-                    <!-- Product image-->
-                    <img src="{{ record.aitemimage.url }}" class="card-img-top" height="150px" />
-                    <!-- Product details-->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <!-- Product name-->
-                            <h5 class="fw-bolder">{{ record.aitemname }}</h5>
-                            <!-- Product price-->
-                            {{ record.price }}
+                {% if record.stripe_product_id in errorname_list %}
+                    {% for i in error_list %}
+                        {% if i.0 == record.stripe_product_id %}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; background-color: red !important">{{ record.stock }}</div>
+                                <!-- Product image-->
+                                <img src="{{ record.aitemimage.url }}" class="card-img-top" height="150px" />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder">{{ record.aitemname }}</h5>
+                                        <!-- Product price-->
+                                        {{ record.price }}
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <form method="POST">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:over' record.pk %}'">詳細・編集</a></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ record.stock }}</div>
+                            <!-- Product image-->
+                            <img src="{{ record.aitemimage.url }}" class="card-img-top" height="150px" />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ record.aitemname }}</h5>
+                                    <!-- Product price-->
+                                    {{ record.price }}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <form method="POST">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:purchase_delete' record.pk %}'">詳細・編集</a></div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <form method="POST">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:purchase_delete' record.pk %}'">削除</a></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

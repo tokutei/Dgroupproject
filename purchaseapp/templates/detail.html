@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}削除内容{% endblock %}
 {% block content %}
+    {% if object %}
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
@@ -14,7 +15,7 @@
                         <p class="lead">
                             カテゴリー:{{ object.category }}<br>
                             賞味期限:{{ object.shelf }}<br>
-                            アレルギー:<br>{{ object.allergy }}<br><br>
+                            アレルギー:{{ object.allergy }}<br><br>
                         </p>
                         <form method="POST">
                             <div class="d-flex">
@@ -27,4 +28,7 @@
                 </div>
             </div>
         </section>
+    {% else %}
+    商品の有効期限が切れました
+    {% endif %}
 {% endblock %}
