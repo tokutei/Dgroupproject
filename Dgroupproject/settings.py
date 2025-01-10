@@ -91,8 +91,12 @@ WSGI_APPLICATION = 'Dgroupproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dgroupdb',        # ➃で作成したDB名
+        'USER': 'postgres',    # default
+        'PASSWORD': 'pass',     # Posgresqlのインストールで設定したPW
+        'HOST': '',            # 空でOK
+        'PORT': '',            # 空でOK
     }
 }
 
