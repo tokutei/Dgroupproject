@@ -30,8 +30,7 @@ def contact_confirm_view(request):
             form.save()
             del request.session['contact_form_data']  # セッションデータを削除
             messages.success(request, 'お問い合わせいただきありがとうございます。')
-            return redirect('dgrouinquiry:contact')  # 成功後にフォーム画面にリダイレクト
+            return redirect('dgroupapp:index')  # 成功後にフォーム画面にリダイレクト
     else:
         form = ContactForm(form_data)
-
     return render(request, 'contact_confirm.html', {'form': form, 'form_data': form_data})

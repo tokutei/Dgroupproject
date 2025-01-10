@@ -27,7 +27,7 @@
                 <li class="contact-item no-data">現在、お問い合わせはありません。</li>
             {% endfor %}
         </ul>
-        <button onclick="window.history.back()" class="back-button">前のページに戻る</button>
+        <a href="{% url 'system_menu' %}" class="back-link">戻る</a>
     </div>
 </body>
 </html>
