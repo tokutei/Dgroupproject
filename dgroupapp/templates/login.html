@@ -37,6 +37,9 @@
     <h2 class="text-center mb-3">ログイン</h2>
     <form method="post" class="login-form">
         {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div style="color:#e41b1b">{{ form.non_field_errors }}</div>
+        {% endif %}
         <div class="form-group pb-3">
             <label>{{ form.username.label }}</label>
             {{ form.username }}<br>
@@ -48,8 +51,5 @@
         <button type="submit" class="btn btn-primary mb-3">ログイン</button><br>
         <a href="{% url 'password_reset' %}">パスワードを忘れた方はこちら</a>
     </form>
-    {% if form.non_field_errors %}
-        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
-    {% endif %}
 </div>
 {% endblock %}
