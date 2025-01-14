@@ -24,6 +24,8 @@ from purchaseapp.views import (
     PurchaseCheck,
     SuccessPage,
     CancelPageView,
+    stripe_webhook,
+    cancel_checkout,
 )
 from django.contrib.auth import views as auth_views
 
@@ -41,7 +43,9 @@ urlpatterns = [
     path('stripe/create-checkout-session/', CreateCheckoutSessionView.as_view(), name="create-checkout-session"),
     path('stripe/purchasecheck', PurchaseCheck, name='purchasecheck'),
     path('stripe/success/', SuccessPage, name='success'),
-    path('stripe/cancel/', CancelPageView.as_view(), name="cancel"),
+    path('stripe/cancel/', cancel_checkout, name="cancel"),
+    path('stripe/cancel/template', CancelPageView.as_view(), name='canceltemplate'),
+    path('webhook2/', stripe_webhook, name="webhook"),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name="pw_reset.html"), name='password_reset'),
     path('password_reset/done', auth_views.PasswordResetDoneView.as_view(template_name="pw_reset_sent.html"), name='password_reset_done'),
     path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name="pw_reset_form.html"), name='password_reset_confirm'),
