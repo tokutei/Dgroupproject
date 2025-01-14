@@ -44,6 +44,7 @@ class OrderPost(models.Model):
     user = models.CharField(verbose_name='ユーザー', max_length=100)
     address = models.CharField(verbose_name='住所', max_length=100)
     delivery_method = models.CharField(max_length=10, choices=DELIVERY_CHOICES, default='standard')
+    ordertime = models.DateTimeField(verbose_name='注文日時', auto_now_add=True)
     
     shipped = models.BooleanField(default=False, verbose_name='配送済み')  # 配送完了フラグ
     shipped_date = models.DateTimeField(null=True, blank=True, verbose_name='配送日時')  # 配送日時

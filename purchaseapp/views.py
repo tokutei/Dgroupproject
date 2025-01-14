@@ -109,7 +109,7 @@ class PurchaseView(ListView):
         if user_list:
             totalprice = sum(item.price * item.stock for item in user_list)
             totalstock = sum(item.stock for item in user_list)
-            context['totalprice'] = totalprice
+            context['totalprice'] = totalprice + 150
             context['totalstock'] = totalstock
         return context
 
@@ -168,6 +168,10 @@ class CreateCheckoutSessionView(View):
                         'quantity': i.stock,
                     },)
                     metalist.append(i.stripe_product_id)
+                line_items_list.append({
+                    'price': 'price_1Qh09ML8vAMNBiqUkFzXCIqT',
+                    'quantity': 1,
+                },)
                 checkout_session = stripe.checkout.Session.create(
                     payment_method_types=['card'],
                     line_items=line_items_list,
@@ -205,6 +209,7 @@ class CreateCheckoutSessionView(View):
             return render(request, 'cart.html', dictionary)
         else:
             return render(request, ('timeout.html'))
+
 
 
 @csrf_exempt
@@ -268,14 +273,13 @@ def PurchaseCheck(request):
         'address': address,
         'delivery': delivery,
         'object_list': object_list,
-        'totalprice': totalprice,
+        'totalprice': totalprice + 150,
         'totalstock': totalstock,
     }
     return render(request, 'purchasecheck.html', dictionary)
 
 
 def SuccessPage(request):
-    print(1)
     judge = 0
     user_list = CartPost.objects.filter(user=request.user.id)
     if len(user_list) == 0:
@@ -351,7 +355,7 @@ def SuccessPage(request):
             entries = OrderPost(
                 ordernumber=inputordernumber,
                 aitem=totalaitem,
-                price=totalprice,
+                price=totalprice + 150,
                 payment=payment,
                 user=request.user.username,
                 address=address,

@@ -5,8 +5,9 @@
 {% if object_list %}
 <section class="py-5">
     <a href="{% url 'purchaseapp:cart' user.id %}">戻る</a>
+    <div style="background-color: white; border: solid 1px white; padding: 1px; border-radius: 10px; margin: 10px 150px; box-shadow: 0 0 8px gray;">
     <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="text-center">
             <table class="purchasetable">
                 <tr>
                     <th>商品名</th>
@@ -23,6 +24,12 @@
                     </td>
                 </tr>
                 {% endfor %}
+                <tr>
+                    <td>送料</td>
+                    <td>￥150</td>
+                    <td></td>
+                    <td></td>
+                </tr>
                 <tr>
                     <td>支払額</td>
                     <td>￥{{ totalprice }}</td>
@@ -56,11 +63,11 @@
             </p>
             <br>
             <div id="message1" class="hidden">
-                <button class="btn btn-primary my-2" type="submit" name="credit">購入画面に進む</button>
+                <button class="btn btn-outline-dark flex-shrink-0" type="submit" name="credit">購入画面に進む</button>
             </div>
 
             <div id="message2" class="hidden">
-                <button class="btn btn-primary my-2" type="submit" name="cash">購入画面に進む</button>
+                <button class="btn btn-outline-dark flex-shrink-0" type="submit" name="cash">購入画面に進む</button>
             </div>
 
             <script>
@@ -78,9 +85,9 @@
 
         </form>
     </div>
+    </div>
 </section>
 {% else %}
 カートに商品がありません
 {% endif %}
-
 {% endblock %}
