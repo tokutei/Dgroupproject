@@ -5,6 +5,20 @@
 
 {% block content %}
 <section>
+    <div class="category-header">
+        <div class="category-container">
+            {% for category in categorys %}
+                <div class="category-card">
+                    <a href="{% url 'dgroupapp:category_view' category.id %}">
+                        <img src="{{ category.image.url }}" alt="カテゴリ画像">
+                        <p>{{ category.title }}</p>
+                    </a>
+                </div>
+            {% empty %}
+                <p>カテゴリがありません。</p>
+            {% endfor %}
+        </div>
+    </div>
     <div class="container px-4 px-lg-5 mt-1 py-2">
         <div class="search-result">
         <h3 style="text-align: center;">

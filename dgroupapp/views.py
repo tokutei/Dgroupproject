@@ -158,14 +158,16 @@ def address_update_complete(request):
 
 
 def category_view(request, category_id):
-    # 指定したカテゴリに関連する商品を取得
     category = Category.objects.get(id=category_id)
-    products = Food.objects.filter(category=category)  # カテゴリに関連する商品を取得
+    products = Food.objects.filter(category=category)
+    categories = Category.objects.all()  # 全カテゴリ情報を取得
 
     return render(request, 'category_view.html', {
         'category': category,
         'products': products,
+        'categorys': categories,  # カテゴリ情報をテンプレートに渡す
     })
+
 
 
 # def allergy_view(request):
