@@ -7,93 +7,43 @@
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.image.url }}" alt="..." style="width: 470px; height: 300px;" /></div>
             <div class="col-md-6">
                 <h1 class="display-5 fw-bolder">{{ object.name }}</h1>
-                <div class="fs-5 mb-5">
-                    <span>￥{{ object.price }}</span>
-                </div>
-                <p class="lead">
-                    カテゴリー：{{ object.category }}<br>
-                    賞味期限：{{ object.shelf_life }}<br>
-                    アレルギー：{{ object.allergy }}<br><br>
-                </p>
                 <style>
-                    /** デフォルトのスピンボタンを隠す **/
-                    .number-spinner-wrap input::-webkit-outer-spin-button,
-                    .number-spinner-wrap input::-webkit-inner-spin-button {
+                    form input[type="number"]::-webkit-outer-spin-button,
+                    form input[type="number"]::-webkit-inner-spin-button {
                         -webkit-appearance: none !important;
                         margin: 0 !important;
                         appearance: none !important;
                     }
 
-                    .number-spinner-wrap input {
+                    form input[type="number"] {
                         -moz-appearance: textfield !important;
                         appearance: none !important;
                     }
 
-                    /** input/スピンボタンのラップ要素 **/
-                    .number-spinner-wrap{
-                        position: relative;
-                        display: block;
-                        width: 130px !important;
-                        height: 40px;
-                    }
-
-                    /** input要素 **/
-                    .number-spinner-wrap input{
-                        width: 100%; height: 100%;
-                        padding-left: 3rem;
-                        padding-right: 3rem;
-                        text-align: center;
-                        border: 1px solid #afb1b3;
-                        border-radius: 6px;
-                        outline: none;
-                    }
-
-                    /** スピンボタン要素 **/
-                    .number-spinner-wrap .spinner{
-                        position: absolute;
-                        top: 50%;
-                        transform: translate(0, -50%);
-                        font-size: 20px;
-                        padding: 2px .5rem;
-                        text-align: center;
-                        cursor: pointer;
-                        user-select: none;
-                        height: 37px;
-                        background-color: #fff;
-                        border: none;
-                    }
-
-                    /** 減算のスピンボタン要素 **/
-                    .number-spinner-wrap .spinner-down{
-                        left: 2px;
-                        border-right: 1px solid #afb1b3;
-                        border-radius: 5px 0 0 5px;
-                    }
-
-                    /** 加算のスピンボタン要素 **/
-                    .number-spinner-wrap .spinner-up{
-                        right: 2px;
-                        border-left: 1px solid #afb1b3;
-                        border-radius: 0 5px 5px 0;
-                    }
-
-                    /* スピンボタンホバー時 */
-                    .spinner:hover {
-                        background-color: #d7d7d7;
+                    .select1 {
+                        padding-top: 5px;
+                        padding-bottom: 5px;
                     }
                 </style>
                 <form action="{% url 'purchaseapp:buysuccess' object.stripe_product_id %}" method="POST">
+                    <p class="lead">値段　　　　　<span class="fs-5">￥{{ object.price }}</span></p>
+                    <p class="lead">賞味期限　　　<span class="fs-5">{{ object.shelf_life }}</span></p>
+                    <p class="lead">アレルギー　　{{ object.allergy }}</p>
+                    <p class="lead">カテゴリー　　{{ object.category }}</p>
+                    <div class="d-flex mb-3">
+                        <p class="lead">数量　　　　　</p>
+                        <select name="addstock" class="select1">
+                            {% for i in numlist %}
+                            <option value="{{ i }}">{{ i }}
+                            {% endfor %}
+                        </select>
+                    </div>
                     {% csrf_token %}
                     <div class="d-flex">
-                        <div class="number-spinner-wrap my-2">
-                            <span class="spinner spinner-down">－</span>
-                            <input type="number" name="addstock" id="inputQuantity" value="1" min="1" max="{{ maxvalue }}">
-                            <span class="spinner spinner-up">＋</span>
-                        </div>    
-                        <button class="btn btn-outline-dark flex-shrink-0 mx-2 mt-0" type="submit">
-                            <i class="bi-cart-fill me-1"></i>カートに追加
+                        <button class="btn btn-outline-primary flex-shrink-0 mt-0 w-50" type="submit">
+                            <i class="bi-cart-fill me-1"></i>カートに入れる
                         </button>
-                        <a href="{% url 'index' %}"class="btn btn-secondary my-2">キャンセル</a>
+                        <a href="{% url 'index' %}"class="btn btn-secondary mx-3 my-2">キャンセル</a>
                     </div>
                     <p>在庫数：{{ object.stock }}</p>
                 </form>
@@ -101,14 +51,4 @@
         </div>
     </div>
 </section>
-<script>
-    const $wrap = document.querySelector('.number-spinner-wrap')
-    const $input = $wrap.querySelector('#inputQuantity')
-    $wrap.querySelector('.spinner-down').onclick = ()=>{
-        $input.stepDown()
-    }
-    $wrap.querySelector('.spinner-up').onclick = ()=>{
-        $input.stepUp()
-    }
-</script>
 {% endblock %}
