@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="input_page">
+    <a href="{% url 'system_menu' %}" class="btn-site">戻る</a>
     <h2 class="menutitle">食品情報変更</h2>
     <form method="POST" enctype="multipart/form-data" class="input_form" onsubmit="foodConfirm()">
         {% csrf_token %}
@@ -41,8 +42,6 @@
             <button type="submit" class="input_btn">変更する</button> 
         </div>
     </form>
-    <a href="{% url 'foods:food_delete_list' %}">戻る</a>
-    <br>
 </div>
 <script>
     function foodConfirm() {
