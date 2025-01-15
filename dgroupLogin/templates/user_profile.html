@@ -12,7 +12,7 @@
     <form method="POST">
       {% csrf_token %}
       
-      <!-- ユーザー名 (自動生成) -->
+      <!-- ユーザー名 -->
       <div>
         <label for="{{ form.username.id_for_label }}">ユーザー名:</label>
         {{ form.username }}
@@ -25,7 +25,7 @@
         {% endif %}
       </div>
 
-      <!-- ニックネーム (自動生成) -->
+      <!-- ニックネーム -->
       <div>
         <label for="{{ form.nickname.id_for_label }}">ニックネーム:</label>
         {{ form.nickname }}
@@ -38,7 +38,7 @@
         {% endif %}
       </div>
 
-      <!-- メールアドレス (自動生成) -->
+      <!-- メールアドレス -->
       <div>
         <label for="{{ form.email.id_for_label }}">メールアドレス:</label>
         {{ form.email }}
@@ -51,7 +51,7 @@
         {% endif %}
       </div>
       
-      <!-- 電話番号 (自動生成) -->
+      <!-- 電話番号 -->
       <div>
         <label for="{{ form.phone_number.id_for_label }}">電話番号:</label>
         {{ form.phone_number }}
@@ -64,7 +64,20 @@
         {% endif %}
       </div>
 
-      <!-- 住所 (自動生成) -->
+      <!-- 郵便番号 -->
+      <div>
+        <label for="{{ form.postal_code.id_for_label }}">郵便番号:</label>
+        {{ form.postal_code }}
+        {% if form.postal_code.errors %}
+          <ul>
+            {% for error in form.postal_code.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <!-- 住所 -->
       <div>
         <label for="{{ form.address.id_for_label }}">住所:</label>
         {{ form.address }}
@@ -76,8 +89,7 @@
           </ul>
         {% endif %}
       </div>
-
-      <!-- パスワード (自動生成) -->
+      <!-- パスワード -->
       <div>
         <label for="{{ form.password.id_for_label }}">パスワード:</label>
         {{ form.password }}
@@ -90,7 +102,7 @@
         {% endif %}
       </div>
 
-      <!-- パスワード確認 (自動生成) -->
+      <!-- パスワード確認 -->
       <div>
         <label for="{{ form.confirm_password.id_for_label }}">パスワード確認:</label>
         {{ form.confirm_password }}

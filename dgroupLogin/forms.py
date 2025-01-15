@@ -9,16 +9,14 @@ class CustomUserForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'nickname', 'email', 'phone_number', 'address', 'password']
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
+        fields = ['username', 'nickname', 'email', 'phone_number', 'address', 'postal_code', 'password']
         widgets = {
             'username': forms.TextInput(attrs={'placeholder': 'ユーザー名（半角英数字、記号）'}),
             'nickname': forms.TextInput(attrs={'placeholder': 'ニックネームを入力してください'}),
             'email': forms.EmailInput(attrs={'placeholder': 'example@domain.com'}),
             'phone_number': forms.TextInput(attrs={'placeholder': '電話番号（10～11桁）'}),
             'address': forms.Textarea(attrs={'placeholder': '住所を入力してください', 'rows': 3}),
+            'postal_code': forms.TextInput(attrs={'placeholder': '郵便番号（7桁の半角数字）'}),
             'password': forms.PasswordInput(attrs={'placeholder': 'パスワードを入力してください'}),
         }
         labels = {
@@ -26,13 +24,14 @@ class CustomUserForm(forms.ModelForm):
             'nickname': 'ニックネーム',
             'email': 'メールアドレス',
             'phone_number': '電話番号',
+            'postal_code': '郵便番号',
             'address': '住所',
-            'password': 'パスワード',
         }
         help_texts = {
             'username': '半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。',
             'nickname': 'ニックネームを入力してください。',
             'email': '有効なメールアドレスを入力してください。',
+            'postal_code': '郵便番号は7桁の半角数字で入力してください。',
             'address': '住所を入力してください。',
             'password': 'パスワードを設定してください。',
         }
@@ -50,6 +49,14 @@ class CustomUserForm(forms.ModelForm):
         min_length=10,
         validators=[RegexValidator(r'^[0-9]{10,11}$', '10桁または11桁の半角数字を入力してください')],
         widget=forms.TextInput(attrs={'placeholder': '電話番号（10～11桁）'})
+    )
+
+    # `postal_code`フィールドに7桁の半角数字のみを許可するバリデーション
+    postal_code = forms.CharField(
+        max_length=7,
+        min_length=7,
+        validators=[RegexValidator(r'^[0-9]{7}$', '郵便番号は7桁の半角数字で入力してください')],
+        widget=forms.TextInput(attrs={'placeholder': '郵便番号（7桁の半角数字）'})
     )
 
     def clean(self):
@@ -74,12 +81,13 @@ class CustomUserForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'nickname', 'email', 'phone_number', 'address']  # 必要なフィールドを指定
+        fields = ['username', 'nickname', 'email', 'phone_number', 'address', 'postal_code']  # 必要なフィールドを指定
         labels = {
             'username': 'ユーザー名',
             'nickname': 'ニックネーム',
             'email': 'メールアドレス',
             'phone_number': '電話番号',
+            'postal_code': '郵便番号',
             'address': '住所',
         }
         widgets = {
@@ -88,4 +96,5 @@ class ProfileEditForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+            'postal_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '郵便番号（7桁の半角数字）'}),
         }
