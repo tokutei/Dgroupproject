@@ -10,8 +10,13 @@
         {% csrf_token %}
         
         <div class="form-group">
-            <label for="address" class="custom-label"><h3>お届け先住所の編集</h3></label>
-            <textarea id="address" name="address" class="custom-form-control" rows="4">{{ user.address }}</textarea>
+            <label for="address" class="custom-label">お届け先住所</label>
+            <input id="address" name="address" type="text" class="custom-form-control" value="{{ user.address }}">
+        </div>
+
+        <div class="form-group">
+            <label for="postal_code" class="custom-label">郵便番号</label>
+            <input id="postal_code" name="postal_code" type="text" class="custom-form-control" value="{{ user.postal_code }}" maxlength="7">
         </div>
 
         <button type="submit" class="btn btn-primary custom-submit-btn">住所を更新する</button>

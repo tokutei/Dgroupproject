@@ -139,17 +139,20 @@ def profile(request):
 @login_required
 def edit_address(request):
     if request.method == 'POST':
-        # フォームから新しい住所を取得
+        # フォームから新しい住所と郵便番号を取得
         new_address = request.POST.get('address')
+        new_postal_code = request.POST.get('postal_code')
 
-        # ユーザーの住所を更新
+        # ユーザーの住所と郵便番号を更新
         request.user.address = new_address
+        request.user.postal_code = new_postal_code
         request.user.save()
 
         return redirect('dgroupapp:address_update_complete')
     
-    # GETリクエストの場合は、現在の住所を表示
+    # GETリクエストの場合は、現在の住所と郵便番号を表示
     return render(request, 'edit_address.html')
+
 
 
 @login_required

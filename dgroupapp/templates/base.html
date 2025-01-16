@@ -42,8 +42,8 @@
                         </a>
                         {% if user.is_authenticated %}
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">{{ user.nickname }}さん</a></li>
-                            <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">住所:{{ user.address }}</a></li>
+                            <li><a class="dropdown-item" href="#!">{{ user.nickname }}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">{{ user.address }},<br>{{ user.postal_code }}</a></li>
                             
                         </ul>
                         {% endif %}
