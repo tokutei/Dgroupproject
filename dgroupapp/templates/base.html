@@ -42,8 +42,7 @@
                         </a>
                         {% if user.is_authenticated %}
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">{{ user.nickname }}</a></li>
-                            <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">{{ user.address }},<br>{{ user.postal_code }}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">{{ user.nickname }}<br>{{ user.address }},<br>{{ user.postal_code }}</a></li>
                             
                         </ul>
                         {% endif %}
@@ -128,7 +127,7 @@
     </div>
 
 <footer>
-    <small>Copyright&copy; <a href="">Waste Not</a> All Rights Reserved.</small>
+    <small>Copyright&copy; <a href="{% url 'index' %}">Waste Not</a> All Rights Reserved.</small>
     <span class="pr"><a href="https://www.o-hara.ac.jp/" target="_blank">2024 TeamD</a></span>
 </footer>
 
