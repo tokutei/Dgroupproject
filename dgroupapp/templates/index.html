@@ -215,11 +215,7 @@
                             <div class="card h-100">
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">在庫数:{{ i.1 }}</div>
                             <!-- 商品画像 -->
-                            <!-- 商品画像 -->
-                            <a href="{% url 'purchaseapp:buy' record.pk %}">
-                                <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="{{ record.name }}">
-                            </a>
-
+                            <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="..." />
                             <!-- 商品詳細 -->
                             <div class="card-body p-4">
                                 <div class="text-center">
