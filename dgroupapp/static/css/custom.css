@@ -1161,7 +1161,7 @@ a:hover.btn1-parts {
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 1.5rem;
-    text-align: center; /* 中央揃え */
+    text-align: center; /* 中央揃え. */
     position: relative;
     padding: 0 1rem;
     display: inline-block;
