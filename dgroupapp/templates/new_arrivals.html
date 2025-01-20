@@ -20,85 +20,71 @@
 </div>
 <!-- 新着商品の表示 -->
 <div class="container px-4 px-lg-5 mt-1">
-    <h3>商品一覧</h3>
+    <h2 class="section-title">- 商品一覧 -</h2>
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-        {% for record in object_list %}
-        {% if record.stripe_product_id in target %}
-            {% for i in minus %}
-            {% if i.0 == record.stripe_product_id %}
-                {% if i.1 > 0 %}
-                <div class="col mb-5">
-                    <div class="card h-100">
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ i.1 }}</div>
-                    <!-- 商品画像 -->
-                    <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="..." />
-                    <!-- 商品詳細 -->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <h5 class="fw-bolder">{{ record.name }}</h5>
-                            <span class="price">￥{{ record.price }}</span>
-                            <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
-                        </div>
-                    </div>
-                    <!-- 商品アクション -->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
-                        </div>
-                    </div>
+        {% for record in new_arrivals %}
+        <!-- 商品カード -->
+        <div class="col mb-5">
+            <div class="card h-100">
+                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                    {{ record.stock }}
+                </div>
+                <img class="card-img-top" src="{{ record.image.url }}" alt="{{ record.name }}" />
+                <div class="card-body p-4">
+                    <div class="text-center">
+                        <h5 class="fw-bolder">{{ record.name }}</h5>
+                        <span class="price">￥{{ record.price }}</span>
+                        <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
                     </div>
                 </div>
-                {% else %}
-
-                {% endif %}
-            {% endif %}
-            {% endfor %}
-            {% else %}
-            <div class="col mb-5">
-                <div class="card h-100">
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ record.stock }}</div>
-                    <!-- 商品画像 -->
-                    <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="..." />
-                    <!-- 商品詳細 -->
-                    <div class="card-body p-4">
-                        <div class="text-center">
-                            <h5 class="fw-bolder">{{ record.name }}</h5>
-                            <span class="price">￥{{ record.price }}</span>
-                            <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
-                        </div>
-                    </div>
-                    <!-- 商品アクション -->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center">
-                            <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
-                        </div>
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center">
+                        <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
                     </div>
                 </div>
             </div>
-            {% endif %}
-        {% empty %}
-            <p>新着商品がありません。</p>
+        </div>
         {% endfor %}
     </div>
 
     <!-- ページネーション -->
-    <div class="pagination">
-        <span class="step-links">
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
             {% if new_arrivals.has_previous %}
-                <a class="pagination-link" href="?page=1">&laquo; 最初</a>
-                <a class="pagination-link" href="?page={{ new_arrivals.previous_page_number }}">前へ</a>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ new_arrivals.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">&laquo;</span>
+            </li>
             {% endif %}
-            
-            <span class="current">
-                ページ {{ new_arrivals.number }} / {{ new_arrivals.paginator.num_pages }} 
-            </span>
-    
+
+            {% for page_num in new_arrivals.paginator.page_range %}
+            <li class="page-item {% if new_arrivals.number == page_num %}active{% endif %}">
+                <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+            {% endfor %}
+
             {% if new_arrivals.has_next %}
-                <a class="pagination-link" href="?page={{ new_arrivals.next_page_number }}">次へ</a>
-                <a class="pagination-link" href="?page={{ new_arrivals.paginator.num_pages }}">最後 &raquo;</a>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ new_arrivals.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link" aria-hidden="true">&raquo;</span>
+            </li>
             {% endif %}
-        </span>
-    </div>
+        </ul>
+    </nav>
+</div>
+
+
+    
     
 </div>
     </div>
