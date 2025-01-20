@@ -42,7 +42,11 @@
         <tr>
             <th>注文番号</th>
             <th>商品名</th>
+            
             <th>数量</th>
+            <th>ユーザ</th>
+            <th>住所</th>
+            
             <th>配送方法</th>
             <th>配送ステータス</th>
             <th>操作</th>
@@ -59,7 +63,11 @@
                     {% endif %}
                 {% endfor %}
             </td>
+            
             <td>{{ order.aitem }}</td>
+            <td>{{ order.user }}</td>
+            <td>{{ order.address }}</td>
+            
             <td>{{ order.get_delivery_method_display }}</td>
             <td>
                 <span>{{ order.shipped|yesno:"配送済み,未配送" }}</span>

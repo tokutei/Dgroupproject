@@ -28,16 +28,25 @@ class IndexView(ListView):
         if self.search_query:
             queryset = queryset.filter(name__icontains=self.search_query)
 
-        # その後にスライス
-        return queryset.order_by('-inputed_at')[:8]  # フィルタリング後にスライスを適用
+        # フィルタリング後のデータをそのまま返す
+        return queryset.order_by('-inputed_at')  # ページネーションのためスライスはしない
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        food_list = []
-        foods = Food.objects.all()
-        for i in foods:
-            food_list.append(i.stripe_product_id)
+        # Paginatorを使用してページネーション
+        paginator = Paginator(context['object_list'], 8)  # 1ページあたり8件
+        page_number = self.request.GET.get('page')  # URLからページ番号を取得
+        page_obj = paginator.get_page(page_number)  # ページネーションされたオブジェクト
+
+        context['object_list'] = page_obj  # ページネーションされたデータ
+        context['search_query'] = self.search_query
+        context['result_count'] = context['object_list'].paginator.count  # 結果数を表示
+        context['categorys'] = Category.objects.all()
+        context['recommended_items'] = Food.objects.order_by('shelf_life')[:4]
+
+        # 在庫数の処理（既存コード）
+        food_list = [i.stripe_product_id for i in Food.objects.all()]
         minus = []
         target = []
         judge = BuyJudge.objects.all()
@@ -49,20 +58,16 @@ class IndexView(ListView):
                     stock = 0
                 minus.append([i.stripe_product_id, stock])
                 target.append(i.stripe_product_id)
+        
         context['minus'] = minus
         context['target'] = target
 
-        context['search_query'] = self.search_query
-        context['result_count'] = context['object_list'].count()
-        context['categorys'] = Category.objects.all()
-        context['recommended_items'] = Food.objects.order_by('shelf_life')[:4]
         return context
 
     def get_template_names(self):
         if self.request.GET.get('name'):
             return ['search.html']
         return ['index.html']
-
 
 class LoginView(TemplateView):
     template_name = 'login.html'
@@ -163,14 +168,18 @@ def address_update_complete(request):
 def category_view(request, category_id):
     category = Category.objects.get(id=category_id)
     products = Food.objects.filter(category=category)
-    categories = Category.objects.all()  # 全カテゴリ情報を取得
 
+    # Paginatorで商品を8件ずつ分割
+    paginator = Paginator(products, 8)  
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    categories = Category.objects.all()  # 全カテゴリ情報を取得
     return render(request, 'category_view.html', {
         'category': category,
-        'products': products,
+        'products': page_obj,  # ページネーションされた商品を渡す
         'categorys': categories,  # カテゴリ情報をテンプレートに渡す
     })
-
 
 
 # def allergy_view(request):

@@ -143,7 +143,7 @@
 
 <section>
     <div class="container px-4 px-lg-5 mt-1">
-        <h2 style="text-align: center;">-セール中-</h2>
+        <h2 class="section-title special-title">- 販売終了間近の商品 -</h2>
 
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for record in recommended_items %}
@@ -202,7 +202,7 @@
 
 <section>
     <div class="container px-4 px-lg-5 mt-1">
-        <h2 style="text-align: center;">商品一覧</h2>
+        <h2 class="section-title">- 商品一覧 -</h2>
         
 
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -215,7 +215,11 @@
                             <div class="card h-100">
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">在庫数:{{ i.1 }}</div>
                             <!-- 商品画像 -->
-                            <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="..." />
+                            <!-- 商品画像 -->
+                            <a href="{% url 'purchaseapp:buy' record.pk %}">
+                                <img class="card-img-top" src="{{ record.image.url }}" width="100%" height="100%" alt="{{ record.name }}">
+                            </a>
+
                             <!-- 商品詳細 -->
                             <div class="card-body p-4">
                                 <div class="text-center">

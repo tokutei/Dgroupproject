@@ -1152,5 +1152,37 @@ a:hover.btn1-parts {
     background-color: #565e64;
 }
 
+/* 共通スタイル */
+.section-title {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+    text-align: center; /* 中央揃え */
+    position: relative;
+    padding: 0 1rem;
+    display: inline-block;
+    width: 100%; /* セクション全幅で中央配置 */
+}
 
+/* 装飾ライン（下線） */
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: #f76c6c;
+    margin: 0.5rem auto 0;
+}
 
+/* 特殊タイトル（販売終了間近の商品） */
+.special-title {
+    color: #f76c6c;
+}
+
+.special-title::after {
+    background-color: #333;
+}
