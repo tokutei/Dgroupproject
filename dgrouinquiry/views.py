@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from django.contrib import messages
+from purchaseapp.models import OrderPost, OrderAitemPost
 
 
 def contact_view(request):
@@ -34,3 +35,21 @@ def contact_confirm_view(request):
     else:
         form = ContactForm(form_data)
     return render(request, 'contact_confirm.html', {'form': form, 'form_data': form_data})
+
+
+def order_history(request):
+    # すべての注文を取得
+    orders = OrderPost.objects.all()
+
+    # 各注文に関連する商品情報を取得し、注文ごとに商品情報をリストとして渡す
+    order_details = []
+    for order in orders:
+        items = OrderAitemPost.objects.filter(ordernumber=order.ordernumber)
+        order_details.append({
+            'order': order,
+            'items': items
+        })
+
+    return render(request, 'order_history.html', {
+        'order_details': order_details
+    })

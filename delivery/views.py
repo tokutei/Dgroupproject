@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.utils import timezone
 from purchaseapp.models import OrderPost, OrderAitemPost
 
+
 def order_list(request):
     order_id = request.GET.get('order_id')
     sort_by = request.GET.get('sort_by', 'ordernumber')  # デフォルトで注文番号でソート
@@ -36,7 +37,6 @@ def order_list(request):
     })
 
 
-
 # 配送処理
 def ship_order(request, order_id):
     order = get_object_or_404(OrderPost, id=order_id)
@@ -46,6 +46,7 @@ def ship_order(request, order_id):
         order.save()
         return redirect('delivery:order_list')  # 注文一覧にリダイレクト
     return HttpResponse("配送処理に失敗しました。", status=400)
+
 
 # 取り消し処理
 def cancel_order(request, order_id):

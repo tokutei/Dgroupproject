@@ -2,7 +2,6 @@ from django import forms
 from django.core.validators import RegexValidator
 from .models import CustomUser
 
-
 # ユーザー情報フォーム
 class CustomUserForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label='パスワード確認')
@@ -14,8 +13,8 @@ class CustomUserForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'placeholder': 'ユーザー名（半角英数字、記号）'}),
             'nickname': forms.TextInput(attrs={'placeholder': 'ニックネームを入力してください'}),
             'email': forms.EmailInput(attrs={'placeholder': 'example@domain.com'}),
-            'phone_number': forms.TextInput(attrs={'placeholder': '電話番号（10～11桁）'}),
-            'address': forms.Textarea(attrs={'placeholder': '住所を入力してください', 'rows': 3}),
+            'phone_number': forms.TextInput(attrs={'placeholder': '電話番号（10～11桁　‐無し）（入力例）　0262295577'}),
+            'address': forms.Textarea(attrs={'placeholder': '住所を入力してください（入力例）長野県長野市栗田 2288', 'rows': 3}),
             'postal_code': forms.TextInput(attrs={'placeholder': '郵便番号（7桁の半角数字）'}),
             'password': forms.PasswordInput(attrs={'placeholder': 'パスワードを入力してください'}),
         }
@@ -63,9 +62,17 @@ class CustomUserForm(forms.ModelForm):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')
+        address = cleaned_data.get('address')
+        postal_code = cleaned_data.get('postal_code')
 
+        # パスワードと確認用パスワードの一致チェック
         if password != confirm_password:
             raise forms.ValidationError('パスワードとパスワード確認が一致しません。')
+
+        # 住所と郵便番号が両方とも入力されていない場合にエラーを発生
+        if not address or not postal_code:
+            raise forms.ValidationError('住所と郵便番号は両方とも必須です。')
+
         return cleaned_data
     
     def save(self, commit=True):
