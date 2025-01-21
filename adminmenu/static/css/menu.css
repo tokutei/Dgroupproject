@@ -72,6 +72,7 @@ body {
 
 /* サイトを表示ボタン */
 .btn-site {
+    color:gray;
     position: absolute;
     top: 65px;
     right: 25px;
