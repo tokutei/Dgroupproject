@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,50 +10,53 @@
     <title>注文履歴</title>
 </head>
 <body>
-    <h1>注文履歴</h1>
+    <div class="order-history-container">
+        <h1 class="order-history-header">注文履歴</h1>
 
-    {% if order_details %}
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>注文番号</th>
-                    <th>注文日時</th>
-                    <th>ユーザー</th>
-                    <th>住所</th>
-                    <th>支払い方法</th>
-                    <th>支払額</th>
-                    <th>配送方法</th>
-                    <th>配送日時</th>
-                    <th>商品名</th>
-                    <th>価格</th>
-                    <th>数量</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for order_detail in order_details %}
-                    {% for order in order_detail.items %}
+        {% if order_details %}
+            <table class="order-history-table">
+                <thead>
                     <tr>
-                        <!-- 注文情報 -->
-                        <td>{{ order_detail.order.ordernumber }}</td>
-                        <td>{{ order_detail.order.ordertime }}</td>
-                        <td>{{ order_detail.order.user }}</td>
-                        <td>{{ order_detail.order.address }}</td>
-                        <td>{{ order_detail.order.payment }}</td>
-                        <td>{{ order_detail.order.price }}</td>
-                        <td>{{ order_detail.order.delivery_method }}</td>
-                        <td>{{ order_detail.order.shipped_date }}</td>
-
-                        <!-- 商品情報 -->
-                        <td>{{ order.aitemname }}</td>
-                        <td>{{ order.aitemprice }}</td>
-                        <td>{{ order.quantity }}</td>
+                        <th>注文番号</th>
+                        <th>注文日時</th>
+                        <th>ユーザー</th>
+                        <th>住所</th>
+                        <th>支払い方法</th>
+                        <th>支払額</th>
+                        <th>配送方法</th>
+                        <th>配送日時</th>
+                        <th>商品名</th>
+                        <th>価格</th>
+                        <th>数量</th>
                     </tr>
+                </thead>
+                <tbody>
+                    {% for order_detail in order_details %}
+                        {% for order in order_detail.items %}
+                        <tr>
+                            <!-- 注文情報 -->
+                            <td>{{ order_detail.order.ordernumber }}</td>
+                            <td>{{ order_detail.order.ordertime }}</td>
+                            <td>{{ order_detail.order.user }}</td>
+                            <td>{{ order_detail.order.address }}</td>
+                            <td>{{ order_detail.order.get_payment_display }}</td>  <!-- 支払い方法の表示を修正 -->
+                            <td class="order-history-price">{{ order_detail.order.price }}</td>
+                            <td>{{ order_detail.order.get_delivery_method_display }}</td>  <!-- 配送方法の表示を修正 -->
+                            <td>{{ order_detail.order.shipped_date }}</td>
+
+                            <!-- 商品情報 -->
+                            <td class="order-history-product-name">{{ order.aitemname }}</td>
+                            <td class="order-history-price">{{ order.aitemprice }}</td>
+                            <td class="order-history-quantity">{{ order.quantity }}</td>
+                        </tr>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>注文履歴はありません。</p>
-    {% endif %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="order-history-message">注文履歴はありません。</p>
+        {% endif %}
+    </div>
 </body>
 </html>
+{% endblock %}

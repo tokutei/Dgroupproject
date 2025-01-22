@@ -38,18 +38,23 @@ def contact_confirm_view(request):
 
 
 def order_history(request):
-    # すべての注文を取得
-    orders = OrderPost.objects.all()
+    if request.user.is_authenticated:
+        orders = OrderPost.objects.filter(user=request.user)
+        order_details = []
+        for order in orders:
+            items = OrderAitemPost.objects.filter(ordernumber=order.ordernumber)
+            order_details.append({
+                'order': order,
+                'items': items
+            })
 
-    # 各注文に関連する商品情報を取得し、注文ごとに商品情報をリストとして渡す
-    order_details = []
-    for order in orders:
-        items = OrderAitemPost.objects.filter(ordernumber=order.ordernumber)
-        order_details.append({
-            'order': order,
-            'items': items
-        })
-
-    return render(request, 'order_history.html', {
-        'order_details': order_details
-    })
+        if order_details:
+            return render(request, 'order_history.html', {
+                'order_details': order_details
+            })
+        else:
+            return render(request, 'order_history.html', {
+                'message': '注文履歴はありません。'
+            })
+    else:
+        return redirect('dgroupapp:login')
