@@ -84,7 +84,53 @@
     object-fit: cover;
 }
 
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-nav .nav-item {
+        width: 100%;
+    }
+}
 
+@media (max-width: 768px) {
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-input {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .search-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-btn {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+    .custom-btn .badge {
+        font-size: 12px;
+    }
+}
+
+.navbar-logo {
+    width: 165px;
+    height: auto;
+    margin-left: -70px;
+}
+
+@media (max-width: 768px) {
+    .navbar-logo {
+        width: 120px; /* スマホ画面での幅を調整 */
+        margin-left: 0; /* 左余白を取り除く */
+    }
+}
 
 
 
@@ -924,167 +970,32 @@ a:hover.btn1-parts {
 	animation-timing-function: linear;	/*アニメーションの速度のタイプ。同じ速度にする。*/
 }
 
-/* ページネーション全体 */
 .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+    flex-wrap: wrap; /* ページネーションを複数行に対応 */
 }
 
-/* ページネーションリンクのスタイル */
-.step-links a {
-    text-decoration: none;
-    color: #007bff;
-    padding: 8px 16px;
-    margin: 0 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+.page-link {
+    font-size: 14px; /* スマホでの視認性を向上 */
+    padding: 0.5rem 0.75rem; /* タッチしやすい大きさに調整 */
 }
 
-/* ホバー時にリンクの色を変更 */
-.step-links a:hover {
-    background-color: #007bff;
-    color: white;
+.page-item.active .page-link {
+    background-color: #0d6efd; /* アクティブページを強調 */
+    border-color: #0d6efd;
+    color: #fff;
 }
 
-/* 現在のページ番号のスタイル */
-.current {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 0 10px;
-}
-
-/* 最初と最後のページリンク */
-.step-links a:first-child,
-.step-links a:last-child {
-    font-weight: bold;
-}
-
-/* ページネーションの矢印とリンクのデザイン */
-.step-links a.pagination-link {
-    padding: 8px 16px;
-    margin: 0 5px;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-/* 前後の矢印にマウスを乗せたとき */
-.step-links a.pagination-link:hover {
-    background-color: #007bff;
-    color: white;
-}
-
-.step-links a.disabled {
-    pointer-events: none;
-    color: #ccc;
-    border-color: #ccc;
-}
-/* ページネーション全体 */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    font-family: Arial, sans-serif; /* フォントを統一 */
-}
-
-/* ページネーションリンクのスタイル */
-.step-links a {
-    text-decoration: none;
-    color: #007bff;
-    padding: 12px 24px;  /* ボタンを少し大きく */
-    margin: 0 8px;
-    border: 2px solid #007bff;
-    border-radius: 30px;  /* 丸みを持たせてボタン風に */
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    display: inline-block;  /* ボタンとして表示 */
-}
-
-/* ホバー時の効果 */
-.step-links a:hover {
-    background-color: #007bff;
-    color: white;
-    border-color: #0056b3;
-}
-
-/* 現在のページ番号のスタイル */
-.current {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 20px;
-    margin: 0 15px;
-    border-radius: 30px;
-    background-color: #f0f0f0;
-    color: #333;
-    border: 2px solid #ddd;
-}
-
-/* 現在のページ番号のホバー時のスタイル */
-.current:hover {
-    background-color: #e1e1e1;
-    border-color: #ccc;
-}
-
-/* 最初と最後のページリンク */
-.step-links a:first-child,
-.step-links a:last-child {
-    font-weight: bold;
-}
-
-/* ページネーションの矢印（最初/最後） */
-.step-links a.pagination-link {
-    padding: 12px 24px;
-    margin: 0 8px;
-    background-color: #f8f9fa;
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    font-size: 18px;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-.step-links a.pagination-link:hover {
-    background-color: #007bff;
-    color: white;
-    border-color: #0056b3;
-}
-
-/* すべてのページネーションリンクを中央に配置 */
-.step-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* 前後の矢印（1ページ戻る、1ページ進む） */
-.step-links a.disabled {
-    pointer-events: none;
-    color: #ccc;
-    border-color: #ccc;
-}
-
-/* モバイル向けのレスポンシブ対応 */
 @media (max-width: 768px) {
-    .pagination {
-        flex-direction: column;
-    }
-    
-    .step-links a {
-        font-size: 14px;
-        padding: 10px 20px;
-        margin: 5px 0;
+    .pagination .page-item {
+        margin: 2px; /* ボタン間隔を狭める */
     }
 
-    .current {
-        font-size: 16px;
-        padding: 8px 16px;
-        margin: 5px 0;
+    .page-link {
+        font-size: 12px; /* スマホでさらに調整 */
+        padding: 0.4rem 0.6rem; /* タッチエリアを保持しつつ縮小 */
     }
 }
+
 
 /* プロフィール編集全体のコンテナ */
 .custom-profile-edit-container {
