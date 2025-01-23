@@ -27,13 +27,13 @@
         <div class="col mb-5">
             <div class="card h-100">
                 <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                    {{ record.stock }}
+                    在庫数:{{ record.stock }}
                 </div>
                 <img class="card-img-top" src="{{ record.image.url }}" alt="{{ record.name }}" />
                 <div class="card-body p-4">
                     <div class="text-center">
                         <h5 class="fw-bolder">{{ record.name }}</h5>
-                        <span class="price">￥{{ record.price }}</span>
+                        <span class="price">￥{{ record.price }}</span><br>
                         <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
                     </div>
                 </div>
