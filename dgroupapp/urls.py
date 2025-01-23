@@ -21,5 +21,6 @@ urlpatterns = [
     path('new-arrivals/', views.NewArrivalsView.as_view(), name='new_arrivals'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('about/', views.AboutView.as_view(), name='about'), 
+    
 ]
 #http://127.0.0.1:8000/convenience/register/

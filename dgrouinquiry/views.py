@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm
 from django.contrib import messages
+from purchaseapp.models import OrderPost, OrderAitemPost
 
 
 def contact_view(request):
@@ -34,3 +35,26 @@ def contact_confirm_view(request):
     else:
         form = ContactForm(form_data)
     return render(request, 'contact_confirm.html', {'form': form, 'form_data': form_data})
+
+
+def order_history(request):
+    if request.user.is_authenticated:
+        orders = OrderPost.objects.filter(user=request.user)
+        order_details = []
+        for order in orders:
+            items = OrderAitemPost.objects.filter(ordernumber=order.ordernumber)
+            order_details.append({
+                'order': order,
+                'items': items
+            })
+
+        if order_details:
+            return render(request, 'order_history.html', {
+                'order_details': order_details
+            })
+        else:
+            return render(request, 'order_history.html', {
+                'message': '注文履歴はありません。'
+            })
+    else:
+        return redirect('dgroupapp:login')
