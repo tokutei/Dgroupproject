@@ -59,22 +59,26 @@
                 
                     <ul class="nav">
                         {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="small-text">こんにちは {{ user.nickname }}さん</span><br>アカウント＆リスト
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="{% url 'dgroupapp:profile' %}">プロフィール</a></li>
-                                <li><a href="{% url 'dgroupapp:switch_account' %}" class="dropdown-item">アカウントの切り替え</a></li>
-                                <li><a href="{% url 'dgroupapp:logout' %}" class="dropdown-item">ログアウト</a></li>
-                            </ul>
-                        </li>
-                        
-                        
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="small-text">こんにちは {{ user.nickname }}さん</span><br>アカウント＆リスト
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'dgroupapp:profile' %}">プロフィール</a></li>
+                                    <li><a href="{% url 'dgroupapp:switch_account' %}" class="dropdown-item">アカウントの切り替え</a></li>
+                                    <li><a href="{% url 'dgroupapp:logout' %}" class="dropdown-item">ログアウト</a></li>
+                                </ul>
+                            </li>
                             
+                            <!-- スーパーユーザーの場合 -->
                             {% if user.is_superuser %}
                                 <li class="nav-item">
-                                    <a href="{% url 'dgroupapp:superuser_only' %}" class="nav-link">|管理|</a>
+                                    <a href="{% url 'dgroupapp:superuser_only' %}" class="nav-link">管理画面</a>
+                                </li>
+                            {% else %}
+                                <!-- スーパーユーザーでない場合は注文履歴リンクを表示 -->
+                                <li class="nav-item">
+                                    <a href="{% url 'dgrouinquiry:order_history' %}" class="nav-link">注文履歴</a>
                                 </li>
                             {% endif %}
                         {% else %}
@@ -87,9 +91,9 @@
                                     <li><a class="dropdown-item" href="{% url 'dgroupLogin:terms_and_privacy' %}">新規登録</a></li>
                                 </ul>
                             </li>
-
                         {% endif %}
                     </ul>
+                    
                 </ul>
                 {% if user.is_authenticated %}
                 <form action="{% url 'purchaseapp:cart' user.id %}" class="d-flex">

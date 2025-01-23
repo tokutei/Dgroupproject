@@ -71,6 +71,29 @@
     margin-top: 30px;
 }
 
+/* 戻るボタンのスタイル */
+.back-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.back-button:active {
+    background-color: #004085;
+}
+
 /* レスポンシブ対応 */
 /* スマホ画面（最大480px幅） */
 @media screen and (max-width: 480px) {
@@ -117,6 +140,11 @@
     .order-history-message {
         font-size: 14px;
     }
+
+    .back-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
 }
 
 /* タブレット画面（最大768px幅） */
@@ -150,5 +178,10 @@
 
     .order-history-quantity {
         font-size: 14px;
+    }
+
+    .back-button {
+        font-size: 15px;
+        padding: 9px 18px;
     }
 }
