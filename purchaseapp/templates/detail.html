@@ -5,18 +5,39 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.aitemimage.url }}" alt="..." style="width: 470px; height: 300px;" /></div>
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.aitemimage.url }}" alt="..." style="width: 100%; height: 100%"" /></div>
                     <div class="col-md-6">
                         <div style="word-break: break-word; overflow-wrap: break-word;">
                         <h1 class="display-5 fw-bolder">{{ object.aitemname }}</h1>
                         <div class="fs-5 mb-5">
                             <span>￥{{ object.price }}</span>
                         </div>
-                        <p class="lead">
-                            カテゴリー:{{ object.category }}<br>
-                            賞味期限:{{ object.shelf }}<br>
-                            アレルギー:{{ object.allergy }}<br><br>
-                        </p>
+                        <table class="lead">
+                            <tr>
+                                <td>
+                                    賞味期限　　　
+                                </td>
+                                <td>
+                                    {{ object.shelf }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    アレルギー
+                                </td>
+                                <td>
+                                    {{ object.allergy }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    カテゴリー
+                                </td>
+                                <td>
+                                    {{ object.category }}
+                                </td>
+                            </tr>
+                        </table>
                         <form method="POST">
                             <div class="d-flex">
                                 {% csrf_token %}
@@ -29,6 +50,12 @@
             </div>
         </section>
     {% else %}
-    商品の有効期限が切れました
+    <br><br>
+    <div class="text-center">
+    <h2>商品の有効期限が切れました</h2>
+    <br>
+    <a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'dgroupapp:index' %}'">トップページに戻る</a>
+    <br>
+    </div>
     {% endif %}
 {% endblock %}

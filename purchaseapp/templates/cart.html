@@ -6,21 +6,38 @@
 <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder"><font color="white"></font>買い物かご</h1>
+            <h1 class="display-4 fw-bolder"><font color="white">買い物かご</font></h1>
         </div>
     </div>
 </header>
 <section class="py-5">
+    <style>
+        .input_btn {
+            background-color: #0d6efd; /* 青色の背景 */
+            color: white; /* 文字色を白に */
+            padding: 11.5px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input_btn:hover {
+            background-color: #0b5ed7; /* ホバー時に少し色を変更 */
+        }
+    </style>
     {% if object_list.count == 0 %}
     <div style="text-align: center">
         <h3>買い物かごに商品がありません</h3>
-    </div>                
+    </div>
     {% else %}
     {% if errorname_list %}
     <div style="text-align: center">
         <p><font color="red">在庫が不足しています</font></p>
     </div>
-    {% endif %}       
+    {% endif %}
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for record in object_list %}
@@ -38,13 +55,14 @@
                                         <!-- Product name-->
                                         <h5 class="fw-bolder">{{ record.aitemname }}</h5>
                                         <!-- Product price-->
-                                        {{ record.price }}
+                                        <span class="price">￥{{ record.price }}</span><br>
+                                        <span class="shelf">賞味期限<br>{{ record.shelf }}</span>
                                     </div>
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <form method="POST">
-                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:over' record.pk %}'">詳細・編集</a></div>
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:over' record.pk %}'">詳細・数量変更</a></div>
                                     </form>
                                 </div>
                             </div>
@@ -63,13 +81,14 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ record.aitemname }}</h5>
                                     <!-- Product price-->
-                                    {{ record.price }}
-                                </div>
+                                    <span class="price">￥{{ record.price }}</span><br>
+                                    <span class="shelf">賞味期限<br>{{ record.shelf }}</span>
+                            </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <form method="POST">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:purchase_delete' record.pk %}'">詳細・編集</a></div>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:purchase_delete' record.pk %}'">詳細・数量変更</a></div>
                                 </form>
                             </div>
                         </div>
@@ -78,8 +97,9 @@
             {% endfor %}
         </div>
     </div>
-    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'purchaseapp:purchase' user.id %}'">購入</a></div>
+    <div class="text-center"><a class="btn input_btn my-2" onclick="location.href='{% url 'purchaseapp:purchase' user.id %}'">購入</a>
+    <a href="{% url 'index' %}"class="btn btn-secondary my-2">トップページに戻る</a>
+    </div>
     {% endif %}
 </section>
-
 {% endblock %}

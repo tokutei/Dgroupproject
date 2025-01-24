@@ -43,6 +43,7 @@ class OrderPost(models.Model):
     payment = models.CharField(verbose_name='支払方法', max_length=100, choices=PAYMENT_METHOD)
     user = models.CharField(verbose_name='ユーザー', max_length=100)
     address = models.CharField(verbose_name='住所', max_length=100)
+    postal_code = models.CharField(verbose_name='郵便番号', max_length=7, blank=True, null=True)
     delivery_method = models.CharField(max_length=10, choices=DELIVERY_CHOICES, default='standard')
     ordertime = models.DateTimeField(verbose_name='注文日時', auto_now_add=True)
     

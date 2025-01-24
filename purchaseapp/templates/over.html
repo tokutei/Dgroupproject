@@ -5,18 +5,40 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.aitemimage.url }}" alt="..." style="width: 470px; height: 300px;" /></div>
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.aitemimage.url }}" alt="..." style="width: 100%; height: 100%" /></div>
                     <div class="col-md-6">
                         <div style="word-break: break-word; overflow-wrap: break-word;">
                         <h1 class="display-5 fw-bolder">{{ object.aitemname }}</h1>
                         <div class="fs-5 mb-5">
                             <span>￥{{ object.price }}</span>
                         </div>
-                        <class="lead">
-                            カテゴリー:{{ object.category }}<br>
-                            賞味期限:{{ object.shelf }}<br>
-                            アレルギー:<br>{{ object.allergy }}<br>
-                            <font color="red">在庫数量:{{ food_stock }}</font><br><br>
+                        <table class="lead">
+                            <tr>
+                                <td>
+                                    賞味期限　　　
+                                </td>
+                                <td>
+                                    {{ object.shelf }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    アレルギー
+                                </td>
+                                <td>
+                                    {{ object.allergy }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    カテゴリー
+                                </td>
+                                <td>
+                                    {{ object.category }}
+                                </td>
+                            </tr>
+                        </table>
+                        <font color="red">在庫数量:{{ food_stock }}</font><br><br>
                         </p>
                         <style>
                             form input[type="number"]::-webkit-outer-spin-button,
@@ -57,19 +79,36 @@
                                 outline: 0;
                                 box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
                             }
+                            .input_btn {
+                                background-color: #0d6efd; /* 青色の背景 */
+                                color: white; /* 文字色を白に */
+                                padding: 8.5px 16px;
+                                border: none;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                font-size: 14px;
+                                margin-right: 10px;
+                                margin-bottom: 10px;
+                            }
+
+                            .input_btn:hover {
+                                background-color: #0b5ed7; /* ホバー時に少し色を変更 */
+                            }
                         </style>
                         <form action="{% url 'purchaseapp:overdelete' object.stripe_product_id %}" method="POST">
-                            削除数量:
+                            <div class="d-flex">
+                            数量　　　　　　　
                             <select name="deletestock" class="select1">
                                 {% for i in deletenumber %}
                                 <option value="{{ i }}">{{ i }}
                                 {% endfor %}
                             </select>
+                            </div>
                             <div class="d-flex">
                                 {% csrf_token %}
-                                <button class="btn btn-outline-dark flex-shrink-0"type="submit">削除</button>
+                                <button class="btn input_btn my-2"type="submit">保存</button>
                                 　
-                                <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-outline-dark flex-shrink-0">キャンセル</a>
+                                <a href="{% url 'purchaseapp:overback' %}"class="btn btn-secondary my-2">戻る</a>
                             </div>
                         </form>
                         </div>

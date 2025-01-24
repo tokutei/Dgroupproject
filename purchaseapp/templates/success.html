@@ -2,7 +2,19 @@
 {% block title %}購入完了{% endblock %}
 {% block content %}
 <section>
-    <p>この度は商品を購入いただきありがとうございました。</p>
-    <a href="{% url 'index' %}">トップページに戻る</a>
+    <br>
+    <div style="background-color: white; border: solid 1px white; padding: 1px; border-radius: 10px; margin: 1% 3%; box-shadow: 0 0 8px gray;">
+        <div style="text-align: center">
+            <h2><br><br>ご注文ありがとうございました。</h2>
+            <p>
+                <br>ただいま、ご注文の確認メールをお送りさせていただきました。<br>
+                万一、ご確認メールが届かない場合は、トラブルの可能性もありますので大変お手数ではありますが<br>
+                お問い合わせくださいませ。<br>
+                今後ともご愛願賜りますようよろしくお願い申し上げます。<br><br>
+            </p>
+            <div class="text-center"><a class="btn  btn-secondary my-2" onclick="location.href='{% url 'dgroupapp:index' %}'">トップページに戻る</a></div>
+            <br>
+        </div>
+    </div>
 </section>
 {% endblock %}
