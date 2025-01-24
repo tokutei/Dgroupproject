@@ -23,27 +23,59 @@
     <h2 class="section-title">- 商品一覧 -</h2>
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
         {% for record in new_arrivals %}
-        <!-- 商品カード -->
-        <div class="col mb-5">
-            <div class="card h-100">
-                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
-                    在庫数:{{ record.stock }}
-                </div>
-                <img class="card-img-top" src="{{ record.image.url }}" alt="{{ record.name }}" />
-                <div class="card-body p-4">
-                    <div class="text-center">
-                        <h5 class="fw-bolder">{{ record.name }}</h5>
-                        <span class="price">￥{{ record.price }}</span><br>
-                        <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
+            {% if record.stripe_product_id in target %}
+                {% for i in minus %}
+                {% if i.0 == record.stripe_product_id %}
+                    {% if i.1 > 0 %}
+                    <!-- 商品カード -->
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                在庫数:{{ i.1 }}
+                            </div>
+                            <img class="card-img-top" src="{{ record.image.url }}" alt="{{ record.name }}" />
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ record.name }}</h5>
+                                    <span class="price">￥{{ record.price }}</span><br>
+                                    <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                    <div class="text-center">
-                        <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
+                    {% else %}
+
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+
+            {% else %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                        在庫数:{{ record.stock }}
+                    </div>
+                    <img class="card-img-top" src="{{ record.image.url }}" alt="{{ record.name }}" />
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <h5 class="fw-bolder">{{ record.name }}</h5>
+                            <span class="price">￥{{ record.price }}</span><br>
+                            <span class="shelf">賞味期限<br>{{ record.shelf_life }}</span>
+                        </div>
+                    </div>
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a class="btn btn-outline-dark mt-auto" href="{% url 'purchaseapp:buy' record.pk %}">商品詳細</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            {% endif %}
         {% endfor %}
     </div>
 

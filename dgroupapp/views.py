@@ -169,8 +169,22 @@ def category_view(request, category_id):
     category = Category.objects.get(id=category_id)
     products = Food.objects.filter(category=category)
 
+    # 在庫数の処理
+    food_list = [i.stripe_product_id for i in products]
+    minus = []
+    target = []
+    judge = BuyJudge.objects.all()
+    for i in judge:
+        if i.stripe_product_id in food_list:
+            foodsstock = Food.objects.get(stripe_product_id=i.stripe_product_id)
+            stock = foodsstock.stock - i.stock
+            if stock < 0:
+                stock = 0
+            minus.append([i.stripe_product_id, stock])
+            target.append(i.stripe_product_id)
+
     # Paginatorで商品を8件ずつ分割
-    paginator = Paginator(products, 8)  
+    paginator = Paginator(products, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -179,6 +193,8 @@ def category_view(request, category_id):
         'category': category,
         'products': page_obj,  # ページネーションされた商品を渡す
         'categorys': categories,  # カテゴリ情報をテンプレートに渡す
+        'minus': minus,  # 在庫数の減少リストを渡す
+        'target': target,  # 在庫数が変更された商品のリストを渡す
     })
 
 

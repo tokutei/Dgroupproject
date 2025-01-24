@@ -404,6 +404,7 @@ class BuyView(DetailView):
             numlist.append(number)
             number = number + 1
         context['numlist'] = numlist
+        context['maxnum'] = maxnum
         return context
 
 def BuySuccess(request, stripe_product_id):
