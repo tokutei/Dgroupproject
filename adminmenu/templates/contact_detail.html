@@ -1,4 +1,3 @@
-<!-- adminmenu/templates/contact_detail.html -->
 {% extends 'system_base.html' %}
 {% load static %}
 
@@ -16,7 +15,9 @@
         <h1 class="contact-detail-title">{{ contact.name }} 様のお問い合わせ詳細</h1>
         <div class="contact-detail-content">
             <p><strong>メールアドレス:</strong> {{ contact.email }}</p>
-            <p><strong>住所:</strong> {{ contact.address }}</p>
+            <!-- 郵便番号を住所の前に表示 -->
+            <p><strong>郵便番号:</strong> {{ contact.postal_code }}</p> <!-- 追加 -->
+            <p><strong>住所:</strong> {{ contact.address }}</p> <!-- 順番を逆に変更 -->
             <p><strong>メッセージ:</strong> <span class="contact-message">{{ contact.message }}</span></p>
             <p><strong>送信日時:</strong> {{ contact.created_at }}</p>
         </div>

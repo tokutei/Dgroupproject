@@ -11,6 +11,10 @@ def contact_view(request):
             # フォームデータをセッションに保存（確認用）
             request.session['contact_form_data'] = form.cleaned_data
             return redirect('dgrouinquiry:contact_confirm')  # 確認ページにリダイレクト
+        else:
+            # フォームが無効な場合、エラーメッセージを表示して再表示
+            messages.error(request, "入力されていない項目があります。もう一度確認してください。")
+            return render(request, 'contact.html', {'form': form})
     else:
         form = ContactForm()
 
@@ -24,16 +28,19 @@ def contact_confirm_view(request):
     if not form_data:
         return redirect('dgrouinquiry:contact')  # データが無ければフォーム画面にリダイレクト
 
+    form = ContactForm(form_data)
+
     if request.method == 'POST':
         # 確認後、データをデータベースに保存
-        form = ContactForm(form_data)
         if form.is_valid():
             form.save()
             del request.session['contact_form_data']  # セッションデータを削除
             messages.success(request, 'お問い合わせいただきありがとうございます。')
             return redirect('dgroupapp:index')  # 成功後にフォーム画面にリダイレクト
-    else:
-        form = ContactForm(form_data)
+        else:
+            # フォームが無効な場合、エラーを表示
+            return render(request, 'contact_confirm.html', {'form': form, 'form_data': form_data, 'errors': form.errors})
+
     return render(request, 'contact_confirm.html', {'form': form, 'form_data': form_data})
 
 
