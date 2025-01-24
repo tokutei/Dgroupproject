@@ -4,8 +4,33 @@
 {% block content %}
 {% if object_list %}
 <section class="py-5">
-    <a href="{% url 'purchaseapp:cart' user.id %}">戻る</a>
-    <div style="background-color: white; border: solid 1px white; padding: 1px; border-radius: 10px; margin: 10px 150px; box-shadow: 0 0 8px gray;">
+    <section class="py-5">
+    <style>
+        .input_btn {
+            background-color: #0d6efd; /* 青色の背景 */
+            color: white; /* 文字色を白に */
+            padding: 11.5px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input_btn:hover {
+            background-color: #0b5ed7; /* ホバー時に少し色を変更 */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 20px;
+        }    
+    </style>
+    <div style="background-color: white; border: solid 1px white; padding: 1px; border-radius: 10px; margin: 1% 3%; box-shadow: 0 0 8px gray;">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="text-center">
             <table class="purchasetable">
@@ -24,70 +49,116 @@
                     </td>
                 </tr>
                 {% endfor %}
-                <tr>
+                <tr id="message3" class="hidden">
                     <td>送料</td>
                     <td>￥150</td>
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr id="message4" class="hidden">
+                    <td>送料</td>
+                    <td>￥200</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr id="message5" class="hidden">
                     <td>支払額</td>
-                    <td>￥{{ totalprice }}</td>
+                    <td>￥{{ totalprice|add:"150" }}</td>
+                    <td>{{ totalstock }}</td>
+                    <td></td>
+                </tr>
+                <tr id="message6" class="hidden">
+                    <td>支払額</td>
+                    <td>￥{{ totalprice|add:"200" }}</td>
                     <td>{{ totalstock }}</td>
                     <td></td>
                 </tr>
             </table>
         </div>
     </div>
-    <div class="text-center">
         <br>
         <form action="{% url 'create-checkout-session' %}" method="POST">
-            {% csrf_token %}
-            <p>
-                住所:　　 <input type="text" name="address" value="{{ user.address }}" style="width: 200px" required>
-            </p>
-            <p>
-                発送方法:
-                <select name="delivery" style="width: 200px">
-                    <option value="standard">通常配送</option>
-                    <option value="express">速達配送</option>
-                </select>
-            </p>
-            <p>
-                支払方法:
-                <select name="payment" id="select" style="width: 200px">
-                    <option value="0">--------</option>
-                    <option value="1">クレジットカード決済</option>
-                    <option value="2">代金引換</option>
-                </select>
-            </p>
-            <br>
-            <div id="message1" class="hidden">
-                <button class="btn btn-outline-dark flex-shrink-0" type="submit" name="credit">購入画面に進む</button>
-            </div>
+            <div class="text-align: center">
+                {% csrf_token %}
+                    郵便番号
+                    <input type="text" name="postnumber" value="{{ user.postal_code }}" style="width: 200px" class="input1" title="郵便番号は7桁の半角数字で入力してください" pattern="^\d{7}$" required>
+                    <br>
+                    住所
+                    <input type="text" name="address" value="{{ user.address }}" style="width: 200px" class="input1" required>
+                    <br>
+                    発送方法
+                    <select name="delivery" id="select2" style="width: 200px" class="select1">
+                        <option value="standard">通常配送</option>
+                        <option value="express">速達配送</option>
+                    </select>
+                    <br>
+                    支払方法
+                    <select name="payment" id="select" style="width: 200px" class="select1">
+                        <option value="0">--------</option>
+                        <option value="1">クレジットカード決済</option>
+                        <option value="2">代金引換</option>
+                    </select>
+                <br>
+                <div id="message1" class="hidden">
+                    <button class="btn input_btn my-2" type="submit" name="credit">購入画面に進む</button>
+                    <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-secondary my-2">戻る</a>
+                </div>
 
-            <div id="message2" class="hidden">
-                <button class="btn btn-outline-dark flex-shrink-0" type="submit" name="cash">購入画面に進む</button>
-            </div>
+                <div id="message2" class="hidden">
+                    <button class="btn input_btn my-2" type="submit" name="cash">購入画面に進む</button>
+                    <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-secondary my-2">戻る</a>
+                </div>
 
-            <script>
-                const select = document.getElementById("select");
-                const message1 = document.getElementById("message1");
-                const message2 = document.getElementById("message2");
-                
-                select.addEventListener("change", (event) => {
-                    const value = event.target.value;
-                    message1.classList.toggle("hidden", value !== "1");
-                    message2.classList.toggle("hidden", value !== "2");
+                <div id="message0" class="hidden">
+                    <a href="{% url 'purchaseapp:cart' user.id %}"class="btn btn-secondary my-2">戻る</a>
+                </div>
+                <br>
+                <script>
+                    const select = document.getElementById("select");
+                    const message1 = document.getElementById("message1");
+                    const message2 = document.getElementById("message2");
+                    const message0 = document.getElementById("message0");
+                    message1.classList.add('hidden');
+                    message2.classList.add('hidden');
+                    message0.classList.remove('hidden')
+
+                    const select2 = document.getElementById("select2");
+                    const message3 = document.getElementById("message3");
+                    const message4 = document.getElementById("message4");
+                    const message5 = document.getElementById("message5");
+                    const message6 = document.getElementById("message6");
                     
-                });
-            </script>
+                    message3.classList.remove('hidden');
+                    message4.classList.add('hidden');
+                    message5.classList.remove('hidden');
+                    message6.classList.add('hidden');
 
+                    select.addEventListener("change", (event) => {
+                        const value = event.target.value;
+                        message1.classList.toggle("hidden", value !== "1");
+                        message2.classList.toggle("hidden", value !== "2");
+                        message0.classList.toggle("hidden", value !== "0");                        
+                    });
+                    select2.addEventListener("change", (event) => {
+                        const value = event.target.value;
+                        message3.classList.toggle("hidden", value !== "standard");
+                        message4.classList.toggle("hidden", value !== "express");
+                        message5.classList.toggle("hidden", value !== "standard");
+                        message6.classList.toggle("hidden", value !== "express");
+                        
+                    });
+                </script>
+            </div>
         </form>
-    </div>
     </div>
 </section>
 {% else %}
-カートに商品がありません
+    <br><br>
+    <div style="text-align: center">
+        <h3>商品の有効期限が切れました</h3>
+    </div>
+    <br>
+    <div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'dgroupapp:index' %}'">トップページに戻る</a></div>
+    <br>
 {% endif %}
 {% endblock %}

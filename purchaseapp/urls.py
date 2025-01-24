@@ -14,5 +14,6 @@ urlpatterns = [
     path('buy/<int:pk>', views.BuyView.as_view(), name='buy'),
     path('buy/buysuccess/<str:stripe_product_id>', views.BuySuccess, name='buysuccess'),
     path('cart/over/<int:pk>', views.OverView.as_view(), name='over'),
+    path('cart/overback', views.Overback, name='overback'),
     path('cart/overdelete/<str:stripe_product_id>', views.OverDelete, name='overdelete'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

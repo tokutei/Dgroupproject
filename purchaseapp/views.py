@@ -48,11 +48,12 @@ class PurchaseDeleteView(DetailView):
         context = super().get_context_data(**kwargs)
         if self.object:
             max_number = self.object.stock
-            count = 1
+            count = max_number
             number = []
             for i in range(max_number):
                 number.append(count)
-                count = count + 1
+                count = count - 1
+            number.append(0)
             context['deletenumber'] = number
         return context
 
@@ -72,11 +73,12 @@ class OverView(DetailView):
         context = super().get_context_data(**kwargs)
         if self.object:
             max_number = self.object.stock
-            count = 1
+            count = max_number
             number = []
             for i in range(max_number):
                 number.append(count)
-                count = count + 1
+                count -= 1
+            number.append(count)
             context['deletenumber'] = number
             food_list = Food.objects.filter(stripe_product_id=self.object.stripe_product_id)
             if len(food_list) > 0:
@@ -109,7 +111,7 @@ class PurchaseView(ListView):
         if user_list:
             totalprice = sum(item.price * item.stock for item in user_list)
             totalstock = sum(item.stock for item in user_list)
-            context['totalprice'] = totalprice + 150
+            context['totalprice'] = totalprice
             context['totalstock'] = totalstock
         return context
 
@@ -139,7 +141,8 @@ class ProductTopPageView(ListView):
 class CreateCheckoutSessionView(View):
     def post(self, request):
         request.session['address'] = request.POST.get('address')
-        request.session['delivery'] = request.POST.get('delivery')
+        request.session['delivery'] = request.POST.get('delivery')        
+        request.session['postnumber'] = int(request.POST.get('postnumber'))
         user_list = CartPost.objects.filter(user=request.user.id)
         judgement = 0
         if len(user_list) == 0:
@@ -168,10 +171,16 @@ class CreateCheckoutSessionView(View):
                         'quantity': i.stock,
                     },)
                     metalist.append(i.stripe_product_id)
-                line_items_list.append({
-                    'price': 'price_1Qh09ML8vAMNBiqUkFzXCIqT',
-                    'quantity': 1,
-                },)
+                if request.session['delivery'] == 'standard':
+                    line_items_list.append({
+                        'price': 'price_1Qh09ML8vAMNBiqUkFzXCIqT',
+                        'quantity': 1,
+                    },)
+                else:
+                    line_items_list.append({
+                        'price': 'price_1QhjtPL8vAMNBiqUH2PgFHm7',
+                        'quantity': 1,
+                    },)
                 checkout_session = stripe.checkout.Session.create(
                     payment_method_types=['card'],
                     line_items=line_items_list,
@@ -208,7 +217,7 @@ class CreateCheckoutSessionView(View):
             }
             return render(request, 'cart.html', dictionary)
         else:
-            return render(request, ('timeout.html'))
+            return redirect('purchaseapp:purchase', request.user.id)
 
 
 
@@ -255,7 +264,7 @@ def cancel_checkout(request):
     payment_intent = request.POST.get('payment_intent')
     if payment_intent:
         stripe.PaymentIntent.cancel(payment_intent)
-    return redirect('canceltemplate')
+    return redirect('purchaseapp:purchase', request.user.id)
 
 
 def PurchaseCheck(request):
@@ -269,11 +278,20 @@ def PurchaseCheck(request):
     object_list = CartPost.objects.filter(user=request.user.id)
     totalprice = sum(item.price * item.stock for item in object_list)
     totalstock = sum(item.stock for item in object_list)
+    match delivery:
+        case '通常配送':
+            deliverypay = 150
+            totalprice += 150
+        case '速達配送':
+            deliverypay = 200
+            totalprice += 200
     dictionary = {
         'address': address,
         'delivery': delivery,
+        'postnumber': request.session['postnumber'],
+        'deliverypay': deliverypay,
         'object_list': object_list,
-        'totalprice': totalprice + 150,
+        'totalprice': totalprice,
         'totalstock': totalstock,
     }
     return render(request, 'purchasecheck.html', dictionary)
@@ -289,7 +307,7 @@ def SuccessPage(request):
             payment_intent = payment.payment_intent
             stripe.PaymentIntent.cancel(payment_intent)
             payment.delete()
-        return render(request, ('timeout.html'))
+        return redirect('purchaseapp:purchase', request.user.id)
     else:
         errorname_list = []
         error_list = []
@@ -352,14 +370,21 @@ def SuccessPage(request):
                 totalprice = totalprice + i.price * i.stock
                 totalaitem += i.stock
             OrderAitemPost.objects.bulk_create(entries)
+
+            if delivery == 'standard':
+                totalprice += 150
+            else:
+                totalprice += 200
             entries = OrderPost(
                 ordernumber=inputordernumber,
                 aitem=totalaitem,
-                price=totalprice + 150,
+                price=totalprice,
                 payment=payment,
                 user=request.user.username,
                 address=address,
-                delivery_method=delivery)
+                delivery_method=delivery,
+                postal_code = request.session['postnumber'],
+            )
             entries.save()
             for i in user_list:
                 item_list = Food.objects.filter(stripe_product_id=i.stripe_product_id)
@@ -385,7 +410,10 @@ def SuccessPage(request):
                 recipient_list = [request.user.email],
                 from_email = 'test@test.com'
             )
-            return render(request, ('success.html'))
+            dictionary = {
+                'inputordernumber': inputordernumber
+            }
+            return render(request, ('success.html'), dictionary)
 
 
 class BuyView(DetailView):
@@ -408,73 +436,96 @@ class BuyView(DetailView):
         return context
 
 def BuySuccess(request, stripe_product_id):
-    select_list = CartPost.objects.filter(stripe_product_id=stripe_product_id, user=request.user.id)
-    addstock = request.POST.get('addstock')
-    target = BuyJudge.objects.filter(stripe_product_id=stripe_product_id)
-    if len(target) > 0:
-        target = BuyJudge.objects.get(stripe_product_id=stripe_product_id)
-        target.stock += int(addstock)
-        target.save()
+    if request.user.is_authenticated:
+        select_list = CartPost.objects.filter(stripe_product_id=stripe_product_id, user=request.user.id)
+        addstock = request.POST.get('addstock')
+        target = BuyJudge.objects.filter(stripe_product_id=stripe_product_id)
+        if len(target) > 0:
+            target = BuyJudge.objects.get(stripe_product_id=stripe_product_id)
+            target.stock += int(addstock)
+            target.save()
+        else:
+            target = BuyJudge(
+                stripe_product_id=stripe_product_id,
+                stock=int(addstock)
+            )
+            target.save()
+        if len(select_list) == 0:
+            print_list = Food.objects.get(stripe_product_id=stripe_product_id)
+            cartadd = CartPost(
+                user=request.user,
+                stripe_product_id=stripe_product_id,
+                aitemimage=print_list.image,
+                category=print_list.category,
+                aitemname=print_list.name,
+                price=print_list.price,
+                stock=addstock,
+                shelf=print_list.shelf_life,
+                allergy=print_list.allergy,
+            )
+            cartadd.save()
+        else:
+            update_object = CartPost.objects.get(stripe_product_id=stripe_product_id, user=request.user.id)
+            update_object.stock = update_object.stock + int(addstock)
+            update_object.save()
+        return redirect('index')
     else:
-        target = BuyJudge(
-            stripe_product_id=stripe_product_id,
-            stock=int(addstock)
-        )
-        target.save()
-    if len(select_list) == 0:
-        print_list = Food.objects.get(stripe_product_id=stripe_product_id)
-        cartadd = CartPost(
-            user=request.user,
-            stripe_product_id=stripe_product_id,
-            aitemimage=print_list.image,
-            category=print_list.category,
-            aitemname=print_list.name,
-            price=print_list.price,
-            stock=addstock,
-            shelf=print_list.shelf_life,
-            allergy=print_list.allergy,
-        )
-        cartadd.save()
-    else:
-        update_object = CartPost.objects.get(stripe_product_id=stripe_product_id)
-        update_object.stock = update_object.stock + int(addstock)
-        update_object.save()
-    return redirect('index')
+        return redirect('dgroupapp:login')
 
 
 def DeleteSuccess(request, stripe_product_id):
-    delete_object = CartPost.objects.filter(stripe_product_id=stripe_product_id)
+    delete_object = CartPost.objects.filter(stripe_product_id=stripe_product_id, user=request.user.id)
     if len(delete_object) > 0:
-        delete_object = CartPost.objects.get(stripe_product_id=stripe_product_id)
+        delete_object = CartPost.objects.get(stripe_product_id=stripe_product_id, user=request.user.id)
         deletestock = request.POST.get('deletestock')
-        if delete_object.stock - int(deletestock) > 0:
-            delete_object.stock = delete_object.stock - int(deletestock)
-            delete_object.save()
-        else:
-            delete_object.delete()
         deletejudge = BuyJudge.objects.filter(stripe_product_id=stripe_product_id)
         if len(deletejudge) > 0:
             deletejudge = BuyJudge.objects.get(stripe_product_id=stripe_product_id)
-            deletejudge.stock -= int(deletestock)
+            deletejudge.stock = deletejudge.stock - (delete_object.stock - int(deletestock))
             deletejudge.save()
+        if int(deletestock) > 0:
+            delete_object.stock = int(deletestock)
+            delete_object.save()
+        else:
+            delete_object.delete()
     return redirect('purchaseapp:cart', request.user.id)
 
 
 def OverDelete(request, stripe_product_id):
-    delete_object = CartPost.objects.filter(stripe_product_id=stripe_product_id)
+    delete_object = CartPost.objects.filter(stripe_product_id=stripe_product_id, user=request.user.id)
     if len(delete_object) > 0:
-        delete_object = CartPost.objects.get(stripe_product_id=stripe_product_id)
+        delete_object = CartPost.objects.get(stripe_product_id=stripe_product_id, user=request.user.id)
         deletestock = request.POST.get('deletestock')
-        if delete_object.stock - int(deletestock) > 0:
-            delete_object.stock = delete_object.stock - int(deletestock)
-            delete_object.save()
-        else:
-            delete_object.delete()
         deletejudge = BuyJudge.objects.filter(stripe_product_id=stripe_product_id)
         if len(deletejudge) > 0:
             deletejudge = BuyJudge.objects.get(stripe_product_id=stripe_product_id)
-            deletejudge.stock -= int(deletestock)
+            deletejudge.stock = deletejudge.stock - (delete_object.stock - int(deletestock))
             deletejudge.save()
+        if int(deletestock) > 0:
+            delete_object.stock = int(deletestock)
+            delete_object.save()
+        else:
+            delete_object.delete()
+    errorname_list = []
+    error_list = []
+    user_list = CartPost.objects.filter(user=request.user.id)
+    for i in user_list:
+        food_list = Food.objects.filter(stripe_product_id=i.stripe_product_id)
+        if len(food_list) > 0:
+            food_list = Food.objects.get(stripe_product_id=i.stripe_product_id)
+            if food_list.stock < i.stock:
+                over = i.stock - food_list.stock
+                errorname_list.append(i.stripe_product_id)
+                error_list.append([i.stripe_product_id, over])
+    dictionary = {
+        'errorname_list': errorname_list,
+        'error_list': error_list,
+        'object_list': user_list,
+    }
+    return render(request, 'cart.html', dictionary)
+
+
+def Overback(request):
     errorname_list = []
     error_list = []
     user_list = CartPost.objects.filter(user=request.user.id)
