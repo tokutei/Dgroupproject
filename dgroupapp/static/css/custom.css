@@ -1097,3 +1097,135 @@ a:hover.btn1-parts {
 .special-title::after {
     background-color: #333;
 }
+
+/* ログイン */
+.account-inner {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 7px;
+    box-shadow: 0 4px 10px #d1d1d1;
+    padding: 30px 28px;
+}
+
+.account-container {
+    margin: 20px auto 30px;
+    max-width: 500px;
+}
+
+.account-form {
+    text-align: center;
+}
+
+.account-form input {
+    width: 100%;
+    height: 45px;
+    border: 1.5px solid #acacac;
+    border-radius: 5px;
+}
+
+.account-form label {
+    text-align: left;
+    display: block;
+}
+
+.account-btn {
+    width: 270px;
+    margin-top: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+/* ログアウト */
+.logout-container {
+    margin: 50px auto 130px;
+    max-width: 500px;
+}
+
+.logout-form {
+    text-align: left;
+}
+
+.logout-btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.logout-btn {
+    width: 100px;
+}
+
+@media (max-width: 768px) {
+    .account-container {
+        margin: 20px auto 30px;
+        width: 90%;
+    }
+
+    .logout-container {
+        margin: 50px auto 130px;
+        width: 90%;
+    }    
+}
+
+@media (max-width: 450px) {
+    .account-btn {
+        width: 100%;
+    }
+
+    .logout-form p {
+        text-align: center;
+    }
+
+    .logout-btn {
+        width: 50%;
+    }
+}
+
+/* パスワードリセット */
+/* メール送信とリセット完了 */
+.reset-sent-container {
+    margin: 70px auto 180px;
+    max-width: 70%;
+    text-align: center;
+}
+
+/* 新パスワード入力 */
+.reset-form-container {
+    margin: 20px auto 30px;
+    max-width: 500px;
+}
+
+.reset-form {
+    background-color: #fff;
+    border-radius: 7px;
+    box-shadow: 0 4px 10px #d1d1d1;
+    padding: 30px 35px;
+}
+
+.reset-form input {
+    width: 100%;
+    height: 45px;
+    border: 1.5px solid #acacac;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.submit-btn-group {
+    text-align: center;
+}
+
+.reset-btn {
+    width: 270px;
+    margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+    .reset-form-container {
+        margin: 20px auto 30px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 450px) {
+    .reset-btn {
+        width: 100%;
+    }
+}

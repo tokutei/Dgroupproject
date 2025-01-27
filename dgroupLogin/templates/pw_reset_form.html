@@ -2,46 +2,21 @@
 {% block title %}パスワードリセット WasteNot{% endblock %}
 
 {% block content %}
-<style>
-    .pw-reset-container {
-        margin: 20px auto 30px;
-        width: 600px;
-    }
-
-    .pw-reset-form {
-        background-color: #fff;
-        border-radius: 7px;
-        box-shadow: 0 4px 10px #d1d1d1;
-        padding: 35px;
-    }
-
-    .pw-reset-form input {
-        width: 100%;
-        height: 45px;
-        border: 1.5px solid #acacac;
-        border-radius: 5px;
-        margin-bottom: 15px;
-    }
-
-    .btn-primary {
-        width: 400px;
-        margin-left: 65px;
-    }
-
-</style>
-<div class="pw-reset-container">
+<div class="reset-form-container">
     <h2 class="text-center mb-3">パスワードリセット</h2>
-    <div  class="pw-reset-form">
-        <h6>
-        新しいパスワードを2回入力してください。これにより、
-        正しく入力できたことが確認されます。
-        </h6>
-        <br>
-        <form action="" method="POST">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit" class="btn btn-primary custom-submit-btn">パスワードリセット</button>
-        </form>
-    </div>
+        <div  class="reset-form">
+            <h6>
+            新しいパスワードを2回入力してください。これにより、
+            正しく入力できたことが確認されます。
+            </h6>
+            <br>
+            <form action="" method="POST">
+            {% csrf_token %}
+            {{form}}
+            <div class="submit-btn-group">
+                <button type="submit" class="btn btn-primary reset-btn">パスワードリセット</button>
+            </div>
+            </form>
+        </div>
 </div>
 {% endblock %}

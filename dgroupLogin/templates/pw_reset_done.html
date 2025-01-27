@@ -8,11 +8,11 @@
         width: 500px;
     }
 </style>
-<div class="pw-reset-container">
+<div class="reset-sent-container">
     <h5>パスワードがリセットされました。</h5>
     <br>
-    <p>新しいパスワードでログインできます。</p>
+    <h6>新しいパスワードでログインできます。</h6>
     <br>
-    <a href="{% url 'dgroupapp:login' %}">ログイン画面へ</a>
+    <a href="{% url 'dgroupapp:login' %}" class="btn btn-secondary">ログイン画面へ</a>
 </div>
 {% endblock %}

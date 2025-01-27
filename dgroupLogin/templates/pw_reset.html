@@ -2,49 +2,22 @@
 {% block title %}パスワードリセット WasteNot{% endblock %}
 
 {% block content %}
-<style>
-    .pw-reset-container {
-        margin: 20px auto 30px;
-        width: 500px;
-    }
-
-    .input-mail-form {
-        background-color: #fff;
-        border-radius: 7px;
-        box-shadow: 0 4px 10px #d1d1d1;
-        padding: 30px 35px 25px;
-    }
-
-    .input-mail-form input {
-        width: 100%;
-        height: 45px;
-        border: 1.5px solid #acacac;
-        border-radius: 5px;
-        margin-bottom: 15px;
-    }
-
-    .input-mail-form label {
-        padding-right: 340px;
-    }
-
-    .btn-primary {
-        width: 300px;
-    }
-</style>
-<div class="pw-reset-container">
+<div class="account-container">
     <h2 class="text-center mb-3">パスワードをリセットしますか？</h2>
-    <div class="input-mail-form">
-        <p class="mb-0">
-        登録済みのメールアドレスを入力してください。
-        パスワードリセットのリンクを記載したメールをすぐにお届けします。
-        </p>
-        <br>
-        <form action="" method="POST" class="text-center">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit" class="btn btn-primary mb-3">メールを送信</button><br>
-        <a href="{% url 'dgroupapp:login' %}">キャンセル</a>
-        </form>
+    <div class="account-inner">
+        <div class="account-form">
+            <p class="mb-0">
+            登録済みのメールアドレスを入力してください。
+            パスワードリセットのリンクを記載したメールをすぐにお届けします。
+            </p>
+            <br>
+            <form action="" method="POST" class="text-center">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" class="btn btn-primary account-btn">メールを送信</button><br>
+            <a href="{% url 'dgroupapp:login' %}">キャンセル</a>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

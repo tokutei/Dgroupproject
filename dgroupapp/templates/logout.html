@@ -4,33 +4,19 @@
 {% block title %}ログアウト WasteNot{% endblock %}
 
 {% block content %}
-<style>
-    .logout-container {
-        margin: 50px auto 130px;
-        width: 500px;
-    }
-
-    .logout-form {
-        background-color: #fff;
-        border-radius: 7px;
-        box-shadow: 0 4px 10px #d1d1d1;
-        padding: 30px;
-    }
-
-    .btn-primary {
-        width: 80px;
-        margin-right: 10px;
-    }
-</style>
 <div class="logout-container">
     <h2 class="text-center mb-3">ログアウト確認</h2>
-    <div class="logout-form">
-        <p>ログアウトしますか？</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">はい</button>
-            <a href="{% url 'dgroupapp:index' %}" class="btn btn-secondary">いいえ</a>
-        </form>
+    <div class="account-inner">
+        <div class="logout-form">
+            <p>本当にログアウトしますか？</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="logout-btn-group">
+                    <a href="{% url 'dgroupapp:index' %}" class="btn btn-secondary logout-btn">いいえ</a>
+                    <button type="submit" class="btn btn-primary logout-btn">はい</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
