@@ -6,7 +6,7 @@
 <div class="input_page">
     <a href="{% url 'system_menu' %}" class="btn-site">戻る</a>
     <h2 class="menutitle">食品情報変更</h2>
-    <form method="POST" enctype="multipart/form-data" class="input_form" onsubmit="foodConfirm()">
+    <form method="POST" enctype="multipart/form-data" class="input_form" onsubmit="return foodConfirm()">
         {% csrf_token %}
         <table class="food_input">
             <tr>
@@ -42,14 +42,25 @@
             <button type="submit" class="input_btn">変更する</button> 
         </div>
     </form>
+    <div id="toast" class="toast"></div>
 </div>
 <script>
+    // トースト通知を表示する関数
+    function showToast(message) {
+        var toast = document.getElementById("toast");
+        toast.className = "toast show";
+        toast.innerText = message;
+        setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+    }
+
     function foodConfirm() {
         const conf = confirm('変更を保存しますか？');
         if (conf) {
-            alert('食品情報を変更しました。');
+            showToast("食品情報を変更しました。");
+            return true; // フォームを送信
         } else {
             event.preventDefault();
+            return false; // フォームを送信しない
         }
     }
 </script>
