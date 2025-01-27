@@ -31,6 +31,7 @@
     {% if object_list.count == 0 %}
     <div style="text-align: center">
         <h3>買い物かごに商品がありません</h3>
+        <a href="{% url 'index' %}" class="btn btn-secondary mt-4">買い物を続ける</a>
     </div>
     {% else %}
     {% if errorname_list %}
