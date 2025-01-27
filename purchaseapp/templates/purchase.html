@@ -49,30 +49,29 @@
                     </td>
                 </tr>
                 {% endfor %}
-                <tr id="message3" class="hidden">
-                    <td>送料</td>
-                    <td>￥150</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr id="message4" class="hidden">
-                    <td>送料</td>
-                    <td>￥200</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr id="message5" class="hidden">
+                {% if totalprice < 1000 %}
+                    <tr>
+                        <td>送料</td>
+                        <td>￥150</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endif %}
+                {% if totalprice < 1000 %}
+                <tr>
                     <td>支払額</td>
                     <td>￥{{ totalprice|add:"150" }}</td>
                     <td>{{ totalstock }}</td>
                     <td></td>
                 </tr>
-                <tr id="message6" class="hidden">
+                {% else %}
+                <tr>
                     <td>支払額</td>
-                    <td>￥{{ totalprice|add:"200" }}</td>
+                    <td>￥{{ totalprice }}</td>
                     <td>{{ totalstock }}</td>
                     <td></td>
                 </tr>
+                {% endif %}
             </table>
         </div>
     </div>
@@ -85,12 +84,6 @@
                     <br>
                     住所
                     <input type="text" name="address" value="{{ user.address }}" style="width: 200px" class="input1" required>
-                    <br>
-                    発送方法
-                    <select name="delivery" id="select2" style="width: 200px" class="select1">
-                        <option value="standard">通常配送</option>
-                        <option value="express">速達配送</option>
-                    </select>
                     <br>
                     支払方法
                     <select name="payment" id="select" style="width: 200px" class="select1">
@@ -122,30 +115,11 @@
                     message2.classList.add('hidden');
                     message0.classList.remove('hidden')
 
-                    const select2 = document.getElementById("select2");
-                    const message3 = document.getElementById("message3");
-                    const message4 = document.getElementById("message4");
-                    const message5 = document.getElementById("message5");
-                    const message6 = document.getElementById("message6");
-                    
-                    message3.classList.remove('hidden');
-                    message4.classList.add('hidden');
-                    message5.classList.remove('hidden');
-                    message6.classList.add('hidden');
-
                     select.addEventListener("change", (event) => {
                         const value = event.target.value;
                         message1.classList.toggle("hidden", value !== "1");
                         message2.classList.toggle("hidden", value !== "2");
                         message0.classList.toggle("hidden", value !== "0");                        
-                    });
-                    select2.addEventListener("change", (event) => {
-                        const value = event.target.value;
-                        message3.classList.toggle("hidden", value !== "standard");
-                        message4.classList.toggle("hidden", value !== "express");
-                        message5.classList.toggle("hidden", value !== "standard");
-                        message6.classList.toggle("hidden", value !== "express");
-                        
                     });
                 </script>
             </div>

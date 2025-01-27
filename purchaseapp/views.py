@@ -141,7 +141,6 @@ class ProductTopPageView(ListView):
 class CreateCheckoutSessionView(View):
     def post(self, request):
         request.session['address'] = request.POST.get('address')
-        request.session['delivery'] = request.POST.get('delivery')        
         request.session['postnumber'] = int(request.POST.get('postnumber'))
         user_list = CartPost.objects.filter(user=request.user.id)
         judgement = 0
@@ -163,6 +162,7 @@ class CreateCheckoutSessionView(View):
                 user_email = request.user.email
                 line_items_list = []
                 metalist = []
+                totalprice = 0
                 for i in user_list:
                     product = Product.objects.get(stripe_product_id=i.stripe_product_id)
                     price = Price.objects.get(product=product)
@@ -170,15 +170,11 @@ class CreateCheckoutSessionView(View):
                         'price': price.stripe_price_id,
                         'quantity': i.stock,
                     },)
+                    totalprice = totalprice + (price.price * i.stock)
                     metalist.append(i.stripe_product_id)
-                if request.session['delivery'] == 'standard':
+                if totalprice < 1000:
                     line_items_list.append({
                         'price': 'price_1Qh09ML8vAMNBiqUkFzXCIqT',
-                        'quantity': 1,
-                    },)
-                else:
-                    line_items_list.append({
-                        'price': 'price_1QhjtPL8vAMNBiqUH2PgFHm7',
                         'quantity': 1,
                     },)
                 checkout_session = stripe.checkout.Session.create(
@@ -269,27 +265,13 @@ def cancel_checkout(request):
 
 def PurchaseCheck(request):
     address = request.session['address']
-    delivery = request.session['delivery']
-    match delivery:
-        case 'standard':
-            delivery = '通常配送'
-        case 'express':
-            delivery = '速達配送'
     object_list = CartPost.objects.filter(user=request.user.id)
     totalprice = sum(item.price * item.stock for item in object_list)
     totalstock = sum(item.stock for item in object_list)
-    match delivery:
-        case '通常配送':
-            deliverypay = 150
-            totalprice += 150
-        case '速達配送':
-            deliverypay = 200
-            totalprice += 200
     dictionary = {
         'address': address,
-        'delivery': delivery,
         'postnumber': request.session['postnumber'],
-        'deliverypay': deliverypay,
+        'deliverypay': 150,
         'object_list': object_list,
         'totalprice': totalprice,
         'totalstock': totalstock,
@@ -349,7 +331,6 @@ def SuccessPage(request):
             user_list = CartPost.objects.filter(user=request.user.id)
             address = request.session['address']
             payment = request.session['payment']
-            delivery = request.session['delivery']
             totalprice = 0
             totalaitem = 0
             entries = []
@@ -371,10 +352,8 @@ def SuccessPage(request):
                 totalaitem += i.stock
             OrderAitemPost.objects.bulk_create(entries)
 
-            if delivery == 'standard':
+            if totalprice < 1000:
                 totalprice += 150
-            else:
-                totalprice += 200
             entries = OrderPost(
                 ordernumber=inputordernumber,
                 aitem=totalaitem,
@@ -382,7 +361,6 @@ def SuccessPage(request):
                 payment=payment,
                 user=request.user.username,
                 address=address,
-                delivery_method=delivery,
                 postal_code = request.session['postnumber'],
             )
             entries.save()

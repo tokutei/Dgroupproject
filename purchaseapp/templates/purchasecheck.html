@@ -37,16 +37,26 @@
                     </td>
                 </tr>
                 {% endfor %}
+                {% if totalprice < 1000 %}
                 <tr>
                     <td>送料</td>
                     <td>￥{{ deliverypay }}</td>
                     <td></td>
                 </tr>
+                {% endif %}
+                {% if totalprice < 1000 %}
+                <tr>
+                    <td>支払額</td>
+                    <td>￥{{ totalprice|add:"150" }}</td>
+                    <td>{{ totalstock }}</td>
+                </tr>
+                {% else %}
                 <tr>
                     <td>支払額</td>
                     <td>￥{{ totalprice }}</td>
                     <td>{{ totalstock }}</td>
                 </tr>
+                {% endif %}
             </table>
         </div>
         <div class="text-center">
@@ -58,9 +68,6 @@
                 </p>
                 <p>
                     住所:　{{ address }}
-                </p>
-                <p>
-                    発送方法:　{{ delivery }}
                 </p>
                 <p>
                     支払方法:　代金引換

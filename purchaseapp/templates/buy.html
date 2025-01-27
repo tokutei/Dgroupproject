@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}{{ object.name }} WasteNot{% endblock %}
 {% block content %}
-<section class="py-4">
+<section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6 text-center"><img class="card-img-top mb-5 mb-md-0" src="{{ object.image.url }}" alt="..." style="width: 85%; height: 300px;" /></div>
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ object.image.url }}" alt="..." style="width: 100%; height: 100%" /></div>
             <div class="col-md-6">
                 <h1 class="display-5 fw-bolder">{{ object.name }}</h1>
                 <style>
@@ -25,7 +25,7 @@
                         padding-bottom: 5px;
                     }
                 </style>
-                <form action="{% url 'purchaseapp:buysuccess' object.stripe_product_id %}" method="POST">
+                <form action="{% url 'purchaseapp:buysuccess' object.stripe_product_id %}" method="POST" onsubmit="cartinput()">
                     <p class="lead">値段　　　　　<span class="fs-5">￥{{ object.price }}</span></p>
                     <p class="lead">賞味期限　　　<span class="fs-5">{{ object.shelf_life }}</span></p>
                     <p class="lead">アレルギー　　{{ object.allergy }}</p>
@@ -51,4 +51,11 @@
         </div>
     </div>
 </section>
+{% if user.is_authenticated %}
+<script>
+    function cartinput(){
+        alert('買い物かごに追加しました')
+    }
+</script>
+{% endif %}
 {% endblock %}

@@ -1,5 +1,8 @@
 from purchaseapp.models import CartPost, BuyJudge
-
+from foods.models import Food
+from django.utils import timezone
+from django.utils.timezone import now
+import datetime
 class Middleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -15,4 +18,8 @@ class Middleware:
                     target.save()
                     i.delete()
         response = self.get_response(response)
+        foods_list = Food.objects.all()
+        for i in foods_list:
+            if datetime.date.today() > i.shelf_life:
+                i.delete()
         return response
