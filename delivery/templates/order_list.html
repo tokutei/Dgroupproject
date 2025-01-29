@@ -115,9 +115,9 @@
                     {% else %}
                         <form method="POST" action="{% url 'delivery:cancel_order' order.id %}" onsubmit="confirmCancellation(event)">
                             {% csrf_token %}
-                            <button type="submit">消</button>
+                            <button type="submit">取消</button>
                         </form>
-                    <button disabled>済</button>
+                  
                     {% endif %}
                 </div>
             </td>
