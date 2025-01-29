@@ -1,0 +1,77 @@
+/* 食品情報削除ページ専用のスタイル */
+
+/* 食品情報削除ページのテーブル */
+.food-delete-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* テーブルのセルとヘッダー */
+.food-delete-header, .food-delete-cell {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* ヘッダーの背景色 */
+.food-delete-header {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+/* 偶数行の背景色 */
+.food-delete-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* 行にカーソルを合わせたときの背景色 */
+.food-delete-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 削除リンクのスタイル */
+.food-delete-link {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.food-delete-link:hover {
+    background-color: #ffcccc;
+}
+
+/* 編集リンクのスタイル */
+.food-update-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.food-update-link:hover {
+    background-color: #cce5ff;
+}
+
+/* 戻るボタンのスタイル */
+.food-back-button {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.food-back-button:hover {
+    background-color: #218838;
+}
