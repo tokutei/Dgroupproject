@@ -1,4 +1,5 @@
 {% extends 'system_base.html' %}
+
 {% block title %}食品情報削除 WasteNot/管理システム{% endblock %}
 
 {% block content %}
@@ -21,10 +22,8 @@
             <td class="food-delete-cell">{{ food.price }}</td>
             <td class="food-delete-cell">{{ food.stock }}</td>
             <td class="food-delete-cell">
-                <a href="{% url 'foods:food_delete' food.id %}" class="food-delete-link">削除</a>
-            </td>
-            <td class="food-delete-cell">
                 <a href="{% url 'foods:food_update' food.id %}" class="food-update-link">編集</a>
+                <a href="{% url 'foods:food_delete' food.id %}" class="food-delete-link">削除</a>
             </td>
         </tr>
         {% empty %}
