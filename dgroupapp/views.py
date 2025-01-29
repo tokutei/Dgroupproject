@@ -11,7 +11,7 @@ from django.contrib import messages
 from foods.models import Food 
 from dgroupLogin.forms import ProfileEditForm
 from purchaseapp.models import CartPost, BuyJudge
-
+from .forms import AddressEditForm
 from django.core.paginator import Paginator
 
 
@@ -144,21 +144,28 @@ def profile(request):
 @login_required
 def edit_address(request):
     if request.method == 'POST':
-        # フォームから新しい住所と郵便番号を取得
-        new_address = request.POST.get('address')
-        new_postal_code = request.POST.get('postal_code')
+        form = AddressEditForm(request.POST)
+        
+        if form.is_valid():
+            # フォームがバリデーションを通過した場合、ユーザーの住所を更新
+            new_address = form.cleaned_data['address']
+            new_postal_code = form.cleaned_data['postal_code']
+            
+            request.user.address = new_address
+            request.user.postal_code = new_postal_code
+            request.user.save()
 
-        # ユーザーの住所と郵便番号を更新
-        request.user.address = new_address
-        request.user.postal_code = new_postal_code
-        request.user.save()
-
-        return redirect('dgroupapp:address_update_complete')
+            return redirect('dgroupapp:address_update_complete')
+        else:
+            # フォームが無効な場合、エラーメッセージを表示
+            return render(request, 'edit_address.html', {'form': form})
     
-    # GETリクエストの場合は、現在の住所と郵便番号を表示
-    return render(request, 'edit_address.html')
-
-
+    # GETリクエストの場合、フォームを空で表示
+    form = AddressEditForm(initial={
+        'address': request.user.address,
+        'postal_code': request.user.postal_code
+    })
+    return render(request, 'edit_address.html', {'form': form})
 
 @login_required
 def address_update_complete(request):
