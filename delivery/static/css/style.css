@@ -28,24 +28,7 @@ th {
     background-color: #f2f2f2;
 }
 
-th:nth-child(1), td:nth-child(1) {
-    width: 130px; /* 配送ステータスの幅を150pxに設定 */
-}
-th:nth-child(2), td:nth-child(2) {
-    width: 180px; /* 配送ステータスの幅を150pxに設定 */
-}
-th:nth-child(3), td:nth-child(3) {
-    width: 60px; /* 配送ステータスの幅を150pxに設定 */
-}
-th:nth-child(4), td:nth-child(4) {
-    width: 100px; /* 配送ステータスの幅を150pxに設定 */
-}
-th:nth-child(5), td:nth-child(5) {
-    width: 230px; /* 配送ステータスの幅を150pxに設定 */
-}
-th:nth-child(6), td:nth-child(6) {
-    width: 145px; /* 配送ステータスの幅を150pxに設定 */
-}
+
 
 .shipped {
     background-color: #d4edda; /* 配送済みの行の色 */
