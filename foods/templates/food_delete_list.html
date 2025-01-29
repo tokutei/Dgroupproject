@@ -3,28 +3,28 @@
 
 {% block content %}
 <h2>食品情報削除</h2>
-<table class="food_list">
+<table class="food-delete-table">
     <thead>
         <tr>
-            <th>カテゴリ</th>
-            <th>商品名</th>
-            <th>価格</th>
-            <th>在庫</th>
-            <th>操作</th>
+            <th class="food-delete-header">カテゴリ</th>
+            <th class="food-delete-header">商品名</th>
+            <th class="food-delete-header">価格</th>
+            <th class="food-delete-header">在庫</th>
+            <th class="food-delete-header">操作</th>
         </tr>
     </thead>
     <tbody>
         {% for food in foods %}
         <tr>
-            <td>{{ food.category }}</td>
-            <td>{{ food.name }}</td>
-            <td>{{ food.price }}</td>
-            <td>{{ food.stock }}</td>
-            <td>
-                <a href="{% url 'foods:food_delete' food.id %}" class="delete-link">削除</a>
+            <td class="food-delete-cell">{{ food.category }}</td>
+            <td class="food-delete-cell">{{ food.name }}</td>
+            <td class="food-delete-cell">{{ food.price }}</td>
+            <td class="food-delete-cell">{{ food.stock }}</td>
+            <td class="food-delete-cell">
+                <a href="{% url 'foods:food_delete' food.id %}" class="food-delete-link">削除</a>
             </td>
-            <td>
-                <a href="{% url 'foods:food_update' food.id %}" class="update-link">編集</a>
+            <td class="food-delete-cell">
+                <a href="{% url 'foods:food_update' food.id %}" class="food-update-link">編集</a>
             </td>
         </tr>
         {% empty %}
@@ -34,5 +34,5 @@
         {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'system_menu' %}" class="btn-back">戻る</a>
+<a href="{% url 'system_menu' %}" class="food-back-button">戻る</a>
 {% endblock %}
