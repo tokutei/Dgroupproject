@@ -20,9 +20,14 @@
       </div>
 
       <div class="form-actions">
+         <!-- ホームページに戻るボタン -->
+         <a href="{% url 'index' %}" class="home-button custom-back-btn">トップページに戻る</a>
+
+        <!-- 次に進むボタン -->
         <button type="submit" class="submit-button">次に進む</button>
+      
       </div>
-    </form>
+      
     
     <!-- エラーメッセージ表示 -->
     {% if messages %}

@@ -57,6 +57,7 @@ h1 {
   margin-top: 20px;
 }
 
+/* 次に進むボタン */
 .submit-button {
   background-color: #28a745;
   color: white;
@@ -74,6 +75,36 @@ h1 {
 .submit-button:hover {
   background-color: #218838;
 }
+
+/* トップページに戻るボタン（リンク） */
+.home-button {
+  background-color: #007bff;  /* 青色 */
+  color: white;  /* 初期の文字色 */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;  /* インラインブロックにして、リンクがボタンっぽくなる */
+  text-decoration: none;  /* リンクの下線を消す */
+  width: 100%;
+  max-width: 200px;
+  margin: 10px auto 0;  /* 上に少しスペースを追加 */
+  transition: background-color 0.3s ease, color 0.3s ease;  /* 色の変化をスムーズに */
+}
+
+.home-button:hover {
+  background-color: #0056b3;  /* 少し暗い青色 */
+  color: white;  /* ホバー時に文字色が消えないように、文字色を白に設定 */
+}
+
+/* リンクがクリックされたときのスタイル */
+.home-button:focus, .home-button:active {
+  outline: none;  /* クリック時のフォーカスリングを消す（必要に応じて） */
+  background-color: #007bff;  /* 背景色を元に戻す */
+  color: white;  /* 文字色も元に戻す */
+}
+
 
 .messages {
   margin-top: 20px;

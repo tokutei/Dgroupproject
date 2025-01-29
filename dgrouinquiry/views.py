@@ -35,7 +35,7 @@ def contact_confirm_view(request):
         if form.is_valid():
             form.save()
             del request.session['contact_form_data']  # セッションデータを削除
-            messages.success(request, 'お問い合わせいただきありがとうございます。')
+            messages.success(request,)
             return redirect('dgroupapp:index')  # 成功後にフォーム画面にリダイレクト
         else:
             # フォームが無効な場合、エラーを表示
