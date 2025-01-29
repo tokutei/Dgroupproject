@@ -1,6 +1,7 @@
 from django import forms
 from django.core.validators import RegexValidator
 from .models import CustomUser
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 
 # ユーザー情報フォーム
 class CustomUserForm(forms.ModelForm):
@@ -88,7 +89,7 @@ class CustomUserForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'nickname', 'email', 'phone_number', 'address', 'postal_code']  # 必要なフィールドを指定
+        fields = ['nickname', 'email', 'phone_number', 'postal_code', 'address']
         labels = {
             'username': 'ユーザー名',
             'nickname': 'ニックネーム',
@@ -97,11 +98,65 @@ class ProfileEditForm(forms.ModelForm):
             'postal_code': '郵便番号',
             'address': '住所',
         }
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'nickname': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'phone_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'address': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'postal_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '郵便番号（7桁の半角数字）'}),
-        }
+
+    nickname = forms.CharField(
+        max_length=30,
+        required=True,
+        label="ニックネーム",
+        widget=forms.TextInput(attrs={
+            'placeholder': '例: 山田太郎',
+            'size': '20',
+            'style': 'margin-left: 15px;',
+        })
+    )
+
+    email = forms.EmailField(
+        required=True,
+        label="メールアドレス",
+        widget=forms.EmailInput(attrs={
+            'placeholder': '例: example@example.com',
+            'size': '30',
+            'style': 'margin-left: 5px;',
+        })
+    )
+
+    phone_number = forms.CharField(
+        max_length=11,
+        validators=[
+            MinLengthValidator(11, "電話番号は11桁で入力してください"),
+        ],
+        required=True,
+        label="電話番号",
+        widget=forms.TextInput(attrs={
+            'placeholder': '例: 09012345678',
+            'pattern': '\d{11}',
+            'size': '13',
+            'style': 'margin-left: 22px;',
+        })
+    )
+
+    postal_code = forms.CharField(
+        max_length=7,
+        validators=[
+            MinLengthValidator(7, "郵便番号は7桁で入力してください"),
+        ],
+        required=True,
+        label="郵便番号",
+        widget=forms.TextInput(attrs={
+            'placeholder': '例: 1234567',
+            'pattern': '\d{7}',
+            'size': '12',
+            'style': 'margin-left: 22px;',
+        })
+    )
+
+    address = forms.CharField(
+        max_length=100,
+        required=True,
+        label="住所",
+        widget=forms.TextInput(attrs={
+            'placeholder': '例: 長野市篠ノ井1-2-3',
+            'size': '30',
+            'style': 'margin-left: 53px;',
+        })
+    )
