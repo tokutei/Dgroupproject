@@ -22,6 +22,36 @@
         }
     }
 </script>
+<style>
+
+
+    /* 各列の幅を指定 */
+    .order_list th:nth-child(1), .order_list td:nth-child(1) { /* 注文番号列 */
+        width: 10%;
+    }
+    .order_list th:nth-child(2), .order_list td:nth-child(2) { /* 商品名列 */
+        width: 18%;
+    }
+    .order_list th:nth-child(3), .order_list td:nth-child(3) { /* 数量列 */
+        width: 5%;
+    }
+    .order_list th:nth-child(4), .order_list td:nth-child(4) { /* ユーザ列 */
+        width: 10%;
+    }
+    .order_list th:nth-child(5), .order_list td:nth-child(5) { /* 住所列 */
+        width: 22%;
+    }
+    .order_list th:nth-child(6), .order_list td:nth-child(6) { /* 配送方法列 */
+        width: 12%;
+    }
+    .order_list th:nth-child(7), .order_list td:nth-child(7) { /* 配送ステータス列 */
+        width: 15%;
+    }
+    .order_list th:nth-child(8), .order_list td:nth-child(8) { /* 操作列 */
+        width: 25%;
+    }
+</style>
+
 <a href="{% url 'system_menu' %}" class="btn-site">戻る</a>
 <h2 class="menutitle">配送選択</h2>
 <div class="searchnum">
@@ -87,7 +117,7 @@
                             {% csrf_token %}
                             <button type="submit">取消</button>
                         </form>
-                    <button disabled></button>
+                  
                     {% endif %}
                 </div>
             </td>
