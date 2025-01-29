@@ -12,8 +12,8 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="logout-btn-group">
-                    <a href="{% url 'dgroupapp:index' %}" class="btn btn-secondary logout-btn">いいえ</a>
                     <button type="submit" class="btn btn-primary logout-btn">はい</button>
+                    <a href="{% url 'dgroupapp:index' %}" class="btn btn-secondary logout-btn">いいえ</a>
                 </div>
             </form>
         </div>

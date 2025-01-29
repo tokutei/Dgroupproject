@@ -115,7 +115,11 @@
         {% endif %}
       </div>
 
-      <button type="submit">確定</button>
+      <div class="user-form-container">
+        <!-- 戻るボタン -->
+        <button type="button" class="back-button" onclick="window.history.back()">戻る</button>
+        <button type="submit">確定</button>
+      </div>
     </form>
   </div>
 {% endblock %}

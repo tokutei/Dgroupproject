@@ -58,20 +58,35 @@
     margin-bottom: 5px;
   }
   
-  /* ボタン */
-  .user-form-container button {
-    background-color: #28a745;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s;
-  }
-  
-  .user-form-container button:hover {
-    background-color: #218838;
-  }
-  
+
+
+/* 確定ボタン */
+.user-form-container button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 48%;
+  flex: 1;  /* 確定ボタンが残りのスペースを埋める */
+  transition: background-color 0.3s;
+}
+
+/* 戻るボタンのスタイル */
+.user-form-container .back-button {
+  background-color: #dc3545;  /* 赤色 */
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 48%;  /* 戻るボタンも横幅を半分にする */
+  transition: background-color 0.3s;
+}
+
+.user-form-container .back-button:hover {
+  background-color: #c82333;  /* 少し暗い赤色 */
+}
