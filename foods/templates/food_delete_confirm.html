@@ -2,17 +2,22 @@
 {% block title %}削除確認 WasteNot/管理システム{% endblock %}
 
 {% block content %}
-<h2>削除確認</h2>
-<p>以下の食品情報を削除します。本当に削除してもよろしいですか？</p>
-<ul>
-    <li>カテゴリ: {{ object.category }}</li>
-    <li>商品名: {{ object.name }}</li>
-    <li>価格: {{ object.price }}</li>
-    <li>在庫: {{ object.stock }}</li>
-</ul>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn-delete">削除する</button>
-    <a href="{% url 'foods:food_delete_list' %}" class="btn-back">キャンセル</a>
-</form>
+<div class="delete-confirmation-container">
+    <h2 class="delete-confirmation-header">削除確認</h2>
+    <p class="delete-confirmation-message">以下の食品情報を削除します。本当に削除してもよろしいですか？</p>
+    <ul class="delete-confirmation-list">
+        <!-- 1行目 -->
+        <li>カテゴリ: {{ object.category }}</li>
+        <li>商品名: {{ object.name }}</li>
+
+        <!-- 2行目 -->
+        <li>価格: {{ object.price }}</li>
+        <li>在庫: {{ object.stock }}</li>
+    </ul>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn-delete">削除する</button>
+        <a href="{% url 'foods:food_delete_list' %}" class="btn-back">キャンセル</a>
+    </form>
+</div>
 {% endblock %}

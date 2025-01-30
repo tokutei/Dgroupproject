@@ -23,12 +23,15 @@
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    table-layout: fixed; /* セルの幅を固定 */
 }
 
 .order-history-table th, .order-history-table td {
     padding: 15px;
     text-align: left;
     font-size: 14px;
+    word-wrap: break-word; /* テキストが長すぎる場合は折り返し */
+    white-space: normal; /* 必要に応じて折り返し */
 }
 
 .order-history-table th {
@@ -145,6 +148,11 @@
         font-size: 14px;
         padding: 8px 16px;
     }
+
+    /* テーブル横スクロール対応 */
+    .order-history-container {
+        overflow-x: auto;
+    }
 }
 
 /* タブレット画面（最大768px幅） */
@@ -183,5 +191,44 @@
     .back-button {
         font-size: 15px;
         padding: 9px 18px;
+    }
+}
+
+/* アイパッド・中型タブレット画面（最大1024px幅） */
+@media screen and (max-width: 1024px) {
+    .order-history-table th, .order-history-table td {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    .order-history-header {
+        font-size: 28px;
+    }
+
+    .order-history-table td,
+    .order-history-table th {
+        text-align: center;
+    }
+
+    .order-history-container {
+        padding: 20px;
+    }
+
+    .order-history-table {
+        font-size: 15px;
+    }
+
+    .order-history-product-name,
+    .order-history-price {
+        font-size: 16px;
+    }
+
+    .order-history-quantity {
+        font-size: 15px;
+    }
+
+    .back-button {
+        font-size: 16px;
+        padding: 10px 20px;
     }
 }
