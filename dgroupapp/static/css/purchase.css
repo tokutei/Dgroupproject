@@ -138,3 +138,10 @@
     --bs-btn-disabled-bg: #0085A1;
     --bs-btn-disabled-border-color: #0085A1;
 }
+
+@media (min-width: 420px) {
+    .row-cols-min-2 > * {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
