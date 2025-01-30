@@ -148,7 +148,7 @@
 
 
 
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-min-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for record in recommended_items %}
                 {% if record.stripe_product_id in target %}
                     {% for i in minus %}
@@ -238,7 +238,7 @@
         <h2 class="section-title">- 商品一覧 -</h2>
         
 
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-min-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             {% for record in object_list %}
                 {% if record.stripe_product_id in target %}
                     {% for i in minus %}
