@@ -9,17 +9,7 @@
     <form method="POST" class="custom-address-edit-form">
         {% csrf_token %}
         
-        <div class="form-group">
-            <label for="address" class="custom-label">お届け先住所</label>
-            <input id="address" name="address" type="text" class="custom-form-control" value="{{ form.address.value }}">
-            {% if form.address.errors %}
-                <div class="error-message">
-                    {% for error in form.address.errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </div>
+
 
         <div class="form-group">
             <label for="postal_code" class="custom-label">郵便番号</label>
@@ -32,7 +22,17 @@
                 </div>
             {% endif %}
         </div>
-
+        <div class="form-group">
+            <label for="address" class="custom-label">お届け先住所</label>
+            <input id="address" name="address" type="text" class="custom-form-control" value="{{ form.address.value }}">
+            {% if form.address.errors %}
+                <div class="error-message">
+                    {% for error in form.address.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
         <button type="submit" class="btn btn-primary custom-submit-btn">住所を更新する</button>
     </form>
 
