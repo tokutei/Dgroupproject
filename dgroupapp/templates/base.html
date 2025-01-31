@@ -44,7 +44,7 @@
                         </a>
                         {% if user.is_authenticated %}
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">{{ user.nickname }}<br>{{ user.address }},<br>{{ user.postal_code }}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'dgroupapp:edit_address' %}">{{ user.nickname }}<br>{{ user.postal_code }},<br>{{ user.address }}</a></li>
                             
                         </ul>
                         {% endif %}
