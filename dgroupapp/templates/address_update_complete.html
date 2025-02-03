@@ -6,8 +6,8 @@
 <div class="container custom-completion-container">
     <h3 class="custom-completion-heading">住所更新が完了しました</h3>
     <hr>
-    <p class="custom-completion-message">住所:{{ user.address }}</p>
     <p class="custom-completion-message">郵便番号:{{ user.postal_code }}</p>
+    <p class="custom-completion-message">住所:{{ user.address }}</p>
     <a href="{% url 'index' %}" class="btn btn-primary custom-back-btn">トップページに戻る</a>
 </div>
 {% endblock %}

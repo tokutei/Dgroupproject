@@ -47,7 +47,7 @@
                         {% if i.0 == record.stripe_product_id %}
                         <div class="col mb-5">
                             <div class="card h-100">
-                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; background-color: red !important">{{ record.stock }}</div>
+                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem; background-color: red !important">数量:{{ record.stock }}</div>
                                 <!-- Product image-->
                                 <img src="{{ record.aitemimage.url }}" class="card-img-top" height="150px" />
                                 <!-- Product details-->
@@ -73,7 +73,7 @@
                 {% else %}
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ record.stock }}</div>
+                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">数量:{{ record.stock }}</div>
                             <!-- Product image-->
                             <img src="{{ record.aitemimage.url }}" class="card-img-top" height="150px" />
                             <!-- Product details-->
