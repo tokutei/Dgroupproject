@@ -79,11 +79,11 @@
         <form action="{% url 'create-checkout-session' %}" method="POST">
             <div class="text-align: center">
                 {% csrf_token %}
-                    郵便番号
-                    <input type="text" name="postnumber" value="{{ user.postal_code }}" style="width: 200px" class="input1" title="郵便番号は7桁の半角数字で入力してください" pattern="^\d{7}$" required>
+                    <label for="zipcode">郵便番号</label>
+                    <input type="text" name="postnumber" id="zipcode" oninput="fetchAddress()" value="{{ user.postal_code }}" style="width: 200px" class="input1" title="郵便番号は7桁の半角数字で入力してください" pattern="^\d{7}$" required>
                     <br>
                     住所
-                    <input type="text" name="address" value="{{ user.address }}" style="width: 200px" class="input1" required>
+                    <input type="text" name="address" id="address" value="{{ user.address }}" style="width: 200px" title="長野市篠ノ井地域のみ" pattern=".*長野市篠ノ井.*" class="input1" required>
                     <br>
                     支払方法
                     <select name="payment" id="select" style="width: 200px" class="select1">
@@ -121,6 +121,22 @@
                         message2.classList.toggle("hidden", value !== "2");
                         message0.classList.toggle("hidden", value !== "0");                        
                     });
+                    
+                    function fetchAddress() {
+                        var zipcode = document.getElementById('zipcode').value;
+                        if (zipcode.length === 7) {
+                            fetch(`https://api.zipaddress.net/?zipcode=${zipcode}`, { mode: 'cors' })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.code === 200) {
+                                document.getElementById('address').value = data.data.fullAddress;
+                                } else {
+                                document.getElementById('address').value = '住所が見つかりません';
+                                }
+                            })
+                            .catch(error => console.error('エラーが発生しました:', error));
+                        }
+                    }
                 </script>
             </div>
         </form>
