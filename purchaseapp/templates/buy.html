@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ object.name }} WasteNot{% endblock %}
 {% block content %}
+{% if object %}
 <section class="py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
@@ -51,6 +52,15 @@
         </div>
     </div>
 </section>
+{% else %}
+<br><br>
+<div style="text-align: center">
+    <h3>商品がありません</h3>
+</div>
+<br>
+<div class="text-center"><a class="btn btn-outline-dark mt-auto" onclick="location.href='{% url 'dgroupapp:index' %}'">トップページに戻る</a></div>
+<br>
+{% endif %}
 {% if user.is_authenticated %}
 <script>
     function cartinput(){

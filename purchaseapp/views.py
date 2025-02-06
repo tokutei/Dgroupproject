@@ -206,6 +206,10 @@ class CreateCheckoutSessionView(View):
                         over = i.stock - food_list.stock
                         errorname_list.append(i.stripe_product_id)
                         error_list.append([i.stripe_product_id, over])
+                else:
+                    over = i.stock
+                    errorname_list.append(i.stripe_product_id)
+                    error_list.append([i.stripe_product_id, over])
             dictionary = {
                 'errorname_list': errorname_list,
                 'error_list': error_list,
@@ -397,24 +401,36 @@ def SuccessPage(request):
 class BuyView(DetailView):
     template_name = 'buy.html'
     model = Food
+
+    def get_object(self, queryset=None):
+        try:
+            return super().get_object(queryset)
+        except Http404:
+            return None
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        judge = BuyJudge.objects.filter(stripe_product_id=self.object.stripe_product_id)
-        maxnum = self.object.stock
-        if len(judge) > 0:
-            judge = BuyJudge.objects.get(stripe_product_id=self.object.stripe_product_id)
-            maxnum = self.object.stock - judge.stock
-        number = 1
-        numlist = []
-        for i in range(maxnum):
-            numlist.append(number)
-            number = number + 1
-        context['numlist'] = numlist
-        context['maxnum'] = maxnum
-        return context
+        if self.object:
+            judge = BuyJudge.objects.filter(stripe_product_id=self.object.stripe_product_id)
+            maxnum = self.object.stock
+            if len(judge) > 0:
+                judge = BuyJudge.objects.get(stripe_product_id=self.object.stripe_product_id)
+                maxnum = self.object.stock - judge.stock
+            number = 1
+            numlist = []
+            for i in range(maxnum):
+                numlist.append(number)
+                number = number + 1
+            context['numlist'] = numlist
+            context['maxnum'] = maxnum
+            return context
 
 def BuySuccess(request, stripe_product_id):
-    if request.user.is_authenticated:
+    food = Food.objects.filter(stripe_product_id=stripe_product_id)
+    if len(food) == 0:
+        dictionary = {}
+        return render(request, 'error.html', dictionary)
+    elif request.user.is_authenticated:
         select_list = CartPost.objects.filter(stripe_product_id=stripe_product_id, user=request.user.id)
         addstock = request.POST.get('addstock')
         target = BuyJudge.objects.filter(stripe_product_id=stripe_product_id)
@@ -495,6 +511,10 @@ def OverDelete(request, stripe_product_id):
                 over = i.stock - food_list.stock
                 errorname_list.append(i.stripe_product_id)
                 error_list.append([i.stripe_product_id, over])
+        else:
+            over = i.stock
+            errorname_list.append(i.stripe_product_id)
+            error_list.append([i.stripe_product_id, over])
     dictionary = {
         'errorname_list': errorname_list,
         'error_list': error_list,
@@ -515,6 +535,10 @@ def Overback(request):
                 over = i.stock - food_list.stock
                 errorname_list.append(i.stripe_product_id)
                 error_list.append([i.stripe_product_id, over])
+        else:
+            over = food_list.stock
+            errorname_list.append(i.stripe_product_id)
+            error_list.append([i.stripe_product_id, over])
     dictionary = {
         'errorname_list': errorname_list,
         'error_list': error_list,
