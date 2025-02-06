@@ -13,6 +13,10 @@ from dgroupLogin.forms import ProfileEditForm
 from purchaseapp.models import CartPost, BuyJudge
 from .forms import AddressEditForm
 from django.core.paginator import Paginator
+from django.contrib.auth.hashers import check_password
+from django import forms
+from django.urls import reverse
+
 
 
 class IndexView(ListView):
@@ -116,26 +120,40 @@ class PrivacyView(TemplateView):
 
 @login_required
 def switch_account(request):
+    class PasswordForm(forms.Form):
+        password = forms.CharField(widget=forms.PasswordInput, label='Password')
+
     if request.method == 'POST':
-        # ユーザーIDでアカウントを切り替え
+        # ユーザーIDとパスワードを取得
         user_id = request.POST.get('user_id')
+        password = request.POST.get('password')
+
         try:
-            user = CustomUser.objects.get(id=user_id)  # CustomUserを使って検索
-            login(request, user)  # 新しいユーザーでログイン
-            return redirect('dgroupapp:index')  # インデックスページにリダイレクト
+            user = CustomUser.objects.get(id=user_id)
+
+            # ログイン中のユーザーと選択したユーザーのメールアドレスが一致するかを確認
+            if user.email == request.user.email:
+                # 入力されたパスワードがユーザーのパスワードと一致するか確認
+                if check_password(password, user.password):
+                    login(request, user)  # パスワードが一致すれば切り替え
+                    return redirect('dgroupapp:index')  # インデックスページへリダイレクト
+                else:
+                    # パスワードが間違っている場合、元のページに戻す
+                    messages.error(request, "パスワードが間違っています。")
+                    return redirect(reverse('dgroupapp:switch_account'))  # 元のページに戻る
+            else:
+                messages.error(request, "このアカウントは切り替えられません。")
+                return redirect(reverse('dgroupapp:switch_account'))  # 元のページに戻る
+
         except CustomUser.DoesNotExist:
-            return redirect('dgroupapp:login')  # ユーザーが見つからなかった場合はログインページに戻る
+            messages.error(request, "指定されたユーザーが見つかりません。")
+            return redirect(reverse('dgroupapp:switch_account'))  # 元のページに戻る
+
     else:
-        # superuserの場合、全ユーザーを表示
-        if request.user.is_superuser:
-            users = CustomUser.objects.filter(is_superuser=True)  # Superuserは全ユーザーを表示
-        else:
-            # 普通のユーザーの場合、自分のアカウントと同じ役割のユーザーのみ表示
-            users = CustomUser.objects.filter(is_superuser=False)  # 普通のユーザーのみ表示
-
-        return render(request, 'switch_account.html', {'users': users})
-
-
+        # 自分と同じメールアドレスを持つユーザーのみ表示
+        users = CustomUser.objects.filter(email=request.user.email)
+        password_form = PasswordForm()
+        return render(request, 'switch_account.html', {'users': users, 'password_form': password_form})
 @login_required
 def profile(request):
     return render(request, 'profile.html', {'user': request.user})
@@ -204,26 +222,6 @@ def category_view(request, category_id):
         'target': target,  # 在庫数が変更された商品のリストを渡す
     })
 
-
-# def allergy_view(request):
-#     # 全てのアレルギーを取得
-#     allergies = Allergy.objects.all()
-
-#     # 初期表示として、全ての食品を取得
-#     foods = Food.objects.all()
-
-#     # アレルギーが選択されている場合、選択されたアレルギーを含む食品をフィルタリング
-#     selected_allergy = request.GET.get('allergy', None)
-#     if selected_allergy:
-#         # 'selected_allergy'に基づいてアレルギー項目が含まれていない食品をフィルタリング
-#         foods = foods.exclude(allergy__icontains=selected_allergy)
-
-#     # フィルタリング後の食品とアレルギー一覧をテンプレートに渡す
-#     return render(request, 'allergy_view.html', {
-#         'allergies': allergies,  # アレルギーのリストを渡す
-#         'foods': foods,          # フィルタリング後の食品リストを渡す
-#     })
-
 class NewArrivalsView(ListView):
     model = Food
     template_name = 'new_arrivals.html'
@@ -279,6 +277,7 @@ def edit_profile(request):
         form = ProfileEditForm(instance=request.user)
 
     return render(request, 'edit_profile.html', {'form': form})
+
 
 class AboutView(TemplateView):
     template_name = 'about.html'
