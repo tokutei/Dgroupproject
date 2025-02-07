@@ -115,6 +115,12 @@
             </div>
         </section>
     {% else %}
-    商品の有効期限が切れました
+    <br><br>
+    <div style="text-align: center">
+        <h3>商品の有効期限が切れました</h3>
+    </div>
+    <br>
+    <div class="text-center"><a class="btn btn-secondary my-2" onclick="location.href='{% url 'dgroupapp:index' %}'">トップページに戻る</a></div>
+    <br>
     {% endif %}
 {% endblock %}
