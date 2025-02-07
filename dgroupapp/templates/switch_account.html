@@ -5,20 +5,18 @@
 {% block content %}
 
 <div class="container">
-    <!-- エラーメッセージ表示 -->
-    {% if messages %}
-        <div class="alert alert-danger">
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
-
     <!-- アカウントの切り替え -->
     <form method="POST" class="account-switch-form">
         {% csrf_token %}
         <div class="form-group">
-            <label for="user_id"><h1>アカウントの切り替え</h1><br>切り替えたいアカウントを選択してください</label>
+            <label for="user_id"><h1>アカウントの切り替え</h1>
+                <!-- エラーメッセージ表示 -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div style="color:#e41b1b">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            <br>切り替えたいアカウントを選択してください</label>
             <select name="user_id" id="user_id" class="form-control">
                 {% for user in users %}
                     {% if user.is_superuser %}
@@ -32,12 +30,12 @@
         
         <!-- パスワード入力フォーム -->
         <div class="form-group">
-            <label for="password"><h3>パスワード</h3><br>アカウントの切り替えに必要なパスワードを入力してください</label>
+            <label for="password"><br>選択したアカウントのパスワードを入力してください</label>
             <input type="password" name="password" id="password" class="form-control" placeholder="パスワードを入力" required>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">アカウントを切り替える</button>
-        <a href="{% url 'dgroupLogin:user_profile' %}" class="btn btn-success btn-block">新しいアカウントを作成する</a>
+        <button type="submit" class="btn btn-primary btn-block mt-4">アカウントを切り替える</button>
+        <a href="{% url 'dgroupLogin:user_profile' %}" class="btn btn-success btn-block mt-3">新しいアカウントを作成する</a>
     </form>
 
 </div>
