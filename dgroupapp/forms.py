@@ -1,11 +1,15 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 class AddressEditForm(forms.Form):
     address = forms.CharField(
         max_length=255,
         required=True,
-        error_messages={'required': 'お届け先住所を入力してください'}
+        validators=[RegexValidator(r'^(?!.*住所が見つかりません).*', '正しい住所を表示させてください')],
+        error_messages={
+            'required': 'お届け先住所を入力してください',
+        }
     )
     postal_code = forms.CharField(
         max_length=7,
@@ -15,7 +19,7 @@ class AddressEditForm(forms.Form):
             'required': '※郵便番号を入力してください',
             'min_length': '※郵便番号は7桁で入力してください',
             'max_length': '※郵便番号は7桁で入力してください',
-        }
+        },
     )
     
     # 郵便番号のバリデーション（数字だけ）

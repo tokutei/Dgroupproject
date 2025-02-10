@@ -56,7 +56,21 @@ class CustomUserForm(forms.ModelForm):
         max_length=7,
         min_length=7,
         validators=[RegexValidator(r'^[0-9]{7}$', '郵便番号は7桁の半角数字で入力してください')],
-        widget=forms.TextInput(attrs={'placeholder': '郵便番号（7桁の半角数字）'})
+        widget=forms.TextInput(attrs={
+            'placeholder': '郵便番号（7桁の半角数字）',
+            'oninput' : 'fetchAddress()',
+            'id': 'zipcode',
+        })
+    )
+
+    address = forms.CharField(
+        max_length=100,
+        required=True,
+        label="住所",
+        validators=[RegexValidator(r'^(?!.*住所が見つかりません).*', '正しい住所を表示させてください')],
+        widget=forms.TextInput(attrs={
+            'id': 'address',
+        })
     )
 
     def clean(self):
@@ -147,6 +161,8 @@ class ProfileEditForm(forms.ModelForm):
             'pattern': '\d{7}',
             'size': '12',
             'style': 'margin-left: 22px;',
+            'id': 'zipcode',
+            'oninput' : 'fetchAddress()',
         })
     )
 
@@ -155,8 +171,10 @@ class ProfileEditForm(forms.ModelForm):
         required=True,
         label="住所",
         widget=forms.TextInput(attrs={
-            'placeholder': '例: 長野市篠ノ井1-2-3',
+            'pattern': '^(?!.*住所が見つかりません).*',
+            'title' : '正しい住所を表示させてください',
             'size': '30',
             'style': 'margin-left: 53px;',
+            'id': 'address',
         })
     )
