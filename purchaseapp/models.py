@@ -22,7 +22,7 @@ class CartPost(models.Model):
         return self.aitemname
 
     def is_expired(self):
-        expiration_time = self.added_at + timedelta(seconds=10)
+        expiration_time = self.added_at + timedelta(minutes=30)
         return timezone.now() > expiration_time
 
 

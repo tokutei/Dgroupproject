@@ -122,4 +122,21 @@
       </div>
     </form>
   </div>
+  <script>
+    function fetchAddress() {
+        var zipcode = document.getElementById('zipcode').value;
+        if (zipcode.length === 7) {
+            fetch(`https://api.zipaddress.net/?zipcode=${zipcode}`, { mode: 'cors' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === 200) {
+                document.getElementById('address').value = data.data.fullAddress;
+                } else {
+                document.getElementById('address').value = '住所が見つかりません';
+                }
+            })
+            .catch(error => console.error('エラーが発生しました:', error));
+        }
+    }
+  </script>
 {% endblock %}
